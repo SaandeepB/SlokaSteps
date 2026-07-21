@@ -1,0 +1,168 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Sloka Steps design tokens — warm, calm, original palette. */
+  --color-cream-50: #fff9f0;
+  --color-cream-100: #fdf3e3;
+  --color-cream-200: #f8e8ce;
+  --color-cream-300: #efd9b4;
+
+  --color-saffron-100: #fdeed3;
+  --color-saffron-300: #f6c15c;
+  --color-saffron-400: #f0a93f;
+  --color-saffron-500: #e8912d;
+  --color-saffron-600: #c1701a;
+  --color-saffron-700: #9c5a12;
+
+  --color-teal-100: #ddefee;
+  --color-teal-300: #7fbcba;
+  --color-teal-500: #2a7f7f;
+  --color-teal-600: #1d6a6a;
+  --color-teal-700: #155150;
+  --color-teal-800: #0f3d3c;
+
+  --color-sky-100: #e3f1f8;
+  --color-sky-300: #a9d3e8;
+  --color-sky-500: #5b9ec7;
+  --color-sky-700: #33698c;
+
+  --color-lavender-100: #efeaf9;
+  --color-lavender-300: #cdbfeb;
+  --color-lavender-500: #9b85cf;
+  --color-lavender-700: #6a548f;
+
+  --color-lotus-100: #fbe9ee;
+  --color-lotus-300: #f2bfce;
+  --color-lotus-500: #d9829b;
+  --color-lotus-700: #a54e68;
+
+  --color-ink-500: #6e6153;
+  --color-ink-700: #4e4235;
+  --color-ink-900: #33291e;
+
+  --color-leaf-100: #e9f3e1;
+  --color-leaf-500: #6fa84e;
+  --color-leaf-700: #44702c;
+
+  /* Script-aware font stacks: system fonts with broad Indic coverage,
+     no runtime font downloads. */
+  --font-sans: 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
+  --font-devanagari: 'Nirmala UI', 'Noto Sans Devanagari', 'Mangal', 'Segoe UI',
+    sans-serif;
+  --font-telugu: 'Nirmala UI', 'Noto Sans Telugu', 'Gautami', sans-serif;
+  --font-kannada: 'Nirmala UI', 'Noto Sans Kannada', 'Tunga', sans-serif;
+  --font-tamil: 'Nirmala UI', 'Noto Sans Tamil', 'Latha', sans-serif;
+
+  --shadow-soft: 0 4px 16px rgb(51 41 30 / 0.08);
+  --shadow-lifted: 0 8px 28px rgb(51 41 30 / 0.14);
+
+  --animate-gentle-pop: gentle-pop 0.45s ease-out both;
+  --animate-gentle-float: gentle-float 3.5s ease-in-out infinite;
+  --animate-sparkle: sparkle 1.6s ease-in-out infinite;
+
+  @keyframes gentle-pop {
+    0% {
+      transform: scale(0.85);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes gentle-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+  @keyframes sparkle {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.9);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+}
+
+html {
+  background-color: var(--color-cream-50);
+}
+
+body {
+  margin: 0;
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Indic scripts need generous line-height so vowel signs and conjuncts
+   never clip. Never apply uppercase transforms to these blocks. */
+[lang='sa'],
+[lang='hi'],
+[lang='mr'] {
+  font-family: var(--font-devanagari);
+  line-height: 1.9;
+  text-transform: none;
+}
+[lang='te'] {
+  font-family: var(--font-telugu);
+  line-height: 1.9;
+  text-transform: none;
+}
+[lang='kn'] {
+  font-family: var(--font-kannada);
+  line-height: 1.9;
+  text-transform: none;
+}
+[lang='ta'] {
+  font-family: var(--font-tamil);
+  line-height: 1.9;
+  text-transform: none;
+}
+
+/* Visible focus for keyboard users everywhere. */
+:focus-visible {
+  outline: 3px solid var(--color-sky-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Reduced motion: honor both the OS preference and the in-app setting
+   (a .reduce-motion class on the app root). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Screen-reader-only utility (kept explicit for clarity). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
