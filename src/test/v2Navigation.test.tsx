@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { LearningModeSelector } from '../components/learn/LearningModeSelector'
 import { CompletePage } from '../pages/CompletePage'
+import { PathPage } from '../pages/PathPage'
 import { StoriesPage } from '../pages/StoriesPage'
 import { EpicPage } from '../pages/EpicPage'
 import { makeStateWithProfile, renderWithProviders } from './testUtils'
@@ -31,6 +32,18 @@ describe('V2 learning navigation', () => {
     )
     expect(screen.getByRole('heading', { name: 'Ramayana' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Mahabharata' })).toBeInTheDocument()
+  })
+
+  it('shows the editorial status of every sloka path node', () => {
+    renderWithProviders(
+      <Routes>
+        <Route path="/slokas" element={<PathPage />} />
+      </Routes>,
+      { route: '/slokas', state: makeStateWithProfile() },
+    )
+
+    expect(screen.getAllByText('Editorial review')).toHaveLength(7)
+    expect(screen.getAllByText('Draft')).toHaveLength(2)
   })
 
   it('renders the Ramayana and Mahabharata chapter paths', () => {

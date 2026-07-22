@@ -27,6 +27,12 @@ const stateLabelKeys: Record<LessonAvailability, TranslationKey> = {
   'coming-soon': 'stateComingSoon',
 }
 
+const editorialStatusLabels: Record<Sloka['contentStatus'], string> = {
+  draft: 'Draft',
+  'editorial-review': 'Editorial review',
+  approved: 'Approved',
+}
+
 export function PathPage() {
   const { state, dispatch } = useAppState()
   const { t } = useTranslation()
@@ -145,6 +151,15 @@ function PathNode({ sloka, offsetRight }: { sloka: Sloka; offsetRight: boolean }
         <span className="text-sm text-ink-700">
           {stateLabel}
           {availability === 'in-progress' && ` · ${t('percentComplete', { percent })}`}
+        </span>
+        <span
+          className={`w-fit rounded-full px-2 py-0.5 text-xs font-semibold ${
+            sloka.contentStatus === 'approved'
+              ? 'bg-leaf-100 text-leaf-700'
+              : 'bg-lavender-100 text-lavender-700'
+          }`}
+        >
+          {editorialStatusLabels[sloka.contentStatus]}
         </span>
         {(progress?.bestStars ?? 0) > 0 && (
           <StarDisplay stars={progress?.bestStars ?? 0} size={18} />

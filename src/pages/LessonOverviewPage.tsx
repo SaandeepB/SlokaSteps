@@ -124,6 +124,17 @@ export function LessonOverviewPage() {
         )}
       </div>
 
+      {sloka.contentStatus !== 'approved' && (
+        <p
+          role="status"
+          className="rounded-2xl border border-lavender-300 bg-lavender-100 p-3 text-sm font-semibold text-lavender-700"
+        >
+          {sloka.contentStatus === 'draft' ? 'Draft content' : 'Editorial review'} —
+          this lesson is a clearly marked prototype and is not yet editorially
+          approved.
+        </p>
+      )}
+
       <Card>
         <h2 className="mb-3 text-lg font-bold text-ink-900">{t('devanagariLabel')}</h2>
         <SlokaTextBlock
