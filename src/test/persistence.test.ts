@@ -2,26 +2,28 @@ import { describe, expect, it } from 'vitest'
 import {
   clearPersistedState,
   createDefaultPersistedState,
+  LEGACY_STORAGE_KEY,
   loadPersistedState,
+  LocalStorageProgressRepository,
+  migrateV1State,
   sanitizePersistedState,
   savePersistedState,
   STORAGE_KEY,
 } from '../services/persistence'
 
-describe('persistence', () => {
-  it('returns defaults when localStorage is empty', () => {
-    const state = loadPersistedState()
-    expect(state).toEqual(createDefaultPersistedState())
+describe('versioned persistence', () => {
+  it('returns V2 defaults when storage is empty', () => {
+    expect(loadPersistedState()).toEqual(createDefaultPersistedState())
   })
 
-  it('loads a valid saved state back correctly', () => {
+  it('saves and loads a V2 state through the repository', async () => {
     const state = createDefaultPersistedState()
-    state.profile = { displayName: 'Anu', ageRange: '7-8' }
-    state.settings.language = 'te'
-    state.settings.dailyGoalMinutes = 15
-    state.totalXp = 20
-    state.badges = ['badge-wisdom']
-    state.lessons['saraswati-namastubhyam'] = {
+    state.profile = { nickname: 'Anu', ageBand: '7-8', dailyGoalMinutes: 15 }
+    state.preferences.displayLanguage = 'te-IN'
+    state.preferences.narrationLanguage = 'te-IN'
+    state.progress.totalXp = 20
+    state.progress.badges = [{ id: 'badge-wisdom', earnedAt: '2026-07-14T10:00:00Z' }]
+    state.progress.slokas['saraswati-namastubhyam'] = {
       slokaId: 'saraswati-namastubhyam',
       status: 'completed',
       currentActivityIndex: 0,
@@ -31,55 +33,130 @@ describe('persistence', () => {
       xpAwarded: true,
       firstCompletedOn: '2026-07-14',
     }
-    savePersistedState(state)
-
-    const loaded = loadPersistedState()
-    expect(loaded).toEqual(state)
+    const repository = new LocalStorageProgressRepository(window.localStorage)
+    await repository.save(state)
+    expect(await repository.load()).toEqual(state)
   })
 
-  it('recovers safe defaults from corrupted JSON', () => {
-    window.localStorage.setItem(STORAGE_KEY, '{not valid json!!')
-    expect(loadPersistedState()).toEqual(createDefaultPersistedState())
-  })
-
-  it('recovers safe defaults from an unsupported schema version', () => {
-    window.localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ schemaVersion: 99, totalXp: 5000 }),
-    )
-    expect(loadPersistedState()).toEqual(createDefaultPersistedState())
-  })
-
-  it('sanitizes partially corrupted fields instead of crashing', () => {
-    const state = sanitizePersistedState({
+  it('migrates V1 progress and language without deleting the V1 source', () => {
+    const legacy = {
       schemaVersion: 1,
-      profile: { displayName: 42 },
-      settings: { language: 'xx', dailyGoalMinutes: 999 },
-      lessons: { bad: null, ok: { status: 'completed', bestStars: 3 } },
-      badges: ['a', 5, 'b'],
-      totalXp: -10,
-      streak: 'nope',
-      dailyProgress: null,
-      practiceHistory: 'nope',
+      profile: { displayName: 'Anu', ageRange: '7-8' },
+      settings: { language: 'te', dailyGoalMinutes: 15, reducedMotion: true },
+      lessons: {
+        'saraswati-namastubhyam': {
+          status: 'completed',
+          currentActivityIndex: 4,
+          incorrectAttempts: 1,
+          recordingAttempted: true,
+          bestStars: 2,
+          xpAwarded: true,
+          firstCompletedOn: '2026-07-14',
+        },
+      },
+      badges: ['badge-wisdom'],
+      totalXp: 10,
+      streak: { current: 3, lastQualifyingDate: '2026-07-14' },
+      dailyProgress: { date: '2026-07-14', estimatedMinutes: 6 },
+      practiceHistory: [
+        {
+          id: 'history-1',
+          slokaId: 'saraswati-namastubhyam',
+          completedAt: '2026-07-14T10:00:00Z',
+          kind: 'first-completion',
+          stars: 2,
+        },
+      ],
+    }
+    window.localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(legacy))
+
+    const migrated = loadPersistedState()
+    expect(migrated).toEqual(migrateV1State(legacy))
+    expect(migrated.profile).toEqual({
+      nickname: 'Anu',
+      ageBand: '7-8',
+      dailyGoalMinutes: 15,
+    })
+    expect(migrated.preferences.displayLanguage).toBe('te-IN')
+    expect(migrated.preferences.narrationLanguage).toBe('te-IN')
+    expect(migrated.progress.totalXp).toBe(10)
+    expect(migrated.progress.slokas['saraswati-namastubhyam'].bestStars).toBe(2)
+    expect(migrated.progress.practiceHistory[0].contentType).toBe('sloka')
+    expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).not.toBeNull()
+  })
+
+  it('recovers safe defaults from corrupted V2 JSON without touching other data', () => {
+    window.localStorage.setItem(STORAGE_KEY, '{not valid json!!')
+    window.localStorage.setItem('some-other-app', 'keep me')
+    expect(loadPersistedState()).toEqual(createDefaultPersistedState())
+    expect(window.localStorage.getItem(STORAGE_KEY)).toBe('{not valid json!!')
+    expect(window.localStorage.getItem('some-other-app')).toBe('keep me')
+  })
+
+  it('migrates a preserved valid V1 state when V2 JSON is malformed', () => {
+    const legacy = {
+      schemaVersion: 1,
+      profile: { displayName: 'Mira', ageRange: '9-10' },
+      settings: { language: 'hi', dailyGoalMinutes: 20 },
+      lessons: {},
+      totalXp: 35,
+    }
+    const corruptV2 = '{"schemaVersion":2'
+    window.localStorage.setItem(STORAGE_KEY, corruptV2)
+    window.localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(legacy))
+
+    const recovered = loadPersistedState()
+
+    expect(recovered).toEqual(migrateV1State(legacy))
+    expect(recovered.profile?.nickname).toBe('Mira')
+    expect(recovered.preferences.displayLanguage).toBe('hi-IN')
+    expect(recovered.progress.totalXp).toBe(35)
+    expect(window.localStorage.getItem(STORAGE_KEY)).toBe(corruptV2)
+    expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).toBe(JSON.stringify(legacy))
+  })
+
+  it('does not downgrade an explicitly newer valid schema to preserved V1 data', () => {
+    const legacy = JSON.stringify({ schemaVersion: 1, totalXp: 35 })
+    const newer = JSON.stringify({ schemaVersion: 99, progress: { totalXp: 5000 } })
+    window.localStorage.setItem(LEGACY_STORAGE_KEY, legacy)
+    window.localStorage.setItem(STORAGE_KEY, newer)
+
+    expect(loadPersistedState()).toEqual(createDefaultPersistedState())
+    expect(window.localStorage.getItem(STORAGE_KEY)).toBe(newer)
+    expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).toBe(legacy)
+  })
+
+  it('sanitizes partially corrupted V2 fields', () => {
+    const state = sanitizePersistedState({
+      schemaVersion: 2,
+      profile: { nickname: 42 },
+      preferences: { displayLanguage: 'xx', narrationLinked: true },
+      progress: {
+        slokas: { bad: null, ok: { status: 'completed', bestStars: 3 } },
+        storyChapters: {},
+        badges: ['a', 5, { id: 'b' }],
+        totalXp: -10,
+        streak: 'nope',
+        practiceHistory: 'nope',
+      },
     })
     expect(state.profile).toBeNull()
-    expect(state.settings.language).toBe('en')
-    expect(state.settings.dailyGoalMinutes).toBe(10)
-    expect(state.lessons.ok?.status).toBe('completed')
-    expect(state.lessons.bad).toBeUndefined()
-    expect(state.badges).toEqual(['a', 'b'])
-    expect(state.totalXp).toBe(0)
-    expect(state.streak).toEqual({ current: 0, lastQualifyingDate: null })
-    expect(state.practiceHistory).toEqual([])
+    expect(state.preferences.displayLanguage).toBe('en-IN')
+    expect(state.progress.slokas.ok?.status).toBe('completed')
+    expect(state.progress.slokas.bad).toBeUndefined()
+    expect(state.progress.badges.map((badge) => badge.id)).toEqual(['a', 'b'])
+    expect(state.progress.totalXp).toBe(0)
+    expect(state.progress.streak).toEqual({ current: 0, lastQualifyingDate: null })
+    expect(state.progress.practiceHistory).toEqual([])
   })
 
-  it('reset removes only the Sloka Steps key', () => {
+  it('confirmed reset removes both owned schema keys and no unrelated keys', () => {
     window.localStorage.setItem('some-other-app', 'keep me')
+    window.localStorage.setItem(LEGACY_STORAGE_KEY, '{}')
     savePersistedState(createDefaultPersistedState())
-    expect(window.localStorage.getItem(STORAGE_KEY)).not.toBeNull()
-
     clearPersistedState()
     expect(window.localStorage.getItem(STORAGE_KEY)).toBeNull()
+    expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).toBeNull()
     expect(window.localStorage.getItem('some-other-app')).toBe('keep me')
   })
 })

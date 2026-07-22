@@ -17,12 +17,12 @@ export interface TranslationPack {
 }
 
 const packs: Record<SupportedLanguage, TranslationPack> = {
-  en,
-  hi,
-  te,
-  kn,
-  ta,
-  mr,
+  'en-IN': en,
+  'hi-IN': hi,
+  'te-IN': te,
+  'kn-IN': kn,
+  'ta-IN': ta,
+  'mr-IN': mr,
 }
 
 export type TranslationVars = Record<string, string | number>
@@ -48,7 +48,7 @@ export function translate(
   const localized = packs[language]?.strings[key]
   if (localized !== undefined) return interpolate(localized, vars)
 
-  if (language !== 'en' && import.meta.env.DEV) {
+  if (language !== 'en-IN' && import.meta.env.DEV) {
     const warnKey = `${language}:${key}`
     if (!warnedMissing.has(warnKey)) {
       warnedMissing.add(warnKey)

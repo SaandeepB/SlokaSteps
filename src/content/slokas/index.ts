@@ -5,6 +5,7 @@ import { guruBrahma } from './guruBrahma'
 import { tvamevaMata } from './tvamevaMata'
 import { karagreVasate } from './karagreVasate'
 import { shubhamKaroti } from './shubhamKaroti'
+import { lokahSamastah } from './lokahSamastah'
 import { asatoMa } from './asatoMa'
 import { sarveBhavantu } from './sarveBhavantu'
 
@@ -16,6 +17,7 @@ export const SLOKAS: Sloka[] = [
   tvamevaMata,
   karagreVasate,
   shubhamKaroti,
+  lokahSamastah,
   asatoMa,
   sarveBhavantu,
 ]

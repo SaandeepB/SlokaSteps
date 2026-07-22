@@ -7,6 +7,8 @@ export interface AudioPlaybackService {
       language?: string
     },
   ): Promise<void>
+  pause(): void
+  resume(): void
   stop(): void
 }
 

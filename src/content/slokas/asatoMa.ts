@@ -32,17 +32,20 @@ const lines: SlokaLine[] = [
  */
 export const asatoMa: Sloka = {
   id,
-  order: 7,
+  order: 8,
   level: 1,
   title: 'Asato Ma Sadgamaya',
   theme: 'Truth and Inner Light',
   estimatedMinutes: 8,
   implementationStatus: 'coming-soon',
+  contentStatus: 'draft',
+  editorial: { status: 'draft' },
+  practiceStatus: 'not-started',
   contentReviewStatus: 'prototype',
   badge: { id: 'badge-inner-light', name: 'Inner Light Badge', motif: 'lamp' },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'From darkness to light',
       simpleMeaning:
         'This prayer asks to be guided from untruth to truth, from darkness to light, and toward what is lasting and peaceful.',

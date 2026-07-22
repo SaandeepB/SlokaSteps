@@ -26,7 +26,7 @@ function complete(slokaId: string): AppAction {
 function availability(state: AppState, slokaId: string) {
   const sloka = getSlokaById(slokaId)
   if (!sloka) throw new Error(`unknown sloka ${slokaId}`)
-  return getLessonAvailability(sloka, state.lessons, SLOKAS)
+  return getLessonAvailability(sloka, state.progress.slokas, SLOKAS)
 }
 
 describe('sequential unlocking', () => {
@@ -84,8 +84,8 @@ describe('locked and preview lessons cannot award progress', () => {
 
     const afterComplete = run(before, complete(COMING_SOON))
     expect(afterComplete).toEqual(before)
-    expect(afterComplete.totalXp).toBe(0)
-    expect(afterComplete.badges).toEqual([])
-    expect(afterComplete.streak.current).toBe(0)
+    expect(afterComplete.progress.totalXp).toBe(0)
+    expect(afterComplete.progress.badges).toEqual([])
+    expect(afterComplete.progress.streak.current).toBe(0)
   })
 })

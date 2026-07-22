@@ -24,6 +24,9 @@ export const guruBrahma: Sloka = {
   theme: 'Respect for Teachers',
   estimatedMinutes: 6,
   implementationStatus: 'complete',
+  contentStatus: 'editorial-review',
+  editorial: { status: 'editorial-review' },
+  practiceStatus: 'available',
   contentReviewStatus: 'prototype',
   badge: {
     id: 'badge-gratitude-teachers',
@@ -32,7 +35,7 @@ export const guruBrahma: Sloka = {
   },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'Honoring our teachers',
       simpleMeaning:
         'A teacher helps us create, understand, and transform knowledge. I offer respect and gratitude to my teacher.',
@@ -44,7 +47,7 @@ export const guruBrahma: Sloka = {
       ],
       reviewStatus: 'prototype-reviewed',
     },
-    hi: {
+    'hi-IN': {
       title: 'गुरु का सम्मान',
       simpleMeaning:
         'गुरु हमें ज्ञान बनाना, समझना और बदलना सिखाते हैं। मैं अपने गुरु को आदर और धन्यवाद देती/देता हूँ।',

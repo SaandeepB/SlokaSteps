@@ -1,33 +1,80 @@
 import type {
-  AgeRange,
+  AgeBand,
+  Bookmark,
   ChildProfile,
   DailyGoalMinutes,
-  DailyProgress,
-  LessonProgress,
+  EarnedBadge,
+  LearningProgress,
   PersistedAppState,
   PracticeHistoryEntry,
+  SlokaProgress,
   StarCount,
-  StreakState,
+  StoryChapterProgress,
   SupportedLanguage,
-  UserSettings,
+  UserPreferences,
 } from '../types'
 import { SUPPORTED_LANGUAGES } from '../types'
-import { AGE_RANGES, DAILY_GOAL_OPTIONS } from '../types/state'
+import { AGE_BANDS, DAILY_GOAL_OPTIONS } from '../types/state'
 
-/** The only localStorage key Sloka Steps owns. Never touch other keys. */
-export const STORAGE_KEY = 'sloka-steps:v1'
+export const SCHEMA_VERSION = 2 as const
+export const STORAGE_KEY = 'sloka-steps:v2'
+export const LEGACY_STORAGE_KEY = 'sloka-steps:v1'
+
+export interface ProgressRepository {
+  load(): Promise<PersistedAppState>
+  save(state: PersistedAppState): Promise<void>
+  /** Must be called only after explicit parent confirmation. */
+  reset(): Promise<void>
+}
+
+const LEGACY_LANGUAGE_MAP: Record<string, SupportedLanguage> = {
+  en: 'en-IN',
+  hi: 'hi-IN',
+  te: 'te-IN',
+  kn: 'kn-IN',
+  ta: 'ta-IN',
+  mr: 'mr-IN',
+}
+
+export function createDefaultPreferences(): UserPreferences {
+  return {
+    defaultLanguage: 'en-IN',
+    displayLanguage: 'en-IN',
+    narrationLanguage: 'en-IN',
+    narrationLinked: true,
+    scriptPreference: 'regional-and-transliteration',
+    calmMode: false,
+    reducedMotion: false,
+    voicePrivacy: {
+      allowMicrophone: true,
+      allowCloudEvaluation: false,
+      retainPracticeRecordings: false,
+      allowModelTraining: false,
+    },
+    allowFutureCommunityFeatures: false,
+  }
+}
+
+export function createDefaultProgress(): LearningProgress {
+  return {
+    totalXp: 0,
+    streak: { current: 0, lastQualifyingDate: null },
+    slokas: {},
+    storyChapters: {},
+    badges: [],
+    bookmarks: [],
+    lastMode: 'slokas',
+    dailyProgress: { date: '', estimatedMinutes: 0 },
+    practiceHistory: [],
+  }
+}
 
 export function createDefaultPersistedState(): PersistedAppState {
   return {
-    schemaVersion: 1,
+    schemaVersion: SCHEMA_VERSION,
     profile: null,
-    settings: { language: 'en', dailyGoalMinutes: 10, reducedMotion: false },
-    lessons: {},
-    badges: [],
-    totalXp: 0,
-    streak: { current: 0, lastQualifyingDate: null },
-    dailyProgress: { date: '', estimatedMinutes: 0 },
-    practiceHistory: [],
+    preferences: createDefaultPreferences(),
+    progress: createDefaultProgress(),
   }
 }
 
@@ -35,37 +82,81 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function sanitizeProfile(value: unknown): ChildProfile | null {
-  if (!isRecord(value)) return null
-  const { displayName, ageRange } = value
-  if (typeof displayName !== 'string' || displayName.trim() === '') return null
-  if (typeof ageRange !== 'string' || !AGE_RANGES.includes(ageRange as AgeRange)) {
-    return null
+function language(value: unknown, fallback: SupportedLanguage): SupportedLanguage {
+  if (typeof value !== 'string') return fallback
+  if (SUPPORTED_LANGUAGES.includes(value as SupportedLanguage)) {
+    return value as SupportedLanguage
   }
-  return { displayName: displayName.slice(0, 48), ageRange: ageRange as AgeRange }
+  return LEGACY_LANGUAGE_MAP[value] ?? fallback
 }
 
-function sanitizeSettings(value: unknown): UserSettings {
-  const defaults = createDefaultPersistedState().settings
+function dailyGoal(value: unknown): DailyGoalMinutes {
+  return DAILY_GOAL_OPTIONS.includes(value as DailyGoalMinutes)
+    ? (value as DailyGoalMinutes)
+    : 10
+}
+
+function ageBand(value: unknown): AgeBand | null {
+  return typeof value === 'string' && AGE_BANDS.includes(value as AgeBand)
+    ? (value as AgeBand)
+    : null
+}
+
+function sanitizeProfile(value: unknown): ChildProfile | null {
+  if (!isRecord(value)) return null
+  const nickname =
+    typeof value.nickname === 'string'
+      ? value.nickname
+      : typeof value.displayName === 'string'
+        ? value.displayName
+        : ''
+  const band = ageBand(value.ageBand ?? value.ageRange)
+  if (!nickname.trim() || !band) return null
+  return {
+    nickname: nickname.trim().slice(0, 48),
+    ageBand: band,
+    dailyGoalMinutes: dailyGoal(value.dailyGoalMinutes),
+  }
+}
+
+function sanitizePreferences(value: unknown): UserPreferences {
+  const defaults = createDefaultPreferences()
   if (!isRecord(value)) return defaults
-  const language = SUPPORTED_LANGUAGES.includes(value.language as SupportedLanguage)
-    ? (value.language as SupportedLanguage)
-    : defaults.language
-  const dailyGoalMinutes = DAILY_GOAL_OPTIONS.includes(
-    value.dailyGoalMinutes as DailyGoalMinutes,
-  )
-    ? (value.dailyGoalMinutes as DailyGoalMinutes)
-    : defaults.dailyGoalMinutes
-  const reducedMotion =
-    typeof value.reducedMotion === 'boolean' ? value.reducedMotion : false
-  return { language, dailyGoalMinutes, reducedMotion }
+  const displayLanguage = language(value.displayLanguage, defaults.displayLanguage)
+  const narrationLinked = value.narrationLinked !== false
+  const voice = isRecord(value.voicePrivacy) ? value.voicePrivacy : {}
+  const scriptPreference =
+    value.scriptPreference === 'regional' ||
+    value.scriptPreference === 'devanagari' ||
+    value.scriptPreference === 'roman-transliteration' ||
+    value.scriptPreference === 'regional-and-transliteration'
+      ? value.scriptPreference
+      : defaults.scriptPreference
+  return {
+    defaultLanguage: language(value.defaultLanguage, displayLanguage),
+    displayLanguage,
+    narrationLanguage: narrationLinked
+      ? displayLanguage
+      : language(value.narrationLanguage, displayLanguage),
+    narrationLinked,
+    scriptPreference,
+    calmMode: value.calmMode === true,
+    reducedMotion: value.reducedMotion === true,
+    voicePrivacy: {
+      allowMicrophone: voice.allowMicrophone !== false,
+      allowCloudEvaluation: voice.allowCloudEvaluation === true,
+      retainPracticeRecordings: voice.retainPracticeRecordings === true,
+      allowModelTraining: false,
+    },
+    allowFutureCommunityFeatures: value.allowFutureCommunityFeatures === true,
+  }
 }
 
 function sanitizeStars(value: unknown): StarCount {
   return value === 1 || value === 2 || value === 3 ? value : 0
 }
 
-function sanitizeLessonProgress(id: string, value: unknown): LessonProgress | null {
+function sanitizeSlokaProgress(id: string, value: unknown): SlokaProgress | null {
   if (!isRecord(value)) return null
   const status =
     value.status === 'in-progress' || value.status === 'completed'
@@ -80,39 +171,91 @@ function sanitizeLessonProgress(id: string, value: unknown): LessonProgress | nu
       value.currentActivityIndex >= 0
         ? value.currentActivityIndex
         : 0,
+    ...(typeof value.currentActivityId === 'string'
+      ? { currentActivityId: value.currentActivityId }
+      : {}),
     incorrectAttempts:
       typeof value.incorrectAttempts === 'number' && value.incorrectAttempts >= 0
-        ? value.incorrectAttempts
+        ? Math.floor(value.incorrectAttempts)
         : 0,
     recordingAttempted: value.recordingAttempted === true,
     bestStars: sanitizeStars(value.bestStars),
     xpAwarded: value.xpAwarded === true,
     firstCompletedOn:
       typeof value.firstCompletedOn === 'string' ? value.firstCompletedOn : null,
+    ...(typeof value.lastPracticedAt === 'string'
+      ? { lastPracticedAt: value.lastPracticedAt }
+      : {}),
   }
 }
 
-function sanitizeStreak(value: unknown): StreakState {
-  if (!isRecord(value)) return { current: 0, lastQualifyingDate: null }
+function sanitizeStoryProgress(
+  id: string,
+  value: unknown,
+): StoryChapterProgress | null {
+  if (!isRecord(value)) return null
   return {
-    current:
-      typeof value.current === 'number' && value.current >= 0
-        ? Math.floor(value.current)
+    chapterId: id,
+    status:
+      value.status === 'in-progress' || value.status === 'completed'
+        ? value.status
+        : 'not-started',
+    currentActivityId:
+      typeof value.currentActivityId === 'string' ? value.currentActivityId : null,
+    completedActivityIds: Array.isArray(value.completedActivityIds)
+      ? value.completedActivityIds.filter((item): item is string => typeof item === 'string')
+      : [],
+    incorrectAttempts:
+      typeof value.incorrectAttempts === 'number' && value.incorrectAttempts >= 0
+        ? Math.floor(value.incorrectAttempts)
         : 0,
-    lastQualifyingDate:
-      typeof value.lastQualifyingDate === 'string' ? value.lastQualifyingDate : null,
+    xpAwarded: value.xpAwarded === true,
+    firstCompletedOn:
+      typeof value.firstCompletedOn === 'string' ? value.firstCompletedOn : null,
+    ...(typeof value.lastSceneId === 'string' ? { lastSceneId: value.lastSceneId } : {}),
   }
 }
 
-function sanitizeDailyProgress(value: unknown): DailyProgress {
-  if (!isRecord(value)) return { date: '', estimatedMinutes: 0 }
-  return {
-    date: typeof value.date === 'string' ? value.date : '',
-    estimatedMinutes:
-      typeof value.estimatedMinutes === 'number' && value.estimatedMinutes >= 0
-        ? value.estimatedMinutes
-        : 0,
+function sanitizeBadges(value: unknown): EarnedBadge[] {
+  if (!Array.isArray(value)) return []
+  const badges: EarnedBadge[] = []
+  for (const badge of value) {
+    if (typeof badge === 'string') badges.push({ id: badge, earnedAt: '' })
+    else if (isRecord(badge) && typeof badge.id === 'string') {
+      badges.push({
+        id: badge.id,
+        earnedAt: typeof badge.earnedAt === 'string' ? badge.earnedAt : '',
+      })
+    }
   }
+  return badges
+}
+
+function sanitizeBookmarks(value: unknown): Bookmark[] {
+  if (!Array.isArray(value)) return []
+  const validTypes = ['sloka', 'sloka-line', 'story-chapter', 'story-scene']
+  return value.flatMap((item): Bookmark[] => {
+    if (
+      !isRecord(item) ||
+      typeof item.id !== 'string' ||
+      typeof item.contentId !== 'string' ||
+      typeof item.type !== 'string' ||
+      !validTypes.includes(item.type)
+    ) {
+      return []
+    }
+    return [
+      {
+        id: item.id,
+        type: item.type as Bookmark['type'],
+        contentId: item.contentId,
+        ...(typeof item.parentContentId === 'string'
+          ? { parentContentId: item.parentContentId }
+          : {}),
+        createdAt: typeof item.createdAt === 'string' ? item.createdAt : '',
+      },
+    ]
+  })
 }
 
 function sanitizeHistory(value: unknown): PracticeHistoryEntry[] {
@@ -120,15 +263,22 @@ function sanitizeHistory(value: unknown): PracticeHistoryEntry[] {
   const entries: PracticeHistoryEntry[] = []
   for (const item of value) {
     if (!isRecord(item)) continue
+    const contentId =
+      typeof item.contentId === 'string'
+        ? item.contentId
+        : typeof item.slokaId === 'string'
+          ? item.slokaId
+          : ''
     if (
       typeof item.id === 'string' &&
-      typeof item.slokaId === 'string' &&
+      contentId &&
       typeof item.completedAt === 'string' &&
       (item.kind === 'first-completion' || item.kind === 'practice')
     ) {
       entries.push({
         id: item.id,
-        slokaId: item.slokaId,
+        contentType: item.contentType === 'story' ? 'story' : 'sloka',
+        contentId,
         completedAt: item.completedAt,
         kind: item.kind,
         stars: sanitizeStars(item.stars),
@@ -138,66 +288,185 @@ function sanitizeHistory(value: unknown): PracticeHistoryEntry[] {
   return entries.slice(0, 100)
 }
 
-/**
- * Rebuilds a safe state from unknown parsed JSON. Any missing, corrupted, or
- * unsupported portion falls back to defaults; the app must never crash on
- * manually edited or legacy storage.
- */
-export function sanitizePersistedState(raw: unknown): PersistedAppState {
-  const defaults = createDefaultPersistedState()
-  if (!isRecord(raw) || raw.schemaVersion !== 1) return defaults
-
-  const lessons: Record<string, LessonProgress> = {}
-  if (isRecord(raw.lessons)) {
-    for (const [id, value] of Object.entries(raw.lessons)) {
-      const progress = sanitizeLessonProgress(id, value)
-      if (progress) lessons[id] = progress
+function sanitizeProgress(value: unknown): LearningProgress {
+  const defaults = createDefaultProgress()
+  if (!isRecord(value)) return defaults
+  const slokas: Record<string, SlokaProgress> = {}
+  if (isRecord(value.slokas)) {
+    for (const [id, item] of Object.entries(value.slokas)) {
+      const progress = sanitizeSlokaProgress(id, item)
+      if (progress) slokas[id] = progress
     }
   }
-
+  const storyChapters: Record<string, StoryChapterProgress> = {}
+  if (isRecord(value.storyChapters)) {
+    for (const [id, item] of Object.entries(value.storyChapters)) {
+      const progress = sanitizeStoryProgress(id, item)
+      if (progress) storyChapters[id] = progress
+    }
+  }
+  const streak = isRecord(value.streak)
+    ? {
+        current:
+          typeof value.streak.current === 'number' && value.streak.current >= 0
+            ? Math.floor(value.streak.current)
+            : 0,
+        lastQualifyingDate:
+          typeof value.streak.lastQualifyingDate === 'string'
+            ? value.streak.lastQualifyingDate
+            : null,
+      }
+    : defaults.streak
+  const daily = isRecord(value.dailyProgress) ? value.dailyProgress : {}
   return {
-    schemaVersion: 1,
-    profile: sanitizeProfile(raw.profile),
-    settings: sanitizeSettings(raw.settings),
-    lessons,
-    badges: Array.isArray(raw.badges)
-      ? raw.badges.filter((b): b is string => typeof b === 'string')
-      : [],
     totalXp:
-      typeof raw.totalXp === 'number' && raw.totalXp >= 0
-        ? Math.floor(raw.totalXp)
+      typeof value.totalXp === 'number' && value.totalXp >= 0
+        ? Math.floor(value.totalXp)
         : 0,
-    streak: sanitizeStreak(raw.streak),
-    dailyProgress: sanitizeDailyProgress(raw.dailyProgress),
-    practiceHistory: sanitizeHistory(raw.practiceHistory),
+    streak,
+    slokas,
+    storyChapters,
+    badges: sanitizeBadges(value.badges),
+    bookmarks: sanitizeBookmarks(value.bookmarks),
+    lastMode: value.lastMode === 'stories' ? 'stories' : 'slokas',
+    dailyProgress: {
+      date: typeof daily.date === 'string' ? daily.date : '',
+      estimatedMinutes:
+        typeof daily.estimatedMinutes === 'number' && daily.estimatedMinutes >= 0
+          ? daily.estimatedMinutes
+          : 0,
+    },
+    practiceHistory: sanitizeHistory(value.practiceHistory),
   }
 }
 
-export function loadPersistedState(): PersistedAppState {
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
-    if (raw === null) return createDefaultPersistedState()
-    return sanitizePersistedState(JSON.parse(raw))
-  } catch {
-    // Corrupted JSON or storage unavailable — recover with safe defaults.
-    return createDefaultPersistedState()
+export function sanitizePersistedState(raw: unknown): PersistedAppState {
+  const defaults = createDefaultPersistedState()
+  if (!isRecord(raw) || raw.schemaVersion !== SCHEMA_VERSION) return defaults
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    profile: sanitizeProfile(raw.profile),
+    preferences: sanitizePreferences(raw.preferences),
+    progress: sanitizeProgress(raw.progress),
   }
+}
+
+/** Migrates the frozen V1 DTO without changing or deleting its storage value. */
+export function migrateV1State(raw: unknown): PersistedAppState {
+  const defaults = createDefaultPersistedState()
+  if (!isRecord(raw) || raw.schemaVersion !== 1) return defaults
+  const legacySettings = isRecord(raw.settings) ? raw.settings : {}
+  const migratedLanguage = language(legacySettings.language, 'en-IN')
+  const profileValue = isRecord(raw.profile)
+    ? { ...raw.profile, dailyGoalMinutes: dailyGoal(legacySettings.dailyGoalMinutes) }
+    : raw.profile
+  const slokas: Record<string, SlokaProgress> = {}
+  if (isRecord(raw.lessons)) {
+    for (const [id, value] of Object.entries(raw.lessons)) {
+      const progress = sanitizeSlokaProgress(id, value)
+      if (progress) slokas[id] = progress
+    }
+  }
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    profile: sanitizeProfile(profileValue),
+    preferences: sanitizePreferences({
+      defaultLanguage: migratedLanguage,
+      displayLanguage: migratedLanguage,
+      narrationLanguage: migratedLanguage,
+      narrationLinked: true,
+      reducedMotion: legacySettings.reducedMotion === true,
+    }),
+    progress: sanitizeProgress({
+      totalXp: raw.totalXp,
+      streak: raw.streak,
+      slokas,
+      storyChapters: {},
+      badges: raw.badges,
+      bookmarks: [],
+      lastMode: 'slokas',
+      dailyProgress: raw.dailyProgress,
+      practiceHistory: raw.practiceHistory,
+    }),
+  }
+}
+
+type JsonParseResult =
+  | { ok: true; value: unknown }
+  | { ok: false }
+
+function parse(value: string): JsonParseResult {
+  try {
+    return { ok: true, value: JSON.parse(value) as unknown }
+  } catch {
+    return { ok: false }
+  }
+}
+
+function loadLegacyState(storage: Storage): PersistedAppState {
+  const legacyRaw = storage.getItem(LEGACY_STORAGE_KEY)
+  if (legacyRaw === null) return createDefaultPersistedState()
+  const legacy = parse(legacyRaw)
+  return legacy.ok ? migrateV1State(legacy.value) : createDefaultPersistedState()
+}
+
+export class LocalStorageProgressRepository implements ProgressRepository {
+  constructor(private readonly storage: Storage = window.localStorage) {}
+
+  async load(): Promise<PersistedAppState> {
+    return this.loadSync()
+  }
+
+  loadSync(): PersistedAppState {
+    try {
+      const currentRaw = this.storage.getItem(STORAGE_KEY)
+      if (currentRaw !== null) {
+        const current = parse(currentRaw)
+        // A malformed V2 write may be the result of an interrupted save. In that
+        // case, recover from the still-preserved V1 value when possible. A valid
+        // JSON value (including a newer schema) remains authoritative so that we
+        // never silently downgrade data written by a newer app version.
+        return current.ok
+          ? sanitizePersistedState(current.value)
+          : loadLegacyState(this.storage)
+      }
+      return loadLegacyState(this.storage)
+    } catch {
+      return createDefaultPersistedState()
+    }
+  }
+
+  async save(state: PersistedAppState): Promise<void> {
+    this.saveSync(state)
+  }
+
+  saveSync(state: PersistedAppState): void {
+    this.storage.setItem(STORAGE_KEY, JSON.stringify(sanitizePersistedState(state)))
+  }
+
+  async reset(): Promise<void> {
+    this.resetSync()
+  }
+
+  resetSync(): void {
+    // Both keys belong to Sloka Steps. Removing V1 prevents re-migration after
+    // an explicitly confirmed reset; unrelated localStorage is never touched.
+    this.storage.removeItem(STORAGE_KEY)
+    this.storage.removeItem(LEGACY_STORAGE_KEY)
+  }
+}
+
+function browserRepository(): LocalStorageProgressRepository {
+  return new LocalStorageProgressRepository(window.localStorage)
+}
+
+export function loadPersistedState(): PersistedAppState {
+  return browserRepository().loadSync()
 }
 
 export function savePersistedState(state: PersistedAppState): void {
   try {
-    const persisted: PersistedAppState = {
-      schemaVersion: 1,
-      profile: state.profile,
-      settings: state.settings,
-      lessons: state.lessons,
-      badges: state.badges,
-      totalXp: state.totalXp,
-      streak: state.streak,
-      dailyProgress: state.dailyProgress,
-      practiceHistory: state.practiceHistory,
-    }
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(persisted))
+    browserRepository().saveSync(state)
   } catch (error) {
     if (import.meta.env.DEV) {
       console.warn('Sloka Steps: could not save progress to localStorage.', error)
@@ -205,11 +474,11 @@ export function savePersistedState(state: PersistedAppState): void {
   }
 }
 
-/** Removes only the Sloka Steps key — never clears other storage. */
+/** Call only after the parent confirms reset. */
 export function clearPersistedState(): void {
   try {
-    window.localStorage.removeItem(STORAGE_KEY)
+    browserRepository().resetSync()
   } catch {
-    // Storage unavailable — nothing to clear.
+    // Storage unavailable; in-memory reset still proceeds.
   }
 }

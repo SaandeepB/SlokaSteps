@@ -11,7 +11,7 @@ export interface UseTranslationResult {
 
 export function useTranslation(): UseTranslationResult {
   const { state } = useAppState()
-  const language = state.settings.language
+  const language = state.preferences.displayLanguage
   const t = useCallback(
     (key: TranslationKey, vars?: TranslationVars) =>
       translate(language, key, vars),

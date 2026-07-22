@@ -28,11 +28,20 @@ export const en = {
     save: 'Save',
     goHome: 'Go Home',
     chooseLanguage: 'Choose language',
+    learn: 'Learn',
+    practice: 'Practice',
+    rewards: 'Rewards',
+    slokas: 'Slokas',
+    stories: 'Stories',
+    search: 'Search',
+    bookmarks: 'Bookmarks',
 
     // Audio controls
     listen: 'Listen',
     replay: 'Replay',
     stop: 'Stop',
+    pauseAudio: 'Pause',
+    resumeAudio: 'Resume',
     slowPlay: 'Play Slowly',
     record: 'Record',
     stopRecording: 'Stop Recording',
@@ -97,6 +106,10 @@ export const en = {
 
     // Setup
     setupTitle: 'Set up your learner',
+    firstStep: 'First step',
+    chooseAppLanguage: 'Which language should Sloka Steps use?',
+    languageSetupHelp:
+      'This sets the app, meanings, and narration. A parent can separate narration later.',
     setupIntro: 'Tell Mitra a little about the learner. No account needed!',
     nameLabel: 'What should we call you?',
     nameHelp: 'A nickname is perfect. You can leave this empty too.',
@@ -182,6 +195,21 @@ export const en = {
 
     // Settings
     settingsTitle: 'Settings',
+    displayLanguageLabel: 'Display language',
+    narrationLanguageLabel: 'Narration language',
+    linkNarrationLabel: 'Use the display language for narration',
+    scriptPreferenceLabel: 'Sloka script',
+    scriptRegional: 'Regional script',
+    scriptDevanagari: 'Devanagari',
+    scriptRoman: 'Roman transliteration',
+    scriptRegionalAndRoman: 'Regional script and transliteration',
+    calmModeLabel: 'Calm mode',
+    calmModeHelp: 'Uses fewer distractions, softer effects, and no confetti.',
+    microphoneLabel: 'Allow microphone practice',
+    cloudEvaluationLabel: 'Allow future cloud chant evaluation',
+    retainRecordingsLabel: 'Retain practice recordings',
+    communityPreferenceLabel: 'Allow future community features',
+    comingFutureUpdate: 'Coming in a future update',
     reducedMotionLabel: 'Reduce animations',
     reducedMotionHelp: 'Calms movement across the app.',
     settingsSaved: 'Saved!',

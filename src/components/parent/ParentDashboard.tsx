@@ -15,6 +15,7 @@ import {
 import { clearPersistedState } from '../../services/persistence'
 import { LANGUAGES } from '../../types'
 import { routes } from '../../routes/paths'
+import { getStoryChapterById, resolveLocalizedText } from '../../content/stories'
 
 export function ParentDashboard() {
   const { state, dispatch } = useAppState()
@@ -23,16 +24,27 @@ export function ParentDashboard() {
   const [confirmReset, setConfirmReset] = useState(false)
 
   const completedCount = SLOKAS.filter(
-    (sloka) => state.lessons[sloka.id]?.status === 'completed',
+    (sloka) => state.progress.slokas[sloka.id]?.status === 'completed',
   ).length
   const implementedCount = SLOKAS.filter(
     (sloka) => sloka.implementationStatus === 'complete',
   ).length
-  const languageName =
-    LANGUAGES.find((lang) => lang.code === state.settings.language)?.endonym ??
-    state.settings.language
-  const lastEntry = state.practiceHistory[0]
-  const lastSloka = lastEntry ? getSlokaById(lastEntry.slokaId) : undefined
+  const displayLanguageName =
+    LANGUAGES.find((lang) => lang.code === state.preferences.displayLanguage)?.endonym ??
+    state.preferences.displayLanguage
+  const narrationLanguageName =
+    LANGUAGES.find((lang) => lang.code === state.preferences.narrationLanguage)?.endonym ??
+    state.preferences.narrationLanguage
+  const lastEntry = state.progress.practiceHistory[0]
+  const lastSloka =
+    lastEntry?.contentType === 'sloka' ? getSlokaById(lastEntry.contentId) : undefined
+  const currentSloka = SLOKAS.find(
+    (sloka) => state.progress.slokas[sloka.id]?.status === 'in-progress',
+  )
+  const currentStoryId = Object.values(state.progress.storyChapters).find(
+    (chapter) => chapter.status === 'in-progress',
+  )?.chapterId
+  const currentStory = getStoryChapterById(currentStoryId)
 
   const performReset = () => {
     // Removes only the Sloka Steps storage key, never other browser data.
@@ -56,16 +68,18 @@ export function ParentDashboard() {
           <dl className="flex flex-col gap-2 text-ink-700">
             <DashboardRow
               label={t('childNameLabel')}
-              value={state.profile?.displayName ?? '—'}
+              value={state.profile?.nickname ?? '—'}
             />
             <DashboardRow
               label={t('ageRangeLabel')}
-              value={state.profile?.ageRange ?? '—'}
+              value={state.profile?.ageBand ?? '—'}
             />
-            <DashboardRow label={t('preferredLanguageLabel')} value={languageName} />
+            <DashboardRow label={t('displayLanguageLabel')} value={displayLanguageName} />
+            <DashboardRow label={t('narrationLanguageLabel')} value={narrationLanguageName} />
+            <DashboardRow label={t('scriptPreferenceLabel')} value={state.preferences.scriptPreference} />
             <DashboardRow
               label={t('dailyGoal')}
-              value={t('minutesOption', { n: state.settings.dailyGoalMinutes })}
+              value={t('minutesOption', { n: state.profile?.dailyGoalMinutes ?? 10 })}
             />
           </dl>
         </Card>
@@ -79,9 +93,19 @@ export function ParentDashboard() {
               label={t('lessonsCompleted')}
               value={`${completedCount} / ${implementedCount}`}
             />
-            <DashboardRow label={t('totalXpLabel')} value={String(state.totalXp)} />
+            <DashboardRow label="Story chapters completed" value={String(Object.values(state.progress.storyChapters).filter((chapter) => chapter.status === 'completed').length)} />
+            <DashboardRow label="Current sloka path" value={currentSloka?.title ?? '—'} />
             <DashboardRow
-              label={t('currentStreak', { days: state.streak.current })}
+              label="Current story path"
+              value={
+                currentStory
+                  ? resolveLocalizedText(currentStory.title, state.preferences.displayLanguage)
+                  : '—'
+              }
+            />
+            <DashboardRow label={t('totalXpLabel')} value={String(state.progress.totalXp)} />
+            <DashboardRow
+              label={t('currentStreak', { days: state.progress.streak.current })}
               value=""
             />
             {lastSloka && (
@@ -95,8 +119,8 @@ export function ParentDashboard() {
         <h2 className="mb-3 text-lg font-bold text-ink-900">{t('learningPath')}</h2>
         <ul className="flex flex-col gap-3">
           {SLOKAS.map((sloka) => {
-            const progress = state.lessons[sloka.id]
-            const availability = getLessonAvailability(sloka, state.lessons, SLOKAS)
+            const progress = state.progress.slokas[sloka.id]
+            const availability = getLessonAvailability(sloka, state.progress.slokas, SLOKAS)
             return (
               <li
                 key={sloka.id}
@@ -121,11 +145,13 @@ export function ParentDashboard() {
 
       <Card>
         <h2 className="mb-3 text-lg font-bold text-ink-900">{t('badgesLabel')}</h2>
-        {state.badges.length === 0 ? (
+        {state.progress.badges.length === 0 ? (
           <p className="text-ink-500">—</p>
         ) : (
           <div className="flex flex-wrap gap-4">
-            {SLOKAS.filter((sloka) => state.badges.includes(sloka.badge.id)).map(
+            {SLOKAS.filter((sloka) =>
+              state.progress.badges.some((badge) => badge.id === sloka.badge.id),
+            ).map(
               (sloka) => (
                 <BadgeMedal key={sloka.badge.id} badge={sloka.badge} size="lg" showName />
               ),
@@ -138,12 +164,13 @@ export function ParentDashboard() {
         <h2 className="mb-3 text-lg font-bold text-ink-900">
           {t('practiceHistoryTitle')}
         </h2>
-        {state.practiceHistory.length === 0 ? (
+        {state.progress.practiceHistory.length === 0 ? (
           <p className="text-ink-500">{t('noHistory')}</p>
         ) : (
           <ul className="flex flex-col gap-2">
-            {state.practiceHistory.slice(0, 20).map((entry) => {
-              const sloka = getSlokaById(entry.slokaId)
+            {state.progress.practiceHistory.slice(0, 20).map((entry) => {
+              const sloka = entry.contentType === 'sloka' ? getSlokaById(entry.contentId) : undefined
+              const story = entry.contentType === 'story' ? getStoryChapterById(entry.contentId) : undefined
               const when = new Date(entry.completedAt)
               return (
                 <li
@@ -151,7 +178,10 @@ export function ParentDashboard() {
                   className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-cream-200 p-3 text-sm"
                 >
                   <span className="font-semibold text-ink-900">
-                    {sloka?.title ?? entry.slokaId}
+                    {sloka?.title ??
+                      (story
+                        ? resolveLocalizedText(story.title, state.preferences.displayLanguage)
+                        : entry.contentId)}
                   </span>
                   <span className="flex items-center gap-3 text-ink-700">
                     {entry.kind === 'first-completion'
@@ -161,7 +191,7 @@ export function ParentDashboard() {
                     <time dateTime={entry.completedAt}>
                       {Number.isNaN(when.getTime())
                         ? entry.completedAt
-                        : when.toLocaleDateString()}
+                        : when.toLocaleDateString(state.preferences.displayLanguage)}
                     </time>
                   </span>
                 </li>
@@ -169,6 +199,18 @@ export function ParentDashboard() {
             })}
           </ul>
         )}
+      </Card>
+
+      <Card>
+        <h2 className="mb-3 text-lg font-bold text-ink-900">Preferences and privacy</h2>
+        <dl className="flex flex-col gap-2 text-ink-700">
+          <DashboardRow label={t('calmModeLabel')} value={state.preferences.calmMode ? 'On' : 'Off'} />
+          <DashboardRow label={t('microphoneLabel')} value={state.preferences.voicePrivacy.allowMicrophone ? 'On' : 'Off'} />
+          <DashboardRow label={t('cloudEvaluationLabel')} value={state.preferences.voicePrivacy.allowCloudEvaluation ? 'On' : 'Off'} />
+          <DashboardRow label={t('retainRecordingsLabel')} value={state.preferences.voicePrivacy.retainPracticeRecordings ? 'Requested (not active)' : 'Off'} />
+          <DashboardRow label={t('communityPreferenceLabel')} value={state.preferences.allowFutureCommunityFeatures ? 'Parent interest saved; feature off' : 'Off'} />
+          <DashboardRow label={t('bookmarks')} value={String(state.progress.bookmarks.length)} />
+        </dl>
       </Card>
 
       <Card className="flex flex-col gap-3">

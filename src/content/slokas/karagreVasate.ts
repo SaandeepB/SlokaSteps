@@ -24,6 +24,9 @@ export const karagreVasate: Sloka = {
   theme: 'A Mindful Morning',
   estimatedMinutes: 6,
   implementationStatus: 'complete',
+  contentStatus: 'editorial-review',
+  editorial: { status: 'editorial-review' },
+  practiceStatus: 'available',
   contentReviewStatus: 'prototype',
   badge: {
     id: 'badge-morning-light',
@@ -32,7 +35,7 @@ export const karagreVasate: Sloka = {
   },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'A gentle morning start',
       simpleMeaning:
         'As I begin my morning, I remember prosperity, knowledge, and divine guidance in the work of my hands.',
@@ -44,7 +47,7 @@ export const karagreVasate: Sloka = {
       ],
       reviewStatus: 'prototype-reviewed',
     },
-    hi: {
+    'hi-IN': {
       title: 'सुबह की सुंदर शुरुआत',
       simpleMeaning:
         'सुबह की शुरुआत करते हुए मैं अपने हाथों के काम में समृद्धि, ज्ञान और ईश्वर के मार्गदर्शन को याद करती/करता हूँ।',

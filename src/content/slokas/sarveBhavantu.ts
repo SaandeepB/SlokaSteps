@@ -37,17 +37,20 @@ const lines: SlokaLine[] = [
  */
 export const sarveBhavantu: Sloka = {
   id,
-  order: 8,
+  order: 9,
   level: 1,
   title: 'Sarve Bhavantu Sukhinah',
   theme: 'Kindness and Well-Being for All',
   estimatedMinutes: 8,
   implementationStatus: 'coming-soon',
+  contentStatus: 'draft',
+  editorial: { status: 'draft' },
+  practiceStatus: 'not-started',
   contentReviewStatus: 'prototype',
   badge: { id: 'badge-kind-heart', name: 'Kindness Badge', motif: 'heart' },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'Happiness for everyone',
       simpleMeaning:
         'This prayer wishes happiness, health, and goodness for everyone, everywhere — and that no one suffers.',

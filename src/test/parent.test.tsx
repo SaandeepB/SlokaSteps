@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ParentPage } from '../pages/ParentPage'
+import { SettingsPage } from '../pages/SettingsPage'
 import { savePersistedState, STORAGE_KEY } from '../services/persistence'
 import { createDefaultPersistedState } from '../services/persistence'
 import { renderWithProviders, makeStateWithProfile } from './testUtils'
@@ -17,6 +18,18 @@ function renderParent() {
       <Route path="/settings" element={<p>settings page</p>} />
     </Routes>,
     { route: '/parent', state: makeStateWithProfile() },
+  )
+}
+
+function renderSettings() {
+  return renderWithProviders(
+    <Routes>
+      <Route
+        path="/settings"
+        element={<SettingsPage fixedGateQuestion={GATE} />}
+      />
+    </Routes>,
+    { route: '/settings', state: makeStateWithProfile() },
   )
 }
 
@@ -45,6 +58,26 @@ describe('parent gate', () => {
       await screen.findByRole('heading', { name: 'Parent Dashboard' }),
     ).toBeInTheDocument()
     expect(screen.getByText('Anu')).toBeInTheDocument()
+  })
+
+  it('keeps privacy and community controls behind a fresh parent check', async () => {
+    const user = userEvent.setup()
+    renderSettings()
+
+    expect(
+      screen.queryByRole('checkbox', { name: /Allow future cloud chant evaluation/ }),
+    ).not.toBeInTheDocument()
+    expect(screen.getByLabelText('Parent-only privacy settings')).toBeInTheDocument()
+
+    await user.type(screen.getByRole('textbox', { name: 'Your answer' }), '7')
+    await user.click(screen.getByRole('button', { name: 'Enter' }))
+
+    expect(
+      screen.getByRole('checkbox', { name: /Allow future cloud chant evaluation/ }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('checkbox', { name: /Allow future community features/ }),
+    ).toBeInTheDocument()
   })
 })
 
