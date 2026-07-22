@@ -7,7 +7,7 @@ import type { AudioPlaybackService } from '../types'
  * exists so children can hear an approximate reading until reviewed,
  * professionally recorded audio is added (see PrerecordedAudioPlayback).
  */
-class SpeechSynthesisPlayback implements AudioPlaybackService {
+export class BrowserSpeechFallback implements AudioPlaybackService {
   isSupported(): boolean {
     return typeof window !== 'undefined' && 'speechSynthesis' in window
   }
@@ -42,6 +42,18 @@ class SpeechSynthesisPlayback implements AudioPlaybackService {
       window.speechSynthesis.cancel()
     }
   }
+
+  pause(): void {
+    if (this.isSupported() && window.speechSynthesis.speaking) {
+      window.speechSynthesis.pause()
+    }
+  }
+
+  resume(): void {
+    if (this.isSupported() && window.speechSynthesis.paused) {
+      window.speechSynthesis.resume()
+    }
+  }
 }
 
 /**
@@ -52,6 +64,7 @@ class SpeechSynthesisPlayback implements AudioPlaybackService {
  */
 export class PrerecordedAudioPlayback implements AudioPlaybackService {
   private current: HTMLAudioElement | null = null
+  private finishCurrent: (() => void) | null = null
 
   isSupported(): boolean {
     return typeof window !== 'undefined' && typeof window.Audio === 'function'
@@ -65,23 +78,54 @@ export class PrerecordedAudioPlayback implements AudioPlaybackService {
     return new Promise((resolve, reject) => {
       const audio = new Audio(url)
       this.current = audio
+      let settled = false
+      const settle = (error?: Error) => {
+        if (settled) return
+        settled = true
+        audio.onended = null
+        audio.onerror = null
+        if (this.current === audio) {
+          this.current = null
+          this.finishCurrent = null
+        }
+        if (error) reject(error)
+        else resolve()
+      }
+      this.finishCurrent = () => settle()
       if (options?.rate) audio.playbackRate = options.rate
-      audio.onended = () => resolve()
-      audio.onerror = () => reject(new Error('audio-playback-failed'))
-      audio.play().catch((error: unknown) => reject(error))
+      audio.onended = () => settle()
+      audio.onerror = () => settle(new Error('audio-playback-failed'))
+      audio.play().catch((error: unknown) =>
+        settle(error instanceof Error ? error : new Error('audio-playback-failed')),
+      )
     })
   }
 
   stop(): void {
-    if (this.current) {
-      this.current.pause()
-      this.current.src = ''
-      this.current = null
+    const audio = this.current
+    const finish = this.finishCurrent
+    this.current = null
+    this.finishCurrent = null
+    if (audio) {
+      audio.pause()
+      audio.removeAttribute('src')
     }
+    // Cancellation is expected and must settle the caller's Promise.
+    finish?.()
+  }
+
+  pause(): void {
+    this.current?.pause()
+  }
+
+  resume(): void {
+    void this.current?.play().catch(() => {
+      this.finishCurrent?.()
+    })
   }
 }
 
-const speechPlayback = new SpeechSynthesisPlayback()
+const speechPlayback = new BrowserSpeechFallback()
 const prerecordedPlayback = new PrerecordedAudioPlayback()
 
 /**
@@ -107,4 +151,14 @@ export function getSpeechPlayback(): AudioPlaybackService {
 export function stopAllPlayback(): void {
   speechPlayback.stop()
   prerecordedPlayback.stop()
+}
+
+export function pauseAllPlayback(): void {
+  speechPlayback.pause()
+  prerecordedPlayback.pause()
+}
+
+export function resumeAllPlayback(): void {
+  speechPlayback.resume()
+  prerecordedPlayback.resume()
 }

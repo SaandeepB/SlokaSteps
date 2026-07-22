@@ -5,6 +5,7 @@ import { useRecorder } from '../../hooks/useRecorder'
 import { useTranslation } from '../../hooks/useTranslation'
 import { getPronunciationService } from '../../services/pronunciation'
 import type { TranslationKey } from '../../content/translations'
+import { useAppState } from '../../hooks/useAppState'
 
 export interface RecorderPanelProps {
   /** The line/sloka the child is chanting (for future evaluation only). */
@@ -24,6 +25,7 @@ export interface RecorderPanelProps {
  */
 export function RecorderPanel({ expectedText, onAttempted }: RecorderPanelProps) {
   const { t } = useTranslation()
+  const { state } = useAppState()
   const recorder = useRecorder()
   const [isPlayingBack, setIsPlayingBack] = useState(false)
   const [feedbackKey, setFeedbackKey] = useState<TranslationKey | null>(null)
@@ -83,6 +85,17 @@ export function RecorderPanel({ expectedText, onAttempted }: RecorderPanelProps)
     stopPlayback()
     setFeedbackKey(null)
     recorder.reset()
+  }
+
+  if (!state.preferences.voicePrivacy.allowMicrophone) {
+    return (
+      <div className="flex flex-col gap-3">
+        <p role="status" className="rounded-xl bg-sky-100 p-3 text-ink-700">
+          Microphone practice is turned off in Parent Settings. You can still chant aloud and continue.
+        </p>
+        <UnsupportedContinueUnlock onAttempted={notifyAttempted} />
+      </div>
+    )
   }
 
   if (!recorder.supported) {

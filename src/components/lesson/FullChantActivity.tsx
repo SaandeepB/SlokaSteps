@@ -8,6 +8,7 @@ import type { SlokaLine } from '../../types'
 
 export interface FullChantActivityProps {
   lines: SlokaLine[]
+  slokaId?: string
   onFinish: () => void
   onRecordingAttempted: () => void
 }
@@ -19,6 +20,7 @@ export interface FullChantActivityProps {
  */
 export function FullChantActivity({
   lines,
+  slokaId,
   onFinish,
   onRecordingAttempted,
 }: FullChantActivityProps) {
@@ -31,7 +33,20 @@ export function FullChantActivity({
       <h2 className="text-2xl font-bold text-teal-700">{t('fullChantTitle')}</h2>
       <p className="text-lg text-ink-700">{t('fullChantInstruction')}</p>
       <SlokaTextBlock lines={lines} />
-      <PlayLineControls text={fullText} playLabelKey="listenFull" />
+      <PlayLineControls
+        text={fullText}
+        playLabelKey="listenFull"
+        audioQuery={
+          slokaId
+            ? {
+                contentId: slokaId,
+                segmentId: 'full',
+                purpose: 'canonical-chant',
+                language: 'sa-IN',
+              }
+            : undefined
+        }
+      />
       <RecorderPanel
         expectedText={fullText}
         onAttempted={() => {
