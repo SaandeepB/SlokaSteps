@@ -57,7 +57,7 @@ export function ActivityPage() {
     )
   }
 
-  const availability = getLessonAvailability(sloka, state.lessons, SLOKAS)
+  const availability = getLessonAvailability(sloka, state.progress.slokas, SLOKAS)
   if (!canEnterLesson(availability) || sloka.activities.length === 0) {
     return <Navigate to={routes.lesson(sloka.id)} replace />
   }
@@ -79,7 +79,7 @@ export function ActivityPage() {
     )
   }
 
-  const progress = state.lessons[sloka.id]
+  const progress = state.progress.slokas[sloka.id]
   const savedIndex = Math.min(
     progress?.currentActivityIndex ?? 0,
     sloka.activities.length - 1,
@@ -105,6 +105,7 @@ export function ActivityPage() {
       type: 'ADVANCE_ACTIVITY',
       slokaId: sloka.id,
       activityIndex: nextIndex,
+      activityId: sloka.activities[nextIndex]?.id,
       estimatedMinutes: ESTIMATED_MINUTES_PER_ACTIVITY,
       today: todayIsoDate(),
     })
@@ -132,7 +133,10 @@ export function ActivityPage() {
   const recordRecording = () =>
     dispatch({ type: 'RECORD_RECORDING_ATTEMPTED', slokaId: sloka.id })
 
-  const meaning = sloka.meanings[language] ?? sloka.meanings.en
+  const meaning = sloka.meanings[language] ?? sloka.meanings['en-IN']
+  const narrationMeaning =
+    sloka.meanings[state.preferences.narrationLanguage] ??
+    sloka.meanings['en-IN']
 
   return (
     <div className="flex min-h-screen flex-col gap-6 py-4">
@@ -166,7 +170,7 @@ export function ActivityPage() {
             <X size={24} aria-hidden="true" />
           </button>
         </div>
-        <ProgressBar value={index} max={totalSteps} label={t('lessonProgress')} />
+        <ProgressBar value={index + 1} max={totalSteps} label={t('lessonProgress')} />
         <p className="text-center text-sm font-medium text-ink-500">
           {t('stepOf', { current: index + 1, total: totalSteps })}
         </p>
@@ -187,6 +191,7 @@ export function ActivityPage() {
         {activity.type === 'listen' && (
           <ListenActivity
             line={sloka.lines[activity.lineIndex]}
+            slokaId={sloka.id}
             lineMeaning={meaning?.lineMeanings[activity.lineIndex]}
             onContinue={advance}
           />
@@ -194,12 +199,19 @@ export function ActivityPage() {
         {activity.type === 'repeat' && (
           <RepeatActivity
             line={sloka.lines[activity.lineIndex]}
+            slokaId={sloka.id}
             onContinue={advance}
             onRecordingAttempted={recordRecording}
           />
         )}
         {activity.type === 'meaning' && meaning && (
-          <MeaningActivity meaning={meaning} onContinue={advance} />
+          <MeaningActivity
+            meaning={meaning}
+            slokaId={sloka.id}
+            narrationText={narrationMeaning?.simpleMeaning}
+            narrationLanguage={state.preferences.narrationLanguage}
+            onContinue={advance}
+          />
         )}
         {activity.type === 'match' && (
           <MatchActivity
@@ -233,6 +245,7 @@ export function ActivityPage() {
         {activity.type === 'fullChant' && (
           <FullChantActivity
             lines={sloka.lines}
+            slokaId={sloka.id}
             onFinish={advance}
             onRecordingAttempted={recordRecording}
           />

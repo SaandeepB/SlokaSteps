@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Check, Flame, Lock, Play, Sparkles, Star } from 'lucide-react'
 import { SLOKAS } from '../content/slokas'
 import { useAppState } from '../hooks/useAppState'
@@ -16,6 +17,7 @@ import { routes } from '../routes/paths'
 import { todayIsoDate } from '../utils/dates'
 import type { TranslationKey } from '../content/translations'
 import type { Sloka } from '../types'
+import { LearningModeSelector } from '../components/learn/LearningModeSelector'
 
 const stateLabelKeys: Record<LessonAvailability, TranslationKey> = {
   locked: 'stateLocked',
@@ -26,14 +28,21 @@ const stateLabelKeys: Record<LessonAvailability, TranslationKey> = {
 }
 
 export function PathPage() {
-  const { state } = useAppState()
+  const { state, dispatch } = useAppState()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   useDocumentTitle(t('pathTitle'))
 
-  const goal = state.settings.dailyGoalMinutes
+  useEffect(() => {
+    if (state.progress.lastMode !== 'slokas') {
+      dispatch({ type: 'SET_LEARNING_MODE', mode: 'slokas' })
+    }
+  }, [dispatch, state.progress.lastMode])
+
+  const goal = state.profile?.dailyGoalMinutes ?? 10
   const minutesToday =
-    state.dailyProgress.date === todayIsoDate()
-      ? state.dailyProgress.estimatedMinutes
+    state.progress.dailyProgress.date === todayIsoDate()
+      ? state.progress.dailyProgress.estimatedMinutes
       : 0
 
   return (
@@ -45,11 +54,11 @@ export function PathPage() {
           <div className="flex items-center justify-between gap-3 rounded-2xl border border-cream-200 bg-white p-3 shadow-soft">
             <span className="flex items-center gap-2 font-semibold text-ink-700">
               <Sparkles size={20} aria-hidden="true" className="text-saffron-500" />
-              {state.totalXp} {t('xpLabel')}
+              {state.progress.totalXp} {t('xpLabel')}
             </span>
             <span className="flex items-center gap-2 font-semibold text-ink-700">
               <Flame size={20} aria-hidden="true" className="text-lotus-500" />
-              {state.streak.current} {t('streakLabel')}
+              {state.progress.streak.current} {t('streakLabel')}
             </span>
           </div>
           <div className="flex flex-col justify-center gap-1 rounded-2xl border border-cream-200 bg-white p-3 shadow-soft">
@@ -70,6 +79,16 @@ export function PathPage() {
         </div>
       </div>
 
+      <LearningModeSelector
+        value="slokas"
+        slokasLabel={t('slokas')}
+        storiesLabel={t('stories')}
+        onChange={(mode) => {
+          dispatch({ type: 'SET_LEARNING_MODE', mode })
+          navigate(mode === 'slokas' ? routes.slokas : routes.stories)
+        }}
+      />
+
       <ol className="flex flex-col gap-4">
         {SLOKAS.map((sloka, index) => (
           <PathNode
@@ -87,8 +106,8 @@ function PathNode({ sloka, offsetRight }: { sloka: Sloka; offsetRight: boolean }
   const { state } = useAppState()
   const { t } = useTranslation()
 
-  const availability = getLessonAvailability(sloka, state.lessons, SLOKAS)
-  const progress = state.lessons[sloka.id]
+  const availability = getLessonAvailability(sloka, state.progress.slokas, SLOKAS)
+  const progress = state.progress.slokas[sloka.id]
   const percent = getCompletionPercent(sloka, progress)
   const stateLabel = t(stateLabelKeys[availability])
   const clickable = availability !== 'locked'
@@ -133,7 +152,7 @@ function PathNode({ sloka, offsetRight }: { sloka: Sloka; offsetRight: boolean }
       </span>
       <BadgeMedal
         badge={sloka.badge}
-        earned={state.badges.includes(sloka.badge.id)}
+        earned={state.progress.badges.some((badge) => badge.id === sloka.badge.id)}
       />
     </div>
   )

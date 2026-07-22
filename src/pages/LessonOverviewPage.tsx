@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Clock, ListChecks } from 'lucide-react'
+import { Bookmark, Clock, ListChecks } from 'lucide-react'
 import { getSlokaById, SLOKAS } from '../content/slokas'
 import { useAppState } from '../hooks/useAppState'
 import { useTranslation } from '../hooks/useTranslation'
@@ -38,10 +38,10 @@ export function LessonOverviewPage() {
     )
   }
 
-  const availability = getLessonAvailability(sloka, state.lessons, SLOKAS)
-  const progress = state.lessons[sloka.id]
+  const availability = getLessonAvailability(sloka, state.progress.slokas, SLOKAS)
+  const progress = state.progress.slokas[sloka.id]
   // Meanings fall back to English when the selected language pack has none.
-  const meaning = sloka.meanings[language] ?? sloka.meanings.en
+  const meaning = sloka.meanings[language] ?? sloka.meanings['en-IN']
 
   const startLesson = () => {
     dispatch({ type: 'START_LESSON', slokaId: sloka.id })
@@ -57,6 +57,18 @@ export function LessonOverviewPage() {
   }
 
   const fullChantText = sloka.lines.map((line) => line.transliteration).join('. ')
+  const slokaBookmarkId = `sloka:${sloka.id}`
+  const slokaBookmarked = state.progress.bookmarks.some(
+    (bookmark) => bookmark.id === slokaBookmarkId,
+  )
+  const bookmarkedLineIds = new Set(
+    state.progress.bookmarks
+      .filter(
+        (bookmark) =>
+          bookmark.type === 'sloka-line' && bookmark.parentContentId === sloka.id,
+      )
+      .map((bookmark) => bookmark.contentId),
+  )
 
   return (
     <div className="flex flex-col gap-5 py-2">
@@ -67,12 +79,33 @@ export function LessonOverviewPage() {
           </p>
           <h1 className="text-3xl font-extrabold text-teal-700">{sloka.title}</h1>
         </div>
-        <BadgeMedal
-          badge={sloka.badge}
-          earned={state.badges.includes(sloka.badge.id)}
-          size="lg"
-          showName
-        />
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-pressed={slokaBookmarked}
+            aria-label={slokaBookmarked ? 'Remove sloka bookmark' : 'Bookmark this sloka'}
+            onClick={() =>
+              dispatch({
+                type: 'TOGGLE_BOOKMARK',
+                bookmark: {
+                  id: slokaBookmarkId,
+                  type: 'sloka',
+                  contentId: sloka.id,
+                  createdAt: new Date().toISOString(),
+                },
+              })
+            }
+            className="inline-flex h-12 w-12 items-center justify-center rounded-2xl text-teal-700 hover:bg-teal-100"
+          >
+            <Bookmark size={22} aria-hidden="true" fill={slokaBookmarked ? 'currentColor' : 'none'} />
+          </button>
+          <BadgeMedal
+            badge={sloka.badge}
+            earned={state.progress.badges.some((badge) => badge.id === sloka.badge.id)}
+            size="lg"
+            showName
+          />
+        </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-ink-700">
@@ -93,7 +126,22 @@ export function LessonOverviewPage() {
 
       <Card>
         <h2 className="mb-3 text-lg font-bold text-ink-900">{t('devanagariLabel')}</h2>
-        <SlokaTextBlock lines={sloka.lines} />
+        <SlokaTextBlock
+          lines={sloka.lines}
+          bookmarkedLineIds={bookmarkedLineIds}
+          onToggleLineBookmark={(line) =>
+            dispatch({
+              type: 'TOGGLE_BOOKMARK',
+              bookmark: {
+                id: `sloka-line:${line.id}`,
+                type: 'sloka-line',
+                contentId: line.id,
+                parentContentId: sloka.id,
+                createdAt: new Date().toISOString(),
+              },
+            })
+          }
+        />
       </Card>
 
       {meaning && (
@@ -122,7 +170,16 @@ export function LessonOverviewPage() {
         )}
 
         {availability !== 'coming-soon' && (
-          <PlayLineControls text={fullChantText} playLabelKey="listenFull" />
+          <PlayLineControls
+            text={fullChantText}
+            playLabelKey="listenFull"
+            audioQuery={{
+              contentId: sloka.id,
+              segmentId: 'full',
+              purpose: 'canonical-chant',
+              language: 'sa-IN',
+            }}
+          />
         )}
 
         <div className="flex flex-wrap gap-3">

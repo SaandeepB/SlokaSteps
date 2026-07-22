@@ -12,7 +12,7 @@ export function WelcomePage() {
   const { t } = useTranslation()
   useDocumentTitle(t('tagline'))
 
-  const startTarget = state.profile ? routes.path : routes.setup
+  const startTarget = state.profile ? routes.learn : routes.setup
 
   return (
     <div className="flex flex-col items-center gap-8 py-8 text-center">
