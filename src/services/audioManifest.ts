@@ -8,8 +8,11 @@ import type {
   AudioSource,
   ResolvedAudio,
 } from '../types/audio'
+import { appPublicAssetUrl, APP_BASE_PATH } from '../routes/basePath'
+import { publicAssetUrl } from '../../basePath'
 
-export const AUDIO_MANIFEST_URL = '/audio/manifest.json'
+export const AUDIO_MANIFEST_URL = appPublicAssetUrl('/audio/manifest.json')
+export const AUDIO_MANIFEST_TIMEOUT_MS = 8_000
 
 export const EMPTY_AUDIO_MANIFEST: AudioManifest = {
   schemaVersion: 1,
@@ -188,7 +191,11 @@ function isEligibleStaticAsset(asset: AudioAsset, query: AudioAssetQuery): boole
  * Resolves reviewed static audio first. Human recordings outrank every
  * generated source; browser speech is returned only as an explicit fallback.
  */
-export function resolveAudio(manifest: AudioManifest, query: AudioAssetQuery): ResolvedAudio {
+export function resolveAudio(
+  manifest: AudioManifest,
+  query: AudioAssetQuery,
+  basePath = APP_BASE_PATH,
+): ResolvedAudio {
   const selected = manifest.assets
     .filter((asset) => isEligibleStaticAsset(asset, query))
     .sort(
@@ -202,7 +209,7 @@ export function resolveAudio(manifest: AudioManifest, query: AudioAssetQuery): R
     return {
       kind: 'static',
       asset: selected,
-      url: slowUrl ?? selected.url,
+      url: publicAssetUrl(slowUrl ?? selected.url, basePath),
       playbackRate: query.mode === 'slow' && !slowUrl ? 0.65 : 1,
     }
   }
@@ -222,29 +229,69 @@ export function resolveAudio(manifest: AudioManifest, query: AudioAssetQuery): R
 }
 
 let manifestPromise: Promise<AudioManifest> | null = null
+let manifestRequestToken: object | null = null
+
+function fetchAudioManifest(): Promise<AudioManifest> {
+  const controller =
+    typeof AbortController === 'function' ? new AbortController() : null
+  let timeoutId = 0
+  const timeout = new Promise<never>((_resolve, reject) => {
+    timeoutId = globalThis.setTimeout(() => {
+      controller?.abort()
+      reject(new Error('audio-manifest-timeout'))
+    }, AUDIO_MANIFEST_TIMEOUT_MS)
+  })
+  const request = Promise.resolve().then(async () => {
+    const response = await fetch(AUDIO_MANIFEST_URL, {
+      credentials: 'same-origin',
+      ...(controller ? { signal: controller.signal } : {}),
+    })
+    if (!response.ok) throw new Error(`audio-manifest-http-${response.status}`)
+    const raw = (await response.json()) as unknown
+    const result = validateAudioManifest(raw)
+
+    // A malformed envelope is not a usable manifest. Entry-level errors are
+    // recoverable because validateAudioManifest already omits unsafe entries.
+    if (result.manifest === EMPTY_AUDIO_MANIFEST && result.errors.length > 0) {
+      throw new Error(result.errors.join('; '))
+    }
+    if (result.errors.length > 0 && import.meta.env.DEV) {
+      console.warn(
+        'Sloka Steps: invalid audio manifest entries were omitted.',
+        result.errors,
+      )
+    }
+    return result.manifest
+  })
+
+  return Promise.race([request, timeout]).finally(() => {
+    globalThis.clearTimeout(timeoutId)
+  })
+}
 
 export function loadAudioManifest(): Promise<AudioManifest> {
   if (manifestPromise) return manifestPromise
-  manifestPromise = fetch(AUDIO_MANIFEST_URL, { credentials: 'same-origin' })
-    .then((response) => {
-      if (!response.ok) throw new Error(`audio-manifest-http-${response.status}`)
-      return response.json() as Promise<unknown>
-    })
-    .then((raw) => {
-      const result = validateAudioManifest(raw)
-      if (result.errors.length > 0) throw new Error(result.errors.join('; '))
-      return result.manifest
-    })
+  const requestToken = {}
+  manifestRequestToken = requestToken
+  const currentPromise = fetchAudioManifest()
     .catch((error: unknown) => {
+      // Do not pin a failed/empty result in memory. The current callers receive
+      // a safe fallback while a later mount or explicit call can retry.
+      if (manifestRequestToken === requestToken) {
+        manifestPromise = null
+        manifestRequestToken = null
+      }
       if (import.meta.env.DEV) {
         console.warn('Sloka Steps: audio manifest unavailable; using safe fallbacks.', error)
       }
       return EMPTY_AUDIO_MANIFEST
     })
-  return manifestPromise
+  manifestPromise = currentPromise
+  return currentPromise
 }
 
 /** Test/development seam for reloading an updated public manifest. */
 export function clearAudioManifestCache(): void {
   manifestPromise = null
+  manifestRequestToken = null
 }

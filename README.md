@@ -94,6 +94,23 @@ Run `npm.cmd run check` and `npm.cmd run audio:verify` before release. Audio
 verification is separate because generation and editorial approval are not
 normal frontend build steps.
 
+## Web deployment
+
+Root hosting needs no configuration value. For a nested mount such as a GitHub
+project page, build with the public path that will contain the app:
+
+```powershell
+$env:VITE_BASE_PATH = "/SlokaSteps/"
+npm.cmd run build
+```
+
+The base path configures both Vite assets and the React Router basename.
+Production hosts must also rewrite unknown application routes to `index.html`
+without rewriting real asset or audio files. Every build creates a matching
+`dist/404.html` as a static-host/GitHub Pages fallback. See
+[Web deployment](docs/WEB_DEPLOYMENT.md) for the deployment contract, rewrite
+examples, and release checks.
+
 ## Application routes
 
 ```text
@@ -376,6 +393,7 @@ Tailwind CSS v4 uses the official Vite plugin and the `@theme` block in
 - [Chant Coach architecture](docs/CHANT_COACH_ARCHITECTURE.md)
 - [Chant Coach validation plan](docs/CHANT_COACH_VALIDATION_PLAN.md)
 - [Android migration roadmap](docs/ANDROID_MIGRATION_ROADMAP.md)
+- [Web deployment](docs/WEB_DEPLOYMENT.md)
 - [Content review status](CONTENT_REVIEW.md)
 - [Version 1 decisions](DECISIONS.md)
 - [Detailed privacy notes](PRIVACY_NOTES.md)

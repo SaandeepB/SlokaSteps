@@ -56,12 +56,20 @@ const PrivacyPage = lazy(() =>
 const NotFoundPage = lazy(() =>
   import('../pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })),
 )
-const AudioLabPage = lazy(() =>
-  import('../pages/AudioLabPage').then((module) => ({ default: module.AudioLabPage })),
-)
-const ChantLabPage = lazy(() =>
-  import('../pages/ChantLabPage').then((module) => ({ default: module.ChantLabPage })),
-)
+const AudioLabPage = import.meta.env.DEV
+  ? lazy(() =>
+      import('../pages/AudioLabPage').then((module) => ({
+        default: module.AudioLabPage,
+      })),
+    )
+  : null
+const ChantLabPage = import.meta.env.DEV
+  ? lazy(() =>
+      import('../pages/ChantLabPage').then((module) => ({
+        default: module.ChantLabPage,
+      })),
+    )
+  : null
 
 export function App() {
   return (
@@ -92,7 +100,7 @@ export function App() {
             <Route path={routePatterns.legacyComplete} element={<LegacySlokaRedirect kind="complete" />} />
           </Route>
 
-          {import.meta.env.DEV && (
+          {AudioLabPage && ChantLabPage && (
             <>
               <Route path={routePatterns.audioLab} element={<AudioLabPage />} />
               <Route path={routePatterns.chantLab} element={<ChantLabPage />} />

@@ -6,7 +6,7 @@
   "description": "Sloka Steps - a child-friendly multilingual app for learning Sanskrit slokas and epic stories.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/build-spa-fallback.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest run",

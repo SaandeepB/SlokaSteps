@@ -1,6 +1,15 @@
+import { act, renderHook } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { useLinePlayback } from '../hooks/useLinePlayback'
 import { PrerecordedAudioPlayback } from '../services/audioPlayback'
-import { resolveAudio, validateAudioManifest } from '../services/audioManifest'
+import {
+  AUDIO_MANIFEST_TIMEOUT_MS,
+  EMPTY_AUDIO_MANIFEST,
+  clearAudioManifestCache,
+  loadAudioManifest,
+  resolveAudio,
+  validateAudioManifest,
+} from '../services/audioManifest'
 import type { AudioAsset, AudioManifest } from '../types/audio'
 
 const originalAudio = window.Audio
@@ -30,6 +39,14 @@ function asset(overrides: Partial<AudioAsset> = {}): AudioAsset {
 
 function manifest(assets: AudioAsset[]): AudioManifest {
   return { schemaVersion: 1, generatedAt: null, assets }
+}
+
+function manifestResponse(body: unknown): Response {
+  return {
+    ok: true,
+    status: 200,
+    json: vi.fn().mockResolvedValue(body),
+  } as unknown as Response
 }
 
 describe('V2 audio resolution', () => {
@@ -99,6 +116,26 @@ describe('V2 audio resolution', () => {
     })
   })
 
+  it('prefixes reviewed audio with a nested deployment base', () => {
+    const reviewed = asset()
+    const resolved = resolveAudio(
+      manifest([reviewed]),
+      {
+        contentId: reviewed.contentId,
+        segmentId: reviewed.segmentId,
+        purpose: reviewed.purpose,
+        language: reviewed.language,
+        fallbackText: 'Saraswati Namastubhyam',
+      },
+      '/SlokaSteps/',
+    )
+
+    expect(resolved).toMatchObject({
+      kind: 'static',
+      url: '/SlokaSteps/audio/slokas/saraswati/line-1.mp3',
+    })
+  })
+
   it('returns labelled browser fallback data when reviewed audio is missing', () => {
     const resolved = resolveAudio(manifest([]), {
       contentId: 'missing',
@@ -155,6 +192,130 @@ describe('audio manifest validation', () => {
     expect(result.manifest.assets).toHaveLength(2)
     expect(result.errors).toContain(`Duplicate audio asset id: ${valid.id}`)
     expect(result.errors.some((error) => error.includes('safe /audio/ URL'))).toBe(true)
+  })
+
+  it('loads valid assets when another manifest entry is invalid', async () => {
+    clearAudioManifestCache()
+    const valid = asset()
+    const fetchMock = vi.fn().mockResolvedValue(
+      manifestResponse({
+        schemaVersion: 1,
+        generatedAt: null,
+        assets: [valid, { ...valid, id: 'unsafe', url: '../secret.mp3' }],
+      }),
+    )
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    vi.stubGlobal('fetch', fetchMock)
+
+    try {
+      await expect(loadAudioManifest()).resolves.toEqual(manifest([valid]))
+      await expect(loadAudioManifest()).resolves.toEqual(manifest([valid]))
+      expect(fetchMock).toHaveBeenCalledOnce()
+    } finally {
+      clearAudioManifestCache()
+      vi.unstubAllGlobals()
+      warning.mockRestore()
+    }
+  })
+
+  it('times out a stalled request and retries on the next call', async () => {
+    clearAudioManifestCache()
+    vi.useFakeTimers()
+    const valid = asset()
+    const fetchMock = vi
+      .fn()
+      .mockImplementationOnce(() => new Promise<Response>(() => {}))
+      .mockResolvedValueOnce(
+        manifestResponse({ schemaVersion: 1, generatedAt: null, assets: [valid] }),
+      )
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    vi.stubGlobal('fetch', fetchMock)
+
+    try {
+      const stalledLoad = loadAudioManifest()
+      await vi.advanceTimersByTimeAsync(AUDIO_MANIFEST_TIMEOUT_MS)
+      await expect(stalledLoad).resolves.toBe(EMPTY_AUDIO_MANIFEST)
+      await expect(loadAudioManifest()).resolves.toEqual(manifest([valid]))
+      expect(fetchMock).toHaveBeenCalledTimes(2)
+    } finally {
+      clearAudioManifestCache()
+      vi.useRealTimers()
+      vi.unstubAllGlobals()
+      warning.mockRestore()
+    }
+  })
+})
+
+describe('global playback coordination', () => {
+  it('stops speech and prerecorded engines when another control starts', async () => {
+    const cancel = vi.fn()
+    const speak = vi.fn()
+    const createdAudios: FakeAudio[] = []
+
+    class FakeUtterance {
+      lang = ''
+      rate = 1
+      onend: (() => void) | null = null
+      onerror: ((event: { error: string }) => void) | null = null
+
+      constructor(readonly text: string) {}
+    }
+
+    class FakeAudio {
+      playbackRate = 1
+      onended: (() => void) | null = null
+      onerror: (() => void) | null = null
+      pause = vi.fn()
+      removeAttribute = vi.fn()
+      play = vi.fn(() => new Promise<void>(() => {}))
+
+      constructor(readonly url: string) {
+        createdAudios.push(this)
+      }
+    }
+
+    vi.stubGlobal('SpeechSynthesisUtterance', FakeUtterance)
+    vi.stubGlobal('speechSynthesis', {
+      cancel,
+      pause: vi.fn(),
+      paused: false,
+      resume: vi.fn(),
+      speak,
+      speaking: true,
+    })
+    vi.stubGlobal('Audio', FakeAudio)
+
+    const firstSpeech = renderHook(() => useLinePlayback())
+    const staticAudio = renderHook(() => useLinePlayback('/audio/reviewed.mp3'))
+    const secondSpeech = renderHook(() => useLinePlayback())
+
+    try {
+      act(() => firstSpeech.result.current.play('first voice'))
+      expect(speak).toHaveBeenCalledOnce()
+      const cancelsAfterSpeechStart = cancel.mock.calls.length
+
+      act(() =>
+        staticAudio.result.current.play(
+          'reviewed recording',
+          'normal',
+          '/audio/reviewed.mp3',
+        ),
+      )
+      expect(cancel.mock.calls.length).toBeGreaterThan(cancelsAfterSpeechStart)
+      expect(createdAudios).toHaveLength(1)
+
+      await act(async () => {
+        secondSpeech.result.current.play('second voice')
+        await Promise.resolve()
+      })
+      expect(createdAudios[0].pause).toHaveBeenCalledOnce()
+      expect(createdAudios[0].removeAttribute).toHaveBeenCalledWith('src')
+    } finally {
+      firstSpeech.unmount()
+      staticAudio.unmount()
+      secondSpeech.unmount()
+      vi.unstubAllGlobals()
+    }
   })
 })
 

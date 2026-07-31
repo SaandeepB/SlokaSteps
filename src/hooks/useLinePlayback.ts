@@ -56,6 +56,9 @@ export function useLinePlayback(audioUrl?: string): UseLinePlaybackResult {
       options?: { rate?: number; language?: string },
     ) => {
       if (startingRef.current) return
+      // Each hook owns its UI state, but the browser has shared speech and
+      // media channels. Stop both engines so separate controls cannot overlap.
+      stopAllPlayback()
       const operation = operationRef.current + 1
       operationRef.current = operation
       startingRef.current = true
