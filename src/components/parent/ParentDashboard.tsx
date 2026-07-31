@@ -22,6 +22,7 @@ export function ParentDashboard() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [confirmReset, setConfirmReset] = useState(false)
+  const [resetError, setResetError] = useState(false)
 
   const completedCount = SLOKAS.filter(
     (sloka) => state.progress.slokas[sloka.id]?.status === 'completed',
@@ -47,8 +48,12 @@ export function ParentDashboard() {
   const currentStory = getStoryChapterById(currentStoryId)
 
   const performReset = () => {
-    // Removes only the Sloka Steps storage key, never other browser data.
-    clearPersistedState()
+    // Removes only Sloka Steps storage keys, never other browser data.
+    setResetError(false)
+    if (!clearPersistedState()) {
+      setResetError(true)
+      return
+    }
     dispatch({ type: 'RESET_ALL' })
     setConfirmReset(false)
     navigate(routes.setup)
@@ -227,7 +232,13 @@ export function ParentDashboard() {
           >
             {t('updateSettings')}
           </Link>
-          <Button variant="danger" onClick={() => setConfirmReset(true)}>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setResetError(false)
+              setConfirmReset(true)
+            }}
+          >
             {t('resetProgress')}
           </Button>
         </div>
@@ -243,6 +254,11 @@ export function ParentDashboard() {
         onCancel={() => setConfirmReset(false)}
       >
         <p>{t('resetConfirmBody')}</p>
+        {resetError && (
+          <p role="alert" className="mt-3 font-semibold text-lotus-700">
+            {t('resetFailed')}
+          </p>
+        )}
       </ConfirmDialog>
     </div>
   )

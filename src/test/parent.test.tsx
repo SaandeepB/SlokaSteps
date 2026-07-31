@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { Route, Routes } from 'react-router-dom'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -79,6 +79,33 @@ describe('parent gate', () => {
       screen.getByRole('checkbox', { name: /Allow future community features/ }),
     ).toBeInTheDocument()
   })
+
+  it('does not claim settings were saved when browser storage rejects a write', async () => {
+    const setItem = vi
+      .spyOn(Storage.prototype, 'setItem')
+      .mockImplementation(() => {
+        throw new DOMException('Storage is blocked', 'SecurityError')
+      })
+    const warning = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    try {
+      const user = userEvent.setup()
+      renderSettings()
+      await user.click(
+        screen.getByRole('checkbox', { name: /Calm mode/ }),
+      )
+
+      expect(
+        await screen.findByRole('alert'),
+      ).toHaveTextContent(
+        'Changes work for this session, but this browser could not save them.',
+      )
+      expect(screen.queryByText('Saved!')).not.toBeInTheDocument()
+    } finally {
+      setItem.mockRestore()
+      warning.mockRestore()
+    }
+  })
 })
 
 describe('reset progress', () => {
@@ -115,6 +142,41 @@ describe('reset progress', () => {
     const stored = window.localStorage.getItem(STORAGE_KEY)
     if (stored !== null) {
       expect(JSON.parse(stored).profile).toBeNull()
+    }
+  })
+
+  it('keeps durable and in-memory progress when browser deletion fails', async () => {
+    const persisted = createDefaultPersistedState()
+    persisted.profile = {
+      nickname: 'Anu',
+      ageBand: '7-8',
+      dailyGoalMinutes: 10,
+    }
+    savePersistedState(persisted)
+    const removeItem = vi
+      .spyOn(Storage.prototype, 'removeItem')
+      .mockImplementation(() => {
+        throw new DOMException('Storage is blocked', 'SecurityError')
+      })
+
+    try {
+      const user = userEvent.setup()
+      renderParent()
+      await user.type(screen.getByRole('textbox', { name: 'Your answer' }), '7')
+      await user.click(screen.getByRole('button', { name: 'Enter' }))
+      await user.click(screen.getByRole('button', { name: 'Reset Progress' }))
+      await user.click(screen.getByRole('button', { name: 'Yes, Reset Everything' }))
+
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Sloka Steps could not remove the saved data from this browser.',
+      )
+      expect(screen.getByText('Parent Dashboard')).toBeInTheDocument()
+      expect(screen.queryByText('setup page')).not.toBeInTheDocument()
+      expect(JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? '{}').profile).toEqual(
+        persisted.profile,
+      )
+    } finally {
+      removeItem.mockRestore()
     }
   })
 })

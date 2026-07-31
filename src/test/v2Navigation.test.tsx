@@ -44,6 +44,11 @@ describe('V2 learning navigation', () => {
 
     expect(screen.getAllByText('Editorial review')).toHaveLength(7)
     expect(screen.getAllByText('Draft')).toHaveLength(2)
+    expect(
+      screen.getByRole('link', {
+        name: 'Saraswati Namastubhyam. Ready to start. Editorial review',
+      }),
+    ).toBeInTheDocument()
   })
 
   it('renders the Ramayana and Mahabharata chapter paths', () => {

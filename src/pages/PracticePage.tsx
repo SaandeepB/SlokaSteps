@@ -3,7 +3,12 @@ import { BookOpen, Headphones } from 'lucide-react'
 import { PlayLineControls } from '../components/audio/PlayLineControls'
 import { Card } from '../components/common/Card'
 import { SLOKAS } from '../content/slokas'
-import { EPICS, getEpicChapters, resolveLocalizedText } from '../content/stories'
+import {
+  EPICS,
+  getEpicChapters,
+  isStoryChapterAvailable,
+  resolveLocalizedText,
+} from '../content/stories'
 import { useAppState } from '../hooks/useAppState'
 import { useTranslation } from '../hooks/useTranslation'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
@@ -22,6 +27,7 @@ export function PracticePage() {
     getEpicChapters(epic)
       .filter(
         (chapter) =>
+          isStoryChapterAvailable(chapter) &&
           state.progress.storyChapters[chapter.id]?.status === 'completed',
       )
       .map((chapter) => ({ epic, chapter })),

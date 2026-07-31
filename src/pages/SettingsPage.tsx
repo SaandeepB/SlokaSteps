@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Card } from '../components/common/Card'
 import { LanguageSelector } from '../components/common/LanguageSelector'
 import { ParentGate } from '../components/parent/ParentGate'
@@ -27,7 +27,7 @@ export interface SettingsPageProps {
 
 /** Language/accessibility settings plus parent-gated privacy preferences. */
 export function SettingsPage({ fixedGateQuestion }: SettingsPageProps = {}) {
-  const { state, dispatch } = useAppState()
+  const { state, dispatch, persistence } = useAppState()
   const { t } = useTranslation()
   useDocumentTitle(t('settingsTitle'))
   const motionId = useId()
@@ -37,13 +37,46 @@ export function SettingsPage({ fixedGateQuestion }: SettingsPageProps = {}) {
   const cloudId = useId()
   const retainId = useId()
   const communityId = useId()
-  const [savedFlash, setSavedFlash] = useState(false)
+  const [saveNotice, setSaveNotice] = useState<
+    'saving' | 'saved' | 'failed' | null
+  >(null)
+  const [expectedSaveAttempt, setExpectedSaveAttempt] = useState<number | null>(
+    null,
+  )
+  const saveNoticeTimer = useRef<number | null>(null)
   const [parentControlsUnlocked, setParentControlsUnlocked] = useState(false)
 
   const flashSaved = () => {
-    setSavedFlash(true)
-    window.setTimeout(() => setSavedFlash(false), 1500)
+    setExpectedSaveAttempt(persistence.attempt + 1)
+    setSaveNotice('saving')
   }
+
+  useEffect(() => {
+    if (
+      expectedSaveAttempt === null ||
+      persistence.attempt < expectedSaveAttempt
+    ) {
+      return
+    }
+    setExpectedSaveAttempt(null)
+    setSaveNotice(persistence.status === 'saved' ? 'saved' : 'failed')
+    if (saveNoticeTimer.current !== null) {
+      window.clearTimeout(saveNoticeTimer.current)
+    }
+    saveNoticeTimer.current = window.setTimeout(() => {
+      setSaveNotice(null)
+      saveNoticeTimer.current = null
+    }, 3000)
+  }, [expectedSaveAttempt, persistence])
+
+  useEffect(
+    () => () => {
+      if (saveNoticeTimer.current !== null) {
+        window.clearTimeout(saveNoticeTimer.current)
+      }
+    },
+    [],
+  )
 
   const updateVoicePrivacy = (
     updates: Partial<typeof state.preferences.voicePrivacy>,
@@ -242,10 +275,16 @@ export function SettingsPage({ fixedGateQuestion }: SettingsPageProps = {}) {
       )}
 
       <p
-        role="status"
-        className={`text-sm font-semibold text-leaf-700 ${savedFlash ? '' : 'invisible'}`}
+        role={saveNotice === 'failed' ? 'alert' : 'status'}
+        className={`text-sm font-semibold ${
+          saveNotice === 'failed' ? 'text-lotus-700' : 'text-leaf-700'
+        } ${saveNotice ? '' : 'invisible'}`}
       >
-        {t('settingsSaved')}
+        {saveNotice === 'saving'
+          ? t('settingsSaving')
+          : saveNotice === 'failed'
+            ? t('settingsSaveFailed')
+            : t('settingsSaved')}
       </p>
     </div>
   )

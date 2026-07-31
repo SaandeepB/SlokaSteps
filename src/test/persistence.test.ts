@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import {
   clearPersistedState,
   createDefaultPersistedState,
@@ -14,6 +14,20 @@ import {
 describe('versioned persistence', () => {
   it('returns V2 defaults when storage is empty', () => {
     expect(loadPersistedState()).toEqual(createDefaultPersistedState())
+  })
+
+  it('returns safe defaults when the window.localStorage getter is blocked', () => {
+    const storageGetter = vi
+      .spyOn(window, 'localStorage', 'get')
+      .mockImplementation(() => {
+        throw new DOMException('Storage is blocked', 'SecurityError')
+      })
+
+    try {
+      expect(loadPersistedState()).toEqual(createDefaultPersistedState())
+    } finally {
+      storageGetter.mockRestore()
+    }
   })
 
   it('saves and loads a V2 state through the repository', async () => {
@@ -115,13 +129,16 @@ describe('versioned persistence', () => {
     expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).toBe(JSON.stringify(legacy))
   })
 
-  it('does not downgrade an explicitly newer valid schema to preserved V1 data', () => {
+  it('does not load over or autosave across an explicitly newer valid schema', () => {
     const legacy = JSON.stringify({ schemaVersion: 1, totalXp: 35 })
     const newer = JSON.stringify({ schemaVersion: 99, progress: { totalXp: 5000 } })
     window.localStorage.setItem(LEGACY_STORAGE_KEY, legacy)
     window.localStorage.setItem(STORAGE_KEY, newer)
 
     expect(loadPersistedState()).toEqual(createDefaultPersistedState())
+    const v2Autosave = createDefaultPersistedState()
+    v2Autosave.progress.totalXp = 10
+    expect(savePersistedState(v2Autosave)).toBe(false)
     expect(window.localStorage.getItem(STORAGE_KEY)).toBe(newer)
     expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).toBe(legacy)
   })
@@ -154,7 +171,7 @@ describe('versioned persistence', () => {
     window.localStorage.setItem('some-other-app', 'keep me')
     window.localStorage.setItem(LEGACY_STORAGE_KEY, '{}')
     savePersistedState(createDefaultPersistedState())
-    clearPersistedState()
+    expect(clearPersistedState()).toBe(true)
     expect(window.localStorage.getItem(STORAGE_KEY)).toBeNull()
     expect(window.localStorage.getItem(LEGACY_STORAGE_KEY)).toBeNull()
     expect(window.localStorage.getItem('some-other-app')).toBe('keep me')

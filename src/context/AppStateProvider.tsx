@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useRef } from 'react'
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { AppState } from '../types'
 import {
@@ -22,6 +22,10 @@ export function AppStateProvider({
   initialState?: AppState
 }) {
   const [state, dispatch] = useReducer(appReducer, initialState, initializeState)
+  const [persistence, setPersistence] = useState<{
+    status: 'idle' | 'saved' | 'failed'
+    attempt: number
+  }>({ status: 'idle', attempt: 0 })
   const hasRendered = useRef(false)
 
   useEffect(() => {
@@ -31,14 +35,21 @@ export function AppStateProvider({
       hasRendered.current = true
       return
     }
-    savePersistedState(state)
+    const saved = savePersistedState(state)
+    setPersistence((current) => ({
+      status: saved ? 'saved' : 'failed',
+      attempt: current.attempt + 1,
+    }))
   }, [state])
 
   useEffect(() => {
     document.documentElement.lang = state.preferences.displayLanguage
   }, [state.preferences.displayLanguage])
 
-  const value = useMemo(() => ({ state, dispatch }), [state])
+  const value = useMemo(
+    () => ({ state, dispatch, persistence }),
+    [persistence, state],
+  )
 
   return <AppStateContext value={value}>{children}</AppStateContext>
 }

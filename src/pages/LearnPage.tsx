@@ -7,6 +7,7 @@ import { SLOKAS } from '../content/slokas'
 import {
   EPICS,
   getEpicChapters,
+  isStoryChapterAvailable,
   resolveLocalizedText,
 } from '../content/stories'
 import { useAppState } from '../hooks/useAppState'
@@ -55,6 +56,7 @@ export function LearnPage() {
         })
       }
       for (const chapter of getEpicChapters(epic)) {
+        if (!isStoryChapterAvailable(chapter)) continue
         const chapterTitle = resolveLocalizedText(chapter.title, language)
         const searchable = [
           chapterTitle,
@@ -88,7 +90,9 @@ export function LearnPage() {
     (sloka) => state.progress.slokas[sloka.id]?.status === 'in-progress',
   )
   const inProgressStory = EPICS.flatMap((epic) =>
-    getEpicChapters(epic).map((chapter) => ({ epic, chapter })),
+    getEpicChapters(epic)
+      .filter((chapter) => isStoryChapterAvailable(chapter))
+      .map((chapter) => ({ epic, chapter })),
   ).find(
     ({ chapter }) =>
       state.progress.storyChapters[chapter.id]?.status === 'in-progress',

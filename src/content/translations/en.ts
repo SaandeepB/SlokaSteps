@@ -190,6 +190,8 @@ export const en = {
     resetConfirmBody:
       'This removes the child profile, lesson progress, stars, XP, badges, streak, and practice history stored in this browser. It cannot be undone.',
     resetAction: 'Yes, Reset Everything',
+    resetFailed:
+      'Sloka Steps could not remove the saved data from this browser. Nothing was reset. Please check browser storage permissions and try again.',
     gateNotSecurityNote:
       'This simple question only deters young children. It is not a security feature.',
 
@@ -213,6 +215,9 @@ export const en = {
     reducedMotionLabel: 'Reduce animations',
     reducedMotionHelp: 'Calms movement across the app.',
     settingsSaved: 'Saved!',
+    settingsSaving: 'Saving…',
+    settingsSaveFailed:
+      'Changes work for this session, but this browser could not save them.',
 
     // Privacy page
     privacyHeading: 'Your family’s privacy',

@@ -403,6 +403,15 @@ function parse(value: string): JsonParseResult {
   }
 }
 
+function hasFutureSchema(value: unknown): boolean {
+  return (
+    isRecord(value) &&
+    typeof value.schemaVersion === 'number' &&
+    Number.isInteger(value.schemaVersion) &&
+    value.schemaVersion > SCHEMA_VERSION
+  )
+}
+
 function loadLegacyState(storage: Storage): PersistedAppState {
   const legacyRaw = storage.getItem(LEGACY_STORAGE_KEY)
   if (legacyRaw === null) return createDefaultPersistedState()
@@ -440,8 +449,16 @@ export class LocalStorageProgressRepository implements ProgressRepository {
     this.saveSync(state)
   }
 
-  saveSync(state: PersistedAppState): void {
+  saveSync(state: PersistedAppState): boolean {
+    const existingRaw = this.storage.getItem(STORAGE_KEY)
+    if (existingRaw !== null) {
+      const existing = parse(existingRaw)
+      // An older app must never overwrite data written by a newer schema.
+      // Explicit parent-confirmed reset remains the only supported escape hatch.
+      if (existing.ok && hasFutureSchema(existing.value)) return false
+    }
     this.storage.setItem(STORAGE_KEY, JSON.stringify(sanitizePersistedState(state)))
+    return true
   }
 
   async reset(): Promise<void> {
@@ -451,8 +468,8 @@ export class LocalStorageProgressRepository implements ProgressRepository {
   resetSync(): void {
     // Both keys belong to Sloka Steps. Removing V1 prevents re-migration after
     // an explicitly confirmed reset; unrelated localStorage is never touched.
-    this.storage.removeItem(STORAGE_KEY)
     this.storage.removeItem(LEGACY_STORAGE_KEY)
+    this.storage.removeItem(STORAGE_KEY)
   }
 }
 
@@ -461,24 +478,32 @@ function browserRepository(): LocalStorageProgressRepository {
 }
 
 export function loadPersistedState(): PersistedAppState {
-  return browserRepository().loadSync()
+  try {
+    return browserRepository().loadSync()
+  } catch {
+    // Accessing window.localStorage itself can throw when browser storage is
+    // blocked. Startup must still reach a safe, usable in-memory state.
+    return createDefaultPersistedState()
+  }
 }
 
-export function savePersistedState(state: PersistedAppState): void {
+export function savePersistedState(state: PersistedAppState): boolean {
   try {
-    browserRepository().saveSync(state)
+    return browserRepository().saveSync(state)
   } catch (error) {
     if (import.meta.env.DEV) {
       console.warn('Sloka Steps: could not save progress to localStorage.', error)
     }
+    return false
   }
 }
 
 /** Call only after the parent confirms reset. */
-export function clearPersistedState(): void {
+export function clearPersistedState(): boolean {
   try {
     browserRepository().resetSync()
+    return true
   } catch {
-    // Storage unavailable; in-memory reset still proceeds.
+    return false
   }
 }

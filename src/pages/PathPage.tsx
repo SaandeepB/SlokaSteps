@@ -117,6 +117,9 @@ function PathNode({ sloka, offsetRight }: { sloka: Sloka; offsetRight: boolean }
   const percent = getCompletionPercent(sloka, progress)
   const stateLabel = t(stateLabelKeys[availability])
   const clickable = availability !== 'locked'
+  const accessibleLabel = `${sloka.title}. ${stateLabel}. ${
+    editorialStatusLabels[sloka.contentStatus]
+  }`
 
   const stateIcon = {
     locked: <Lock size={22} aria-hidden="true" className="text-ink-500" />,
@@ -177,13 +180,13 @@ function PathNode({ sloka, offsetRight }: { sloka: Sloka; offsetRight: boolean }
       {clickable ? (
         <Link
           to={routes.lesson(sloka.id)}
-          aria-label={`${sloka.title}. ${stateLabel}`}
+          aria-label={accessibleLabel}
           className="block rounded-3xl"
         >
           {body}
         </Link>
       ) : (
-        <div aria-label={`${sloka.title}. ${stateLabel}`} role="img">
+        <div aria-label={accessibleLabel} role="img">
           {body}
         </div>
       )}

@@ -320,7 +320,14 @@ function reduceAppState(
             [action.slokaId]: {
               ...progress,
               status: 'completed',
-              currentActivityIndex: 0,
+              // Keep the terminal position until START_LESSON explicitly
+              // begins a replay. Resetting to zero here makes the still-mounted
+              // ActivityPage treat its final step as an invalid deep link and
+              // race the completion navigation back to the introduction.
+              currentActivityIndex: Math.max(
+                progress.currentActivityIndex,
+                sloka.activities.length - 1,
+              ),
               currentActivityId: undefined,
               incorrectAttempts: 0,
               bestStars: improveBestStars(progress.bestStars, stars),

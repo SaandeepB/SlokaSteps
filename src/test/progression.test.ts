@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { SLOKAS, getSlokaById } from '../content/slokas'
-import { getLessonAvailability } from '../utils/progression'
+import {
+  getCompletionPercent,
+  getLessonAvailability,
+} from '../utils/progression'
 import { appReducer, createDefaultAppState } from '../context/reducer'
 import type { AppAction } from '../context/reducer'
 import type { AppState } from '../types'
@@ -48,6 +51,35 @@ describe('sequential unlocking', () => {
     expect(availability(state, LESSON_3)).toBe('locked')
   })
 
+  it('keeps completed lessons at their terminal position until replay starts', () => {
+    const sloka = getSlokaById(LESSON_1)
+    if (!sloka) throw new Error('missing lesson fixture')
+
+    const completed = run(
+      createDefaultAppState(),
+      { type: 'START_LESSON', slokaId: LESSON_1 },
+      {
+        type: 'ADVANCE_ACTIVITY',
+        slokaId: LESSON_1,
+        activityIndex: sloka.activities.length - 1,
+        activityId: sloka.activities.at(-1)?.id,
+        estimatedMinutes: 1,
+        today: '2026-07-14',
+      },
+      complete(LESSON_1),
+    )
+
+    expect(completed.progress.slokas[LESSON_1].currentActivityIndex).toBe(
+      sloka.activities.length - 1,
+    )
+
+    const replaying = run(completed, {
+      type: 'START_LESSON',
+      slokaId: LESSON_1,
+    })
+    expect(replaying.progress.slokas[LESSON_1].currentActivityIndex).toBe(0)
+  })
+
   it('sequential completion unlocks each next lesson', () => {
     let state = createDefaultAppState()
     for (const id of [LESSON_1, LESSON_2]) {
@@ -67,6 +99,26 @@ describe('sequential unlocking', () => {
     }
     expect(availability(state, COMING_SOON)).toBe('coming-soon')
     expect(availability(state, 'sarve-bhavantu')).toBe('coming-soon')
+  })
+})
+
+describe('lesson progress percentage', () => {
+  it('counts only rendered activities at the final active step', () => {
+    const sloka = getSlokaById(LESSON_1)
+    if (!sloka) throw new Error('missing lesson fixture')
+
+    expect(
+      getCompletionPercent(sloka, {
+        slokaId: sloka.id,
+        status: 'in-progress',
+        currentActivityIndex: sloka.activities.length - 2,
+        incorrectAttempts: 0,
+        recordingAttempted: false,
+        bestStars: 0,
+        xpAwarded: false,
+        firstCompletedOn: null,
+      }),
+    ).toBe(99)
   })
 })
 

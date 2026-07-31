@@ -18,14 +18,17 @@ import { routePatterns, routes } from '../routes/paths'
  * activities. Moves focus to main content on route changes.
  */
 export function AppLayout() {
-  const { state } = useAppState()
+  const { state, dispatch } = useAppState()
   const { t } = useTranslation()
   const location = useLocation()
   const mainRef = useRef<HTMLElement>(null)
   const isFirstRender = useRef(true)
+  const wasCompletionRoute = useRef(false)
 
   const isImmersive =
     matchPath(routePatterns.activity, location.pathname) !== null
+  const isCompletion =
+    matchPath(routePatterns.complete, location.pathname) !== null
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -34,6 +37,17 @@ export function AppLayout() {
     }
     mainRef.current?.focus()
   }, [location.pathname])
+
+  useEffect(() => {
+    if (
+      wasCompletionRoute.current &&
+      !isCompletion &&
+      state.lastCompletion
+    ) {
+      dispatch({ type: 'CLEAR_LAST_COMPLETION' })
+    }
+    wasCompletionRoute.current = isCompletion
+  }, [dispatch, isCompletion, state.lastCompletion])
 
   return (
     <div
@@ -59,7 +73,11 @@ export function AppLayout() {
         {t('skipToContent')}
       </a>
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-3xl flex-col px-4 pb-10 sm:px-6">
+      <div
+        className={`relative mx-auto flex min-h-screen w-full max-w-3xl flex-col px-4 sm:px-6 ${
+          !isImmersive && state.profile ? 'pb-28 sm:pb-10' : 'pb-10'
+        }`}
+      >
         {!isImmersive && (
           <header className="flex items-center justify-between gap-3 py-4">
             <Link
@@ -102,7 +120,7 @@ export function AppLayout() {
         {!isImmersive && state.profile && (
           <nav
             aria-label="Primary"
-            className="sticky bottom-3 z-30 mt-6 grid grid-cols-4 gap-1 rounded-3xl border border-cream-200 bg-white/95 p-2 shadow-soft backdrop-blur"
+            className="primary-mobile-nav sticky bottom-3 z-30 mt-6 grid grid-cols-4 gap-1 rounded-3xl border border-cream-200 bg-white/95 p-2 shadow-soft backdrop-blur"
           >
             <PrimaryNavLink
               to={routes.learn}
