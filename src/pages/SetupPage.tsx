@@ -1,6 +1,6 @@
 import { useId, useState } from 'react'
 import type { FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Card } from '../components/common/Card'
 import { Button } from '../components/common/Button'
 import { Mitra } from '../components/common/Mitra'
@@ -11,12 +11,15 @@ import { AGE_BANDS, DAILY_GOAL_OPTIONS, LANGUAGES } from '../types'
 import type { AgeBand, DailyGoalMinutes, SupportedLanguage } from '../types'
 import { MAX_DISPLAY_NAME_LENGTH, sanitizeDisplayName } from '../utils/profile'
 import { routes } from '../routes/paths'
+import { protectedReturnToFromState } from '../routes/protectedReturnTo'
 
 /** Language-first local setup. No account or identifying profile data. */
 export function SetupPage() {
   const { state, dispatch } = useAppState()
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const location = useLocation()
+  const returnTo = protectedReturnToFromState(location.state)
   useDocumentTitle(t('setupTitle'))
 
   const nameId = useId()
@@ -63,7 +66,7 @@ export function SetupPage() {
         dailyGoalMinutes: dailyGoal,
       },
     })
-    navigate(routes.learn)
+    navigate(returnTo ?? routes.learn, { replace: true })
   }
 
   if (step === 'language') {

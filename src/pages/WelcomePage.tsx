@@ -43,7 +43,7 @@ export function WelcomePage() {
         </Link>
       </div>
 
-      <LanguageSelector />
+      <LanguageSelector kind={state.profile ? 'display' : 'onboarding'} />
 
       {/* Decorative cultural pattern — sparse, original. */}
       <div aria-hidden="true" className="flex items-center gap-3 text-lotus-300">

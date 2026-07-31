@@ -6,7 +6,7 @@ import { useTranslation } from '../../hooks/useTranslation'
 
 export interface LanguageSelectorProps {
   className?: string
-  kind?: 'display' | 'narration'
+  kind?: 'display' | 'narration' | 'onboarding'
 }
 
 /** Switches display or narration language while respecting the link preference. */
@@ -26,23 +26,31 @@ export function LanguageSelector({
       <select
         id={selectId}
         value={
-          kind === 'display'
-            ? state.preferences.displayLanguage
-            : state.preferences.narrationLanguage
+          kind === 'narration'
+            ? state.preferences.narrationLanguage
+            : state.preferences.displayLanguage
         }
         onChange={(event) => {
           const language = event.target.value as SupportedLanguage
-          dispatch({
-            type: 'UPDATE_PREFERENCES',
-            updates:
-              kind === 'display'
+          const updates =
+            kind === 'onboarding'
+              ? {
+                  defaultLanguage: language,
+                  displayLanguage: language,
+                  narrationLanguage: language,
+                  narrationLinked: true,
+                }
+              : kind === 'display'
                 ? {
                     displayLanguage: language,
                     ...(state.preferences.narrationLinked
                       ? { narrationLanguage: language }
                       : {}),
                   }
-                : { narrationLanguage: language, narrationLinked: false },
+                : { narrationLanguage: language, narrationLinked: false }
+          dispatch({
+            type: 'UPDATE_PREFERENCES',
+            updates,
           })
         }}
         className="min-h-11 rounded-xl border-2 border-cream-300 bg-white px-3 py-1 text-base text-ink-900"
