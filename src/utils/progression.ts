@@ -47,8 +47,13 @@ export function getCompletionPercent(
   if (!progress || sloka.activities.length === 0) return 0
   if (progress.status === 'completed') return 100
   if (progress.status === 'not-started') return 0
+  const renderedActivityCount = Math.max(1, sloka.activities.length - 1)
+  const currentStep = Math.min(
+    renderedActivityCount,
+    progress.currentActivityIndex + 1,
+  )
   return Math.min(
     99,
-    Math.round((progress.currentActivityIndex / sloka.activities.length) * 100),
+    Math.round((currentStep / renderedActivityCount) * 100),
   )
 }

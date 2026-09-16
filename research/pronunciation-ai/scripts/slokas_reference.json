@@ -1,0 +1,161 @@
+{
+  "_doc": "Reference text for every sloka in SlokaSteps, extracted verbatim from src/content/slokas/*.ts on 2026-08-30 (branch feature/v2-foundation). Used as expected_text by the ASR / verification harness scripts in this folder. 'metre' is this analyst's scansion, NOT a claim from the app or any model card - see 03-vagdhenu-metre-coverage.md for the reasoning and confidence level of each.",
+  "slokas": [
+    {
+      "id": "saraswati-namastubhyam",
+      "order": 1,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "सरस्वति नमस्तुभ्यं वरदे कामरूपिणि ।",
+        "विद्यारम्भं करिष्यामि सिद्धिर्भवतु मे सदा ॥"
+      ],
+      "transliteration_lines": [
+        "Saraswati Namastubhyam Varade Kamarupini",
+        "Vidyarambham Karishyami Siddhir Bhavatu Me Sada"
+      ],
+      "metre": "Anushtubh (shloka), 8 x 4",
+      "metre_confidence": "high",
+      "reference_bank_key": "anuṣṭubh"
+    },
+    {
+      "id": "vakratunda-mahakaya",
+      "order": 2,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।",
+        "निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥"
+      ],
+      "transliteration_lines": [
+        "Vakratunda Mahakaya Suryakoti Samaprabha",
+        "Nirvighnam Kuru Me Deva Sarvakaryeshu Sarvada"
+      ],
+      "metre": "Anushtubh (shloka), 8 x 4",
+      "metre_confidence": "high",
+      "reference_bank_key": "anuṣṭubh"
+    },
+    {
+      "id": "guru-brahma",
+      "order": 3,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "गुरुर्ब्रह्मा गुरुर्विष्णुर्गुरुर्देवो महेश्वरः ।",
+        "गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः ॥"
+      ],
+      "transliteration_lines": [
+        "Gurur Brahma Gurur Vishnuh Gurur Devo Maheshvarah",
+        "Guruh Sakshat Param Brahma Tasmai Shri Gurave Namah"
+      ],
+      "metre": "Anushtubh (shloka), 8 x 4",
+      "metre_confidence": "high",
+      "reference_bank_key": "anuṣṭubh"
+    },
+    {
+      "id": "tvameva-mata",
+      "order": 4,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "त्वमेव माता च पिता त्वमेव ।",
+        "त्वमेव बन्धुश्च सखा त्वमेव ।",
+        "त्वमेव विद्या द्रविणं त्वमेव ।",
+        "त्वमेव सर्वं मम देवदेव ॥"
+      ],
+      "transliteration_lines": [
+        "Tvameva Mata Cha Pita Tvameva",
+        "Tvameva Bandhushcha Sakha Tvameva",
+        "Tvameva Vidya Dravinam Tvameva",
+        "Tvameva Sarvam Mama Deva Deva"
+      ],
+      "metre": "Upajati (Indravajra / Upendravajra mix), Trishtubh class, 11 x 4",
+      "metre_confidence": "high for the Trishtubh-11 family; medium for 'Upajati' vs 'pure Upendravajra'",
+      "reference_bank_key": "upajāti (indravajrā / upendravajrā also present)"
+    },
+    {
+      "id": "karagre-vasate",
+      "order": 5,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "कराग्रे वसते लक्ष्मीः करमध्ये सरस्वती ।",
+        "करमूले तु गोविन्दः प्रभाते करदर्शनम् ॥"
+      ],
+      "transliteration_lines": [
+        "Karagre Vasate Lakshmih Karamadhye Saraswati",
+        "Karamule Tu Govindah Prabhate Karadarshanam"
+      ],
+      "metre": "Anushtubh (shloka), 8 x 4",
+      "metre_confidence": "high",
+      "reference_bank_key": "anuṣṭubh"
+    },
+    {
+      "id": "shubham-karoti",
+      "order": 6,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "शुभं करोति कल्याणम् आरोग्यं धनसम्पदा ।",
+        "शत्रुबुद्धिविनाशाय दीपज्योतिर्नमोऽस्तु ते ॥"
+      ],
+      "transliteration_lines": [
+        "Shubham Karoti Kalyanam Arogyam Dhana Sampada",
+        "Shatru Buddhi Vinashaya Deepa Jyotir Namostute"
+      ],
+      "metre": "Anushtubh (shloka), 8 x 4",
+      "metre_confidence": "high",
+      "reference_bank_key": "anuṣṭubh"
+    },
+    {
+      "id": "lokah-samastah-sukhino-bhavantu",
+      "order": 7,
+      "implementationStatus": "complete",
+      "devanagari_lines": [
+        "लोकाः समस्ताः सुखिनो भवन्तु ।"
+      ],
+      "transliteration_lines": [
+        "Lokah Samastah Sukhino Bhavantu"
+      ],
+      "metre": "Single Trishtubh-class pada; scans as an Indravajra pada (11 syllables). Repo ships only this one line.",
+      "metre_confidence": "medium-high (single pada does not fully fix the vrtta, but the L/G pattern is Indravajra)",
+      "reference_bank_key": "indravajrā (or upajāti)"
+    },
+    {
+      "id": "asato-ma",
+      "order": 8,
+      "implementationStatus": "coming-soon",
+      "devanagari_lines": [
+        "असतो मा सद्गमय ।",
+        "तमसो मा ज्योतिर्गमय ।",
+        "मृत्योर्मा अमृतं गमय ।",
+        "ॐ शान्तिः शान्तिः शान्तिः ॥"
+      ],
+      "transliteration_lines": [
+        "Asato Ma Sadgamaya",
+        "Tamaso Ma Jyotirgamaya",
+        "Mrityor Ma Amritam Gamaya",
+        "Om Shantih Shantih Shantih"
+      ],
+      "metre": "NOT a regular classical vrtta. Brihadaranyaka Upanishad 1.3.28 - an invocation mantra with uneven padas (8 / 9 / 8-9). The closing line is a shanti formula, not metrical.",
+      "metre_confidence": "n/a - cannot assign a classical metre; would hit Vagbodhini's prose / generic fallback",
+      "reference_bank_key": "gadya (prose) or generic fallback"
+    },
+    {
+      "id": "sarve-bhavantu",
+      "order": 9,
+      "implementationStatus": "coming-soon",
+      "devanagari_lines": [
+        "सर्वे भवन्तु सुखिनः ।",
+        "सर्वे सन्तु निरामयाः ।",
+        "सर्वे भद्राणि पश्यन्तु ।",
+        "मा कश्चिद्दुःखभाग्भवेत् ।",
+        "ॐ शान्तिः शान्तिः शान्तिः ॥"
+      ],
+      "transliteration_lines": [
+        "Sarve Bhavantu Sukhinah",
+        "Sarve Santu Niramayah",
+        "Sarve Bhadrani Pashyantu",
+        "Ma Kashchid Duhkhabhag Bhavet",
+        "Om Shantih Shantih Shantih"
+      ],
+      "metre": "Anushtubh (shloka), 8 x 4, with a light 5-7 cadence in pada 1 (a known vipula). Closing shanti line is appended, not metrical.",
+      "metre_confidence": "medium-high",
+      "reference_bank_key": "anuṣṭubh"
+    }
+  ]
+}

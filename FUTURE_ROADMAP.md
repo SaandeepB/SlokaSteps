@@ -13,10 +13,12 @@ planned without prematurely building it.
 3. **Professional prerecorded audio** — reviewed recordings per line and
    full chant; `SlokaLine.audioUrl` plus `PrerecordedAudioPlayback` are the
    integration points.
-4. **Validated Sanskrit pronunciation analysis** — replace
-   `MockPronunciationEvaluation` behind the existing
-   `PronunciationEvaluationService` interface; only with expert validation
-   and explicit parental consent.
+4. **Validated Sanskrit pronunciation analysis** — register a real analyzer
+   behind the existing `ChantEvaluationService` interface, returning an
+   `AnalyzedChantEvaluation` with per-segment detail instead of the shipped
+   `ParticipationEvaluationService`; only with expert validation and explicit
+   parental consent. Storing per-segment accuracy over time is a separate
+   decision from computing it — see the child-privacy review before doing so.
 5. **Parent accounts** (optional, privacy-reviewed).
 6. **Multiple child profiles** per device/family.
 7. **Supabase or Firebase evaluation** for a managed backend.

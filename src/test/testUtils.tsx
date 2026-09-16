@@ -11,7 +11,7 @@ export function makeState(overrides: Partial<AppState> = {}): AppState {
 
 export function makeStateWithProfile(overrides: Partial<AppState> = {}): AppState {
   return makeState({
-    profile: { displayName: 'Anu', ageRange: '7-8' },
+    profile: { nickname: 'Anu', ageBand: '7-8', dailyGoalMinutes: 10 },
     ...overrides,
   })
 }

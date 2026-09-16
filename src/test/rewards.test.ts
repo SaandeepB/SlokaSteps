@@ -48,9 +48,9 @@ describe('XP and badge rules', () => {
       { type: 'START_LESSON', slokaId: LESSON_1 },
       complete(LESSON_1),
     )
-    expect(state.totalXp).toBe(XP_PER_LESSON)
-    expect(state.badges).toEqual(['badge-wisdom'])
-    expect(state.lessons[LESSON_1].status).toBe('completed')
+    expect(state.progress.totalXp).toBe(XP_PER_LESSON)
+    expect(state.progress.badges.map((badge) => badge.id)).toEqual(['badge-wisdom'])
+    expect(state.progress.slokas[LESSON_1].status).toBe('completed')
     expect(state.lastCompletion?.xpEarned).toBe(XP_PER_LESSON)
   })
 
@@ -62,12 +62,12 @@ describe('XP and badge rules', () => {
       { type: 'START_LESSON', slokaId: LESSON_1 },
       complete(LESSON_1, '2026-07-14', 'T11:00:00'),
     )
-    expect(state.totalXp).toBe(XP_PER_LESSON)
-    expect(state.badges).toEqual(['badge-wisdom'])
+    expect(state.progress.totalXp).toBe(XP_PER_LESSON)
+    expect(state.progress.badges.map((badge) => badge.id)).toEqual(['badge-wisdom'])
     expect(state.lastCompletion?.xpEarned).toBe(0)
-    expect(state.practiceHistory).toHaveLength(2)
-    expect(state.practiceHistory[0].kind).toBe('practice')
-    expect(state.practiceHistory[1].kind).toBe('first-completion')
+    expect(state.progress.practiceHistory).toHaveLength(2)
+    expect(state.progress.practiceHistory[0].kind).toBe('practice')
+    expect(state.progress.practiceHistory[1].kind).toBe('first-completion')
   })
 
   it('practicing again may improve but never reduce best stars', () => {
@@ -77,7 +77,7 @@ describe('XP and badge rules', () => {
       { type: 'START_LESSON', slokaId: LESSON_1 },
       complete(LESSON_1),
     )
-    expect(state.lessons[LESSON_1].bestStars).toBe(3)
+    expect(state.progress.slokas[LESSON_1].bestStars).toBe(3)
 
     // Practice run with many mistakes → 1 star, best stays 3.
     state = run(
@@ -89,7 +89,7 @@ describe('XP and badge rules', () => {
       complete(LESSON_1, '2026-07-15'),
     )
     expect(state.lastCompletion?.stars).toBe(1)
-    expect(state.lessons[LESSON_1].bestStars).toBe(3)
+    expect(state.progress.slokas[LESSON_1].bestStars).toBe(3)
   })
 
   it('two incorrect attempts yield two stars on completion', () => {
@@ -111,6 +111,6 @@ describe('XP and badge rules', () => {
       { type: 'START_LESSON', slokaId: LESSON_1 },
       complete(LESSON_1, '2026-07-14', 'T12:00:00'),
     )
-    expect(state.streak.current).toBe(1)
+    expect(state.progress.streak.current).toBe(1)
   })
 })

@@ -5,12 +5,15 @@ import './styles/index.css'
 import { App } from './app/App'
 import { AppStateProvider } from './context/AppStateProvider'
 import { ErrorBoundary } from './components/common/ErrorBoundary'
+import {
+  APP_ROUTER_BASENAME,
+} from './routes/basePath'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
       <AppStateProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={APP_ROUTER_BASENAME}>
           <App />
         </BrowserRouter>
       </AppStateProvider>

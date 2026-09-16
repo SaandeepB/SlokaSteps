@@ -24,11 +24,14 @@ export const saraswatiNamastubhyam: Sloka = {
   theme: 'Learning and Wisdom',
   estimatedMinutes: 6,
   implementationStatus: 'complete',
+  contentStatus: 'editorial-review',
+  editorial: { status: 'editorial-review' },
+  practiceStatus: 'available',
   contentReviewStatus: 'prototype',
   badge: { id: 'badge-wisdom', name: 'Wisdom Badge', motif: 'book' },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'A prayer to begin learning',
       simpleMeaning:
         'I bow to Goddess Saraswati, who represents knowledge and wisdom. Please bless me as I begin learning.',
@@ -40,7 +43,7 @@ export const saraswatiNamastubhyam: Sloka = {
       ],
       reviewStatus: 'prototype-reviewed',
     },
-    hi: {
+    'hi-IN': {
       title: 'पढ़ाई शुरू करने की प्रार्थना',
       simpleMeaning:
         'मैं ज्ञान और विद्या की देवी सरस्वती को प्रणाम करती/करता हूँ। पढ़ाई शुरू करते समय मुझे आशीर्वाद दें।',

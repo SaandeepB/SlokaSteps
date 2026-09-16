@@ -1,13 +1,19 @@
-/** Languages selectable for the interface and meaning translations. */
-export type SupportedLanguage = 'en' | 'hi' | 'te' | 'kn' | 'ta' | 'mr'
+/** BCP-47 language tags supported across interface, narration, and content. */
+export type SupportedLanguage =
+  | 'en-IN'
+  | 'hi-IN'
+  | 'te-IN'
+  | 'kn-IN'
+  | 'ta-IN'
+  | 'mr-IN'
 
 export const SUPPORTED_LANGUAGES: SupportedLanguage[] = [
-  'en',
-  'hi',
-  'te',
-  'kn',
-  'ta',
-  'mr',
+  'en-IN',
+  'hi-IN',
+  'te-IN',
+  'kn-IN',
+  'ta-IN',
+  'mr-IN',
 ]
 
 export interface LanguageInfo {
@@ -18,13 +24,24 @@ export interface LanguageInfo {
 }
 
 export const LANGUAGES: LanguageInfo[] = [
-  { code: 'en', endonym: 'English', englishName: 'English' },
-  { code: 'hi', endonym: 'हिन्दी', englishName: 'Hindi' },
-  { code: 'te', endonym: 'తెలుగు', englishName: 'Telugu' },
-  { code: 'kn', endonym: 'ಕನ್ನಡ', englishName: 'Kannada' },
-  { code: 'ta', endonym: 'தமிழ்', englishName: 'Tamil' },
-  { code: 'mr', endonym: 'मराठी', englishName: 'Marathi' },
+  { code: 'en-IN', endonym: 'English', englishName: 'English' },
+  { code: 'hi-IN', endonym: 'हिन्दी', englishName: 'Hindi' },
+  { code: 'te-IN', endonym: 'తెలుగు', englishName: 'Telugu' },
+  { code: 'kn-IN', endonym: 'ಕನ್ನಡ', englishName: 'Kannada' },
+  { code: 'ta-IN', endonym: 'தமிழ்', englishName: 'Tamil' },
+  { code: 'mr-IN', endonym: 'मराठी', englishName: 'Marathi' },
 ]
+
+export type ContentStatus = 'draft' | 'editorial-review' | 'approved'
+
+export interface EditorialMetadata {
+  status: ContentStatus
+  reviewer?: string
+  reviewedAt?: string
+  sourceTradition?: string
+  sourceReferences?: string[]
+  variationNotes?: string[]
+}
 
 export type BadgeMotif = 'book' | 'sun' | 'bell' | 'heart' | 'lotus' | 'lamp'
 
@@ -38,12 +55,9 @@ export interface SlokaLine {
   id: string
   devanagari: string
   transliteration: string
-  /**
-   * Regional-script renderings, added only when reviewed content exists.
-   * When absent, the UI shows the transliteration with a fallback notice.
-   */
+  /** Reviewed regional-script renderings only. */
   regionalScripts?: Partial<Record<SupportedLanguage, string>>
-  /** Reviewed prerecorded audio, when it exists. Absent in Version 1. */
+  /** Legacy V1 line recording field; V2 resolves reviewed manifest assets first. */
   audioUrl?: string
 }
 
@@ -51,16 +65,13 @@ export interface SlokaMeaning {
   title: string
   simpleMeaning: string
   culturalNote: string
-  /** One child-friendly meaning per sloka line, index-aligned with `lines`. */
   lineMeanings: string[]
   reviewStatus: 'prototype-draft' | 'prototype-reviewed'
 }
 
 export interface MatchPairDef {
   id: string
-  /** Transliterated phrase shown on the left side. */
   phrase: string
-  /** Index into `lines` / `lineMeanings` for the localized meaning. */
   lineIndex: number
 }
 
@@ -74,9 +85,7 @@ export type LessonActivity =
       id: string
       type: 'fillBlank'
       lineIndex: number
-      /** Index of the removed word within the transliteration's words. */
       blankWordIndex: number
-      /** Plausible wrong options (the correct word is added automatically). */
       distractors: string[]
     }
   | { id: string; type: 'arrangeWords'; lineIndex: number }
@@ -93,6 +102,10 @@ export interface Sloka {
   theme: string
   estimatedMinutes: number
   implementationStatus: 'complete' | 'coming-soon'
+  contentStatus: ContentStatus
+  editorial: EditorialMetadata
+  practiceStatus: 'not-started' | 'available'
+  /** Retained while V1 content is incrementally moved through editorial review. */
   contentReviewStatus: 'prototype' | 'reviewed'
   badge: Badge
   lines: SlokaLine[]

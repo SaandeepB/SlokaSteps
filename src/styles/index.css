@@ -105,27 +105,38 @@ body {
 
 /* Indic scripts need generous line-height so vowel signs and conjuncts
    never clip. Never apply uppercase transforms to these blocks. */
-[lang='sa'],
-[lang='hi'],
-[lang='mr'] {
+:lang(sa),
+:lang(hi),
+:lang(mr) {
   font-family: var(--font-devanagari);
   line-height: 1.9;
   text-transform: none;
 }
-[lang='te'] {
+:lang(te) {
   font-family: var(--font-telugu);
   line-height: 1.9;
   text-transform: none;
 }
-[lang='kn'] {
+:lang(kn) {
   font-family: var(--font-kannada);
   line-height: 1.9;
   text-transform: none;
 }
-[lang='ta'] {
+:lang(ta) {
   font-family: var(--font-tamil);
   line-height: 1.9;
   text-transform: none;
+}
+
+/* Keep primary destinations reachable on long child-facing mobile pages.
+   The content wrapper reserves room so the bar never covers the footer. */
+@media (max-width: 639px) {
+  .primary-mobile-nav {
+    position: fixed;
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    left: 0.75rem;
+  }
 }
 
 /* Visible focus for keyboard users everywhere. */

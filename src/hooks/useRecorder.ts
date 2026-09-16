@@ -57,6 +57,8 @@ export function useRecorder(): UseRecorderResult {
   const chunksRef = useRef<Blob[]>([])
   const timerRef = useRef<number | null>(null)
   const urlManagerRef = useRef(createObjectUrlManager())
+  const mountedRef = useRef(true)
+  const requestGenerationRef = useRef(0)
 
   const stopTimer = useCallback(() => {
     if (timerRef.current !== null) {
@@ -71,11 +73,19 @@ export function useRecorder(): UseRecorderResult {
   }, [])
 
   useEffect(() => {
+    mountedRef.current = true
     const urlManager = urlManagerRef.current
     return () => {
+      mountedRef.current = false
+      requestGenerationRef.current += 1
       stopTimer()
       try {
-        recorderRef.current?.stop()
+        if (recorderRef.current) {
+          recorderRef.current.onstop = null
+          recorderRef.current.ondataavailable = null
+          recorderRef.current.onerror = null
+          recorderRef.current.stop()
+        }
       } catch {
         // Recorder already inactive — nothing to stop.
       }
@@ -88,8 +98,10 @@ export function useRecorder(): UseRecorderResult {
     (kind: RecorderErrorKind) => {
       stopTimer()
       releaseStream()
-      setStatus('error')
-      setErrorKind(kind)
+      if (mountedRef.current) {
+        setStatus('error')
+        setErrorKind(kind)
+      }
     },
     [stopTimer, releaseStream],
   )
@@ -103,21 +115,33 @@ export function useRecorder(): UseRecorderResult {
 
     setStatus('requesting')
     setErrorKind(null)
+    const requestGeneration = requestGenerationRef.current + 1
+    requestGenerationRef.current = requestGeneration
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
+        if (
+          !mountedRef.current ||
+          requestGeneration !== requestGenerationRef.current
+        ) {
+          stream.getTracks().forEach((track) => track.stop())
+          return
+        }
         streamRef.current = stream
         chunksRef.current = []
         const recorder = new MediaRecorder(stream)
         recorderRef.current = recorder
 
         recorder.ondataavailable = (event) => {
-          if (event.data && event.data.size > 0) chunksRef.current.push(event.data)
+          if (mountedRef.current && event.data && event.data.size > 0) {
+            chunksRef.current.push(event.data)
+          }
         }
         recorder.onerror = () => fail('failed')
         recorder.onstop = () => {
           stopTimer()
           releaseStream()
+          if (!mountedRef.current) return
           const blob = new Blob(chunksRef.current, {
             type: recorder.mimeType || 'audio/webm',
           })
@@ -147,6 +171,12 @@ export function useRecorder(): UseRecorderResult {
         }, 1000)
       })
       .catch((error: unknown) => {
+        if (
+          !mountedRef.current ||
+          requestGeneration !== requestGenerationRef.current
+        ) {
+          return
+        }
         const name = error instanceof DOMException ? error.name : ''
         if (name === 'NotAllowedError' || name === 'SecurityError') {
           fail('permission-denied')
@@ -168,6 +198,7 @@ export function useRecorder(): UseRecorderResult {
   }, [status, fail])
 
   const reset = useCallback(() => {
+    requestGenerationRef.current += 1
     stopTimer()
     releaseStream()
     urlManagerRef.current.revoke()

@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         <div className="flex min-h-screen items-center justify-center bg-cream-50 p-4">
           <FriendlyError
             title="Something went wrong"
-            body="Please reload the page. Your progress is saved on this device."
+            body="Please reload the page. Previously saved progress should still be available when browser storage is enabled."
             actions={
               <button
                 type="button"

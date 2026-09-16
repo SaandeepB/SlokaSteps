@@ -1,4 +1,4 @@
-# CONTENT_REVIEW.md — Sloka Steps Version 1
+# CONTENT_REVIEW.md — Sloka Steps content register
 
 All curriculum content in this prototype — Sanskrit text, Roman
 transliteration, meanings, and cultural notes — is **prototype content
@@ -60,3 +60,20 @@ Legend: ⏳ prototype (needs qualified review) · — not present in V1
 - **Imagery**: only neutral cultural motifs are used (lotus, lamp, book,
   bell, sun, decorative geometry). No deity artwork was attempted, per the
   content guardrail.
+
+## Version 2 foundation additions — 2026-07-21
+
+- Added **Lokah Samastah Sukhino Bhavantu** as lesson 7. Its Devanagari,
+  informal transliteration, meaning, tradition/source notes, and Hindi draft
+  are marked `editorial-review`; they are not approved or authoritative.
+- Preserved all eight Version 1 slokas. Asato Ma and Sarve Bhavantu remain
+  distinct coming-soon prayers; neither was renamed or replaced.
+- Added the development sample chapters **Ayodhya and King Dasharatha** and
+  **The Kuru Family**, each marked `editorial-review`. They require source,
+  cultural, translation, and child-safety review before production approval.
+- Story fields structurally contain all six locale keys, but non-English
+  story values are visibly labelled English editorial fallbacks, not reviewed
+  translations.
+- No audio asset is approved in the initial V2 manifest. Browser speech is a
+  labelled fallback only and must not be used as a canonical pronunciation
+  reference.

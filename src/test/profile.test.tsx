@@ -12,11 +12,12 @@ import {
 import { SetupPage } from '../pages/SetupPage'
 import { renderWithProviders } from './testUtils'
 
-describe('display-name sanitization', () => {
+describe('nickname sanitization', () => {
   it('trims whitespace and applies the maximum length', () => {
     expect(sanitizeDisplayName('  Anu  ')).toBe('Anu')
-    const long = 'a'.repeat(MAX_DISPLAY_NAME_LENGTH + 20)
-    expect(sanitizeDisplayName(long)).toHaveLength(MAX_DISPLAY_NAME_LENGTH)
+    expect(sanitizeDisplayName('a'.repeat(MAX_DISPLAY_NAME_LENGTH + 20))).toHaveLength(
+      MAX_DISPLAY_NAME_LENGTH,
+    )
   })
 
   it('falls back to a friendly default when empty', () => {
@@ -24,64 +25,94 @@ describe('display-name sanitization', () => {
   })
 })
 
-describe('profile reducer', () => {
-  it('saves the profile', () => {
+describe('V2 profile and language reducer', () => {
+  it('saves the privacy-minimal child profile', () => {
     const state = appReducer(createDefaultAppState(), {
       type: 'CREATE_PROFILE',
-      profile: { displayName: 'Anu', ageRange: '4-6' },
+      profile: { nickname: 'Anu', ageBand: '4-6', dailyGoalMinutes: 5 },
     })
-    expect(state.profile).toEqual({ displayName: 'Anu', ageRange: '4-6' })
+    expect(state.profile).toEqual({
+      nickname: 'Anu',
+      ageBand: '4-6',
+      dailyGoalMinutes: 5,
+    })
   })
 
-  it('persists language and daily goal through settings updates', () => {
-    const state = appReducer(createDefaultAppState(), {
-      type: 'UPDATE_SETTINGS',
-      updates: { language: 'kn', dailyGoalMinutes: 15 },
+  it('keeps narration linked by default and allows it to be unlinked', () => {
+    let state = appReducer(createDefaultAppState(), {
+      type: 'UPDATE_PREFERENCES',
+      updates: { displayLanguage: 'kn-IN' },
     })
-    expect(state.settings.language).toBe('kn')
-    expect(state.settings.dailyGoalMinutes).toBe(15)
+    expect(state.preferences.narrationLanguage).toBe('kn-IN')
+
+    state = appReducer(state, {
+      type: 'UPDATE_PREFERENCES',
+      updates: { narrationLinked: false, narrationLanguage: 'te-IN' },
+    })
+    state = appReducer(state, {
+      type: 'UPDATE_PREFERENCES',
+      updates: { displayLanguage: 'en-IN' },
+    })
+    expect(state.preferences.displayLanguage).toBe('en-IN')
+    expect(state.preferences.narrationLanguage).toBe('te-IN')
   })
 })
 
-describe('setup page', () => {
-  it('requires an age range before saving', async () => {
-    const user = userEvent.setup()
-    renderWithProviders(
-      <Routes>
-        <Route path="/setup" element={<SetupPage />} />
-        <Route path="/path" element={<p>path page</p>} />
-      </Routes>,
-      { route: '/setup' },
-    )
-
-    await user.click(screen.getByRole('button', { name: 'Start My Journey' }))
-    expect(screen.getByRole('alert')).toHaveTextContent(
-      'Please choose an age range.',
-    )
-    expect(screen.queryByText('path page')).not.toBeInTheDocument()
+describe('language-first setup page', () => {
+  it('asks only for the app language on the first step', () => {
+    renderWithProviders(<SetupPage />)
+    expect(
+      screen.getByRole('heading', {
+        name: 'Which language should Sloka Steps use?',
+      }),
+    ).toBeInTheDocument()
+    expect(screen.queryByLabelText('What should we call you?')).not.toBeInTheDocument()
   })
 
-  it('saves profile, language, and daily goal to localStorage', async () => {
+  it('requires an age band before saving the profile', async () => {
     const user = userEvent.setup()
     renderWithProviders(
       <Routes>
         <Route path="/setup" element={<SetupPage />} />
-        <Route path="/path" element={<p>path page</p>} />
+        <Route path="/learn" element={<p>learn page</p>} />
+      </Routes>,
+      { route: '/setup' },
+    )
+    await user.click(screen.getByRole('button', { name: 'Continue' }))
+    await user.click(screen.getByRole('button', { name: 'Start My Journey' }))
+    expect(screen.getByRole('alert')).toHaveTextContent('Please choose an age range.')
+    expect(screen.queryByText('learn page')).not.toBeInTheDocument()
+  })
+
+  it('persists the first language as linked display and narration language', async () => {
+    const user = userEvent.setup()
+    renderWithProviders(
+      <Routes>
+        <Route path="/setup" element={<SetupPage />} />
+        <Route path="/learn" element={<p>learn page</p>} />
       </Routes>,
       { route: '/setup' },
     )
 
-    await user.type(screen.getByLabelText('What should we call you?'), 'Anu')
-    await user.click(screen.getByRole('radio', { name: '7-8' }))
     await user.click(screen.getByRole('radio', { name: 'తెలుగు' }))
+    await user.click(screen.getByRole('button', { name: 'Continue' }))
+    await user.type(screen.getByLabelText('మిమ్మల్ని ఏమని పిలవాలి?'), 'Anu')
+    await user.click(screen.getByRole('radio', { name: '7-8' }))
     await user.click(screen.getByRole('radio', { name: /15/ }))
-    await user.click(screen.getByRole('button', { name: 'Start My Journey' }))
+    await user.click(
+      screen.getByRole('button', { name: 'నా ప్రయాణం ప్రారంభించండి' }),
+    )
 
-    expect(await screen.findByText('path page')).toBeInTheDocument()
-
+    expect(await screen.findByText('learn page')).toBeInTheDocument()
     const persisted = loadPersistedState()
-    expect(persisted.profile).toEqual({ displayName: 'Anu', ageRange: '7-8' })
-    expect(persisted.settings.language).toBe('te')
-    expect(persisted.settings.dailyGoalMinutes).toBe(15)
+    expect(persisted.profile).toEqual({
+      nickname: 'Anu',
+      ageBand: '7-8',
+      dailyGoalMinutes: 15,
+    })
+    expect(persisted.preferences.defaultLanguage).toBe('te-IN')
+    expect(persisted.preferences.displayLanguage).toBe('te-IN')
+    expect(persisted.preferences.narrationLanguage).toBe('te-IN')
+    expect(persisted.preferences.narrationLinked).toBe(true)
   })
 })

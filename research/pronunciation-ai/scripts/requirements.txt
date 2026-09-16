@@ -1,0 +1,30 @@
+# Dependencies for the Su-srota ASR harness (asr_susrota_decode.py,
+# cer_wer_eval.py, verify_against_text.py).
+#
+# NOT INSTALLED by the research-analyst. This is multi-GB. Install only with
+# explicit approval. See SETUP.md.
+#
+# Rough on-disk cost, CPU-only: ~2.5-4 GB installed. With CUDA torch: ~5-7 GB.
+# Plus model checkpoints (NOT pip): Su-srota v13b .nemo + a generic
+# IndicConformer, ~0.5-2.4 GB each depending on which base.
+#
+# IMPORTANT UNKNOWN: the model card does not state which NeMo version saved
+# `sushrota_sanskrit_asr_v13b.nemo`. `.nemo` restore is version-sensitive. If
+# `restore_from` fails, try the NeMo release closest to the checkpoint's date
+# (model card last modified 2026-08-28), or ask the author for the pin.
+
+# --- core -------------------------------------------------------------------
+numpy>=1.24,<2.0
+soundfile>=0.12.1
+# torch: install the build that matches your machine FIRST, separately, e.g.
+#   CPU:   py -3.11 -m pip install torch==2.4.* --index-url https://download.pytorch.org/whl/cpu
+#   CUDA:  py -3.11 -m pip install torch==2.4.* --index-url https://download.pytorch.org/whl/cu124
+torch>=2.2,<2.6
+
+# --- NeMo ASR (pulls pytorch-lightning, transformers, sentencepiece, librosa,
+#     numba, editdistance, hydra-core, omegaconf, huggingface-hub, ...) -------
+nemo_toolkit[asr]>=1.23,<2.4
+
+# --- harness extras -------------------------------------------------------
+huggingface_hub>=0.23      # to pull the .nemo files
+jiwer>=3.0                 # optional: cross-check our CER/WER implementation

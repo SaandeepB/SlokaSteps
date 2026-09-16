@@ -6,10 +6,14 @@ import { useTranslation } from '../../hooks/useTranslation'
 
 export interface LanguageSelectorProps {
   className?: string
+  kind?: 'display' | 'narration' | 'onboarding'
 }
 
-/** Switches the learning/meaning language; persists via app settings. */
-export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
+/** Switches display or narration language while respecting the link preference. */
+export function LanguageSelector({
+  className = '',
+  kind = 'display',
+}: LanguageSelectorProps) {
   const { state, dispatch } = useAppState()
   const { t } = useTranslation()
   const selectId = useId()
@@ -21,13 +25,34 @@ export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
       </label>
       <select
         id={selectId}
-        value={state.settings.language}
-        onChange={(event) =>
-          dispatch({
-            type: 'UPDATE_SETTINGS',
-            updates: { language: event.target.value as SupportedLanguage },
-          })
+        value={
+          kind === 'narration'
+            ? state.preferences.narrationLanguage
+            : state.preferences.displayLanguage
         }
+        onChange={(event) => {
+          const language = event.target.value as SupportedLanguage
+          const updates =
+            kind === 'onboarding'
+              ? {
+                  defaultLanguage: language,
+                  displayLanguage: language,
+                  narrationLanguage: language,
+                  narrationLinked: true,
+                }
+              : kind === 'display'
+                ? {
+                    displayLanguage: language,
+                    ...(state.preferences.narrationLinked
+                      ? { narrationLanguage: language }
+                      : {}),
+                  }
+                : { narrationLanguage: language, narrationLinked: false }
+          dispatch({
+            type: 'UPDATE_PREFERENCES',
+            updates,
+          })
+        }}
         className="min-h-11 rounded-xl border-2 border-cream-300 bg-white px-3 py-1 text-base text-ink-900"
       >
         {LANGUAGES.map((language) => (

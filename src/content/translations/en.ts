@@ -28,11 +28,20 @@ export const en = {
     save: 'Save',
     goHome: 'Go Home',
     chooseLanguage: 'Choose language',
+    learn: 'Learn',
+    practice: 'Practice',
+    rewards: 'Rewards',
+    slokas: 'Slokas',
+    stories: 'Stories',
+    search: 'Search',
+    bookmarks: 'Bookmarks',
 
     // Audio controls
     listen: 'Listen',
     replay: 'Replay',
     stop: 'Stop',
+    pauseAudio: 'Pause',
+    resumeAudio: 'Resume',
     slowPlay: 'Play Slowly',
     record: 'Record',
     stopRecording: 'Stop Recording',
@@ -82,6 +91,9 @@ export const en = {
     feedbackNiceChanting: 'Nice chanting!',
     feedbackTryOnceMore: 'Try it once more slowly.',
     feedbackListenedCarefully: 'You listened carefully and gave it a try!',
+    chantCoachSimulatedNotice:
+      'This is a simulated preview. Chant Coach did not listen to or check this recording.',
+    chantCoachUnavailableNotice: 'Chant Coach could not check this recording yet.',
 
     // Audio and microphone messages
     speechUnavailable:
@@ -97,6 +109,10 @@ export const en = {
 
     // Setup
     setupTitle: 'Set up your learner',
+    firstStep: 'First step',
+    chooseAppLanguage: 'Which language should Sloka Steps use?',
+    languageSetupHelp:
+      'This sets the app, meanings, and narration. A parent can separate narration later.',
     setupIntro: 'Tell Mitra a little about the learner. No account needed!',
     nameLabel: 'What should we call you?',
     nameHelp: 'A nickname is perfect. You can leave this empty too.',
@@ -177,14 +193,34 @@ export const en = {
     resetConfirmBody:
       'This removes the child profile, lesson progress, stars, XP, badges, streak, and practice history stored in this browser. It cannot be undone.',
     resetAction: 'Yes, Reset Everything',
+    resetFailed:
+      'Sloka Steps could not remove the saved data from this browser. Nothing was reset. Please check browser storage permissions and try again.',
     gateNotSecurityNote:
       'This simple question only deters young children. It is not a security feature.',
 
     // Settings
     settingsTitle: 'Settings',
+    displayLanguageLabel: 'Display language',
+    narrationLanguageLabel: 'Narration language',
+    linkNarrationLabel: 'Use the display language for narration',
+    scriptPreferenceLabel: 'Sloka script',
+    scriptRegional: 'Regional script',
+    scriptDevanagari: 'Devanagari',
+    scriptRoman: 'Roman transliteration',
+    scriptRegionalAndRoman: 'Regional script and transliteration',
+    calmModeLabel: 'Calm mode',
+    calmModeHelp: 'Uses fewer distractions, softer effects, and no confetti.',
+    microphoneLabel: 'Allow microphone practice',
+    cloudEvaluationLabel: 'Allow future cloud chant evaluation',
+    retainRecordingsLabel: 'Retain practice recordings',
+    communityPreferenceLabel: 'Allow future community features',
+    comingFutureUpdate: 'Coming in a future update',
     reducedMotionLabel: 'Reduce animations',
     reducedMotionHelp: 'Calms movement across the app.',
     settingsSaved: 'Saved!',
+    settingsSaving: 'Saving…',
+    settingsSaveFailed:
+      'Changes work for this session, but this browser could not save them.',
 
     // Privacy page
     privacyHeading: 'Your family’s privacy',

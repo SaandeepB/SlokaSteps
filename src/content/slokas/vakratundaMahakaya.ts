@@ -24,6 +24,9 @@ export const vakratundaMahakaya: Sloka = {
   theme: 'New Beginnings',
   estimatedMinutes: 6,
   implementationStatus: 'complete',
+  contentStatus: 'editorial-review',
+  editorial: { status: 'editorial-review' },
+  practiceStatus: 'available',
   contentReviewStatus: 'prototype',
   badge: {
     id: 'badge-bright-beginning',
@@ -32,7 +35,7 @@ export const vakratundaMahakaya: Sloka = {
   },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'A prayer for good beginnings',
       simpleMeaning:
         'O Ganesha, radiant and powerful, please help remove obstacles from the good things I begin.',
@@ -44,7 +47,7 @@ export const vakratundaMahakaya: Sloka = {
       ],
       reviewStatus: 'prototype-reviewed',
     },
-    hi: {
+    'hi-IN': {
       title: 'शुभ शुरुआत की प्रार्थना',
       simpleMeaning:
         'हे गणेश जी, तेजस्वी और शक्तिशाली, मेरे अच्छे कामों की बाधाएँ दूर करने में मदद करें।',

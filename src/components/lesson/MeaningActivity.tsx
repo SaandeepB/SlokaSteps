@@ -1,14 +1,25 @@
 import { Button } from '../common/Button'
 import { Mitra } from '../common/Mitra'
+import { PlayLineControls } from '../audio/PlayLineControls'
 import { useTranslation } from '../../hooks/useTranslation'
 import type { SlokaMeaning } from '../../types'
+import type { SupportedLanguage } from '../../types'
 
 export interface MeaningActivityProps {
   meaning: SlokaMeaning
+  slokaId?: string
+  narrationText?: string
+  narrationLanguage?: SupportedLanguage
   onContinue: () => void
 }
 
-export function MeaningActivity({ meaning, onContinue }: MeaningActivityProps) {
+export function MeaningActivity({
+  meaning,
+  slokaId,
+  narrationText,
+  narrationLanguage,
+  onContinue,
+}: MeaningActivityProps) {
   const { t, language } = useTranslation()
   return (
     <div className="flex flex-col gap-6">
@@ -33,6 +44,18 @@ export function MeaningActivity({ meaning, onContinue }: MeaningActivityProps) {
           <p className="mt-1 text-ink-700">{meaning.culturalNote}</p>
         </div>
       </div>
+      {slokaId && (
+        <PlayLineControls
+          text={narrationText ?? meaning.simpleMeaning}
+          language={narrationLanguage ?? language}
+          audioQuery={{
+            contentId: slokaId,
+            segmentId: 'meaning-summary',
+            purpose: 'meaning-narration',
+            language: narrationLanguage ?? language,
+          }}
+        />
+      )}
       <Button size="lg" onClick={onContinue} className="self-start">
         {t('continueAction')}
       </Button>

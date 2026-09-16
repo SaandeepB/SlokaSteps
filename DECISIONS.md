@@ -1,4 +1,4 @@
-# DECISIONS.md — Sloka Steps Version 1
+# DECISIONS.md — Sloka Steps
 
 Product and engineering decisions made where the specification left room for
 judgment. None of these affect product safety or correctness guarantees.
@@ -84,3 +84,63 @@ judgment. None of these affect product safety or correctness guarantees.
 21. **Desktop layout centers a tablet-width column (max-w-3xl)** over soft
     radial background decoration, so the app never looks like a bare mobile
     strip on a large screen.
+
+---
+
+# Version 2 / 3 — evaluation contract
+
+Decisions taken while designing the chant evaluation contract. Evidence for
+each lives in `research/pronunciation-ai/`.
+
+## Child-facing feedback
+
+1. **A child is never shown "incorrect" (D5).** The child surface shows only
+   `matched` and `unclear`; deviations are confined to the parent view.
+   Measured false-positive rate on correct audio matched against its true
+   transcript was 2.1% (`research/pronunciation-ai/10`), which on a
+   32-syllable sloka means roughly every other attempt would wrongly tell a
+   child who chanted correctly that they got something wrong. Missing a real
+   mispronunciation costs a repeat attempt; falsely correcting a child costs
+   their confidence. The errors are not symmetric and are not treated as such.
+2. **This lives in the presentation layer, not the type.** The parent view
+   legitimately needs `deviation`, so banning it from the contract would
+   destroy the feature's only useful output. `VerifiedChantEvaluation` is
+   identical under either answer; a single projection function applies the
+   policy.
+3. **Feedback may be tiered by `ageBand`.** `ChantEvaluationRequest` already
+   carries it. Both the abstain threshold and feedback sternness may vary by
+   age — be more willing to abstain for younger children. This is a
+   pedagogical decision only.
+
+## Age and privacy
+
+4. **Age is not used as a privacy or legal gate.** Self-declared age cannot
+   gate a legal obligation, the app is child-directed under COPPA on its
+   objective characteristics (mascot, age bands topping out at 10, rewards,
+   parent gate), and India's DPDP defines a child as anyone under 18 — so
+   there is no meaningful adult tier among the current audience. Using age as
+   a gate would additionally require collecting verified age, i.e. more
+   identity data from children, which `AGENTS.md` forbids and which is the
+   opposite of the goal.
+5. **Privacy is settled by where inference runs, not by who is using it.**
+   If audio never leaves the device, the consent regime never triggers, for
+   every user at every age. This is why on-device is the preferred target.
+6. **An adult audience is a product track, not a privacy strategy.** Adults
+   learning slokas is a real and probably larger market, worth pursuing on
+   its own merits. It would require a genuine adult path (setup flow,
+   surface, copy) and an `AgeBand` change touching ~17 files plus a
+   persistence migration. It does not reduce child-privacy obligations,
+   because under-18 covers most of the users it would add.
+
+## Where inference runs (D2) — deferred, not decided
+
+7. **No backend.** Nothing in the contract requires one, and none is
+   proposed. The "no backend without explicit request" rule stands.
+8. **On-device is the target, pending two bounded tests.** ONNX export of the
+   encoder + CTC head is clean (opset 17, standard ops only); fp16 is
+   accuracy-free (byte-identical decodes, 16/16 clips); int8 dynamic
+   quantization nearly doubled CER and ran ~5x slower, so it is not viable as
+   tested. Two things remain unproven: a real `onnxruntime-web` browser
+   benchmark, and a JS/WASM mel-feature extractor, because the raw-audio
+   preprocessor cannot export (`torch.stft` complex-type limitation).
+   See `research/pronunciation-ai/11`.

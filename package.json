@@ -1,17 +1,21 @@
 {
   "name": "sloka-steps",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
-  "description": "Sloka Steps - a child-friendly web app for learning beginner Sanskrit slokas. Learn. Chant. Understand.",
+  "description": "Sloka Steps - a child-friendly multilingual app for learning Sanskrit slokas and epic stories.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/build-spa-fallback.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b",
+    "audio:list-voices": "node scripts/audio/list-voices.mjs",
+    "audio:sample": "node scripts/audio/sample.mjs",
+    "audio:generate": "node scripts/audio/generate.mjs",
+    "audio:verify": "node scripts/audio/verify.mjs",
     "check": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
   "dependencies": {

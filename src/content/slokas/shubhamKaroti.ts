@@ -24,11 +24,14 @@ export const shubhamKaroti: Sloka = {
   theme: 'Light and Well-Being',
   estimatedMinutes: 6,
   implementationStatus: 'complete',
+  contentStatus: 'editorial-review',
+  editorial: { status: 'editorial-review' },
+  practiceStatus: 'available',
   contentReviewStatus: 'prototype',
   badge: { id: 'badge-little-light', name: 'Little Light Badge', motif: 'lamp' },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'Bowing to the light',
       simpleMeaning:
         'I bow to the light that represents goodness, health, well-being, and the removal of harmful thoughts.',
@@ -40,7 +43,7 @@ export const shubhamKaroti: Sloka = {
       ],
       reviewStatus: 'prototype-reviewed',
     },
-    hi: {
+    'hi-IN': {
       title: 'दीप ज्योति को प्रणाम',
       simpleMeaning:
         'मैं उस ज्योति को प्रणाम करती/करता हूँ जो शुभता, स्वास्थ्य, कल्याण और बुरे विचारों को दूर करने का प्रतीक है।',

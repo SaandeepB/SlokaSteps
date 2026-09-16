@@ -12,7 +12,7 @@ export function WelcomePage() {
   const { t } = useTranslation()
   useDocumentTitle(t('tagline'))
 
-  const startTarget = state.profile ? routes.path : routes.setup
+  const startTarget = state.profile ? routes.learn : routes.setup
 
   return (
     <div className="flex flex-col items-center gap-8 py-8 text-center">
@@ -43,7 +43,7 @@ export function WelcomePage() {
         </Link>
       </div>
 
-      <LanguageSelector />
+      <LanguageSelector kind={state.profile ? 'display' : 'onboarding'} />
 
       {/* Decorative cultural pattern — sparse, original. */}
       <div aria-hidden="true" className="flex items-center gap-3 text-lotus-300">

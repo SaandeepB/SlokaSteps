@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "aliases": {
+    "ramayana-ayodhya": "ramayana-ayodhya-and-king-dasharatha",
+    "mahabharata-kuru-family": "mahabharata-the-kuru-family"
+  },
+  "segments": [
+    {
+      "contentType": "sloka",
+      "contentId": "saraswati-namastubhyam",
+      "segmentId": "meaning-summary",
+      "purpose": "meaning-narration",
+      "language": "en-IN",
+      "text": "I bow to Goddess Saraswati, who represents knowledge and wisdom. Please bless me as I begin learning.",
+      "pace": 0.9,
+      "outputFormat": "mp3",
+      "outputUrl": "/audio/slokas/saraswati-namastubhyam/narration/en-IN/generated/sarvam-meaning-summary.mp3"
+    },
+    {
+      "contentType": "sloka",
+      "contentId": "saraswati-namastubhyam",
+      "segmentId": "meaning-summary",
+      "purpose": "meaning-narration",
+      "language": "hi-IN",
+      "text": "मैं ज्ञान और विद्या की देवी सरस्वती को प्रणाम करती या करता हूँ। पढ़ाई शुरू करते समय मुझे आशीर्वाद दें।",
+      "pace": 0.9,
+      "outputFormat": "mp3",
+      "outputUrl": "/audio/slokas/saraswati-namastubhyam/narration/hi-IN/generated/sarvam-meaning-summary.mp3"
+    },
+    {
+      "contentType": "story",
+      "contentId": "ramayana-ayodhya-and-king-dasharatha",
+      "segmentId": "ramayana-ayodhya-scene-1",
+      "purpose": "story-narration",
+      "language": "en-IN",
+      "text": "Long ago, beside the Sarayu River, stood Ayodhya. Its busy streets, gardens, and homes were cared for by a close community.",
+      "pace": 0.9,
+      "outputFormat": "mp3",
+      "outputUrl": "/audio/stories/ramayana/ayodhya-and-king-dasharatha/narration/en-IN/generated/sarvam-scene-1.mp3"
+    },
+    {
+      "contentType": "story",
+      "contentId": "mahabharata-the-kuru-family",
+      "segmentId": "mahabharata-kuru-scene-1",
+      "purpose": "story-narration",
+      "language": "en-IN",
+      "text": "In the kingdom of Hastinapura lived the Kuru family. Many generations had cared for the kingdom, and every new generation inherited both responsibilities and hopes.",
+      "pace": 0.9,
+      "outputFormat": "mp3",
+      "outputUrl": "/audio/stories/mahabharata/the-kuru-family/narration/en-IN/generated/sarvam-scene-1.mp3"
+    }
+  ]
+}

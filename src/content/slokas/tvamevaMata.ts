@@ -34,6 +34,9 @@ export const tvamevaMata: Sloka = {
   theme: 'Gratitude and Support',
   estimatedMinutes: 8,
   implementationStatus: 'complete',
+  contentStatus: 'editorial-review',
+  editorial: { status: 'editorial-review' },
+  practiceStatus: 'available',
   contentReviewStatus: 'prototype',
   badge: {
     id: 'badge-grateful-heart',
@@ -42,7 +45,7 @@ export const tvamevaMata: Sloka = {
   },
   lines,
   meanings: {
-    en: {
+    'en-IN': {
       title: 'You are everything to me',
       simpleMeaning:
         'You are like a mother, father, family member, friend, knowledge, and support to me. You are everything to me.',
@@ -56,7 +59,7 @@ export const tvamevaMata: Sloka = {
       ],
       reviewStatus: 'prototype-reviewed',
     },
-    hi: {
+    'hi-IN': {
       title: 'तुम ही मेरे सब कुछ हो',
       simpleMeaning:
         'आप ही मेरी माता, पिता, परिवार, मित्र, विद्या और सहारा हैं। आप ही मेरे सब कुछ हैं।',
