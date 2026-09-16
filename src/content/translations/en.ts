@@ -91,6 +91,9 @@ export const en = {
     feedbackNiceChanting: 'Nice chanting!',
     feedbackTryOnceMore: 'Try it once more slowly.',
     feedbackListenedCarefully: 'You listened carefully and gave it a try!',
+    chantCoachSimulatedNotice:
+      'This is a simulated preview. Chant Coach did not listen to or check this recording.',
+    chantCoachUnavailableNotice: 'Chant Coach could not check this recording yet.',
 
     // Audio and microphone messages
     speechUnavailable:

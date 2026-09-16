@@ -12,22 +12,6 @@ export interface AudioPlaybackService {
   stop(): void
 }
 
-/**
- * Participation-oriented feedback only. Version 1 has no validated Sanskrit
- * pronunciation model, so no implementation may claim accuracy or scores.
- */
-export interface PronunciationFeedback {
-  kind: 'participation'
-  /** Translation key of an encouraging message (resolved via t()). */
-  messageKey: string
-  /** Always false in Version 1 — this is not a real evaluation. */
-  authoritative: false
-}
-
-export interface PronunciationEvaluationService {
-  evaluate(
-    audioBlob: Blob,
-    expectedText: string,
-    language: string,
-  ): Promise<PronunciationFeedback>
-}
+// Pronunciation and chant feedback share one contract in `./chant`:
+// ChantEvaluationService, whose result can only carry scores when a validated
+// analyzer produced them.

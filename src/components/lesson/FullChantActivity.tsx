@@ -49,6 +49,7 @@ export function FullChantActivity({
       />
       <RecorderPanel
         expectedText={fullText}
+        slokaId={slokaId}
         onAttempted={() => {
           setAttempted(true)
           onRecordingAttempted()

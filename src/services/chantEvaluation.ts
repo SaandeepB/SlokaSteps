@@ -1,61 +1,45 @@
 import type {
   ChantEvaluationRequest,
-  ChantEvaluationResult,
   ChantEvaluationService,
-  DimensionFeedback,
+  UnscoredChantEvaluation,
 } from '../types/chant'
 
 export const SIMULATED_EVALUATION_VERSION = 'simulated-prototype-v1'
+export const LOCAL_PITCH_EVALUATION_VERSION = 'local-pitch-placeholder-v1'
 
-function unableToEvaluate(message: string): DimensionFeedback {
-  return {
-    confidence: 0,
-    status: 'unable-to-evaluate',
-    message,
-  }
-}
-
-function unavailableResult(
+function unscored(
   request: ChantEvaluationRequest,
   evaluationVersion: string,
+  provenance: 'simulated' | 'unavailable',
   explanation: string,
-  simulated: boolean,
-): ChantEvaluationResult {
-  const prefix = simulated ? 'Simulated placeholder' : 'Unavailable'
-  const feedback = () => unableToEvaluate(`${prefix}: ${explanation}`)
-
+): UnscoredChantEvaluation {
+  const prefix = provenance === 'simulated' ? 'Simulated placeholder' : 'Unavailable'
   return {
+    provenance,
     evaluationVersion,
     referenceId: request.referenceId,
-    // A Blob does not contain trustworthy duration metadata. Zero means unknown,
-    // not that the child's recording was empty.
-    recordingDurationMs: 0,
-    audioQuality: feedback(),
-    completeness: feedback(),
-    pronunciation: feedback(),
-    rhythm: feedback(),
-    ...(request.evaluationModes.includes('melody') ? { melody: feedback() } : {}),
-    childFriendlySummary: simulated
-      ? 'Simulated preview only — Chant Coach did not listen to or analyze this recording.'
-      : 'Chant Coach could not evaluate this recording yet.',
-    parentSummary: `${prefix}: no audio analysis was performed and no scores were produced.`,
+    childMessageKey:
+      provenance === 'simulated'
+        ? 'chantCoachSimulatedNotice'
+        : 'chantCoachUnavailableNotice',
+    parentSummary: `${prefix}: ${explanation}. No audio analysis was performed and no scores were produced.`,
   }
 }
 
 /**
- * UI-development seam only. It never inspects audio or invents results, and
- * every returned field explicitly says that the result is simulated.
+ * UI-development seam only. It never inspects audio, and its result is marked
+ * `simulated` so nothing downstream can mistake it for analysis.
  */
 export class MockChantEvaluationService implements ChantEvaluationService {
   readonly simulated = true
 
-  evaluate(request: ChantEvaluationRequest): Promise<ChantEvaluationResult> {
+  evaluate(request: ChantEvaluationRequest): Promise<UnscoredChantEvaluation> {
     return Promise.resolve(
-      unavailableResult(
+      unscored(
         request,
         SIMULATED_EVALUATION_VERSION,
+        'simulated',
         'no audio analysis was performed',
-        true,
       ),
     )
   }
@@ -63,13 +47,13 @@ export class MockChantEvaluationService implements ChantEvaluationService {
 
 /** Placeholder for future privacy-preserving, on-device pitch analysis. */
 export class LocalPitchEvaluationService implements ChantEvaluationService {
-  evaluate(request: ChantEvaluationRequest): Promise<ChantEvaluationResult> {
+  evaluate(request: ChantEvaluationRequest): Promise<UnscoredChantEvaluation> {
     return Promise.resolve(
-      unavailableResult(
+      unscored(
         request,
-        'local-pitch-placeholder-v1',
+        LOCAL_PITCH_EVALUATION_VERSION,
+        'unavailable',
         'local pitch evaluation is not implemented',
-        false,
       ),
     )
   }
@@ -89,7 +73,7 @@ export class ChantEvaluationUnavailableError extends Error {
  * request so recordings can never leave the browser by accident.
  */
 export class ServerChantEvaluationService implements ChantEvaluationService {
-  evaluate(_request: ChantEvaluationRequest): Promise<ChantEvaluationResult> {
+  evaluate(_request: ChantEvaluationRequest): Promise<UnscoredChantEvaluation> {
     return Promise.reject(
       new ChantEvaluationUnavailableError(
         'Server Chant Coach is unavailable; no recording was uploaded.',

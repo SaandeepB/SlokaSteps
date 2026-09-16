@@ -3,13 +3,16 @@ import { Mic, Play, Square, Trash2 } from 'lucide-react'
 import { Button } from '../common/Button'
 import { useRecorder } from '../../hooks/useRecorder'
 import { useTranslation } from '../../hooks/useTranslation'
-import { getPronunciationService } from '../../services/pronunciation'
+import { getEvaluationService } from '../../services/pronunciation'
+import { isScoredEvaluation } from '../../types/chant'
 import type { TranslationKey } from '../../content/translations'
 import { useAppState } from '../../hooks/useAppState'
 
 export interface RecorderPanelProps {
   /** The line/sloka the child is chanting (for future evaluation only). */
   expectedText: string
+  /** Catalogue id of the sloka being practised, when the caller knows it. */
+  slokaId?: string
   /**
    * Called once the child has attempted a recording OR hit a microphone
    * problem — either way the lesson can continue.
@@ -23,7 +26,11 @@ export interface RecorderPanelProps {
  * requested only when the child presses Record. Audio never leaves the
  * device and is never persisted.
  */
-export function RecorderPanel({ expectedText, onAttempted }: RecorderPanelProps) {
+export function RecorderPanel({
+  expectedText,
+  slokaId,
+  onAttempted,
+}: RecorderPanelProps) {
   const { t } = useTranslation()
   const { state } = useAppState()
   const recorder = useRecorder()
@@ -50,9 +57,25 @@ export function RecorderPanel({ expectedText, onAttempted }: RecorderPanelProps)
   // Participation-only encouragement — never a pronunciation score.
   useEffect(() => {
     if (recorder.status === 'recorded' && recorder.recordingBlob) {
-      getPronunciationService()
-        .evaluate(recorder.recordingBlob, expectedText, 'sa')
-        .then((feedback) => setFeedbackKey(feedback.messageKey as TranslationKey))
+      getEvaluationService()
+        .evaluate({
+          recording: recorder.recordingBlob,
+          slokaId: slokaId ?? null,
+          referenceId: null,
+          expectedText,
+          language: 'sa-IN',
+          ageBand: state.profile?.ageBand ?? '7-8',
+          evaluationModes: [],
+        })
+        .then((result) => {
+          // A scored result must never be rendered as a participation message.
+          // Until a validated analyzer ships, this branch is unreachable.
+          setFeedbackKey(
+            isScoredEvaluation(result)
+              ? null
+              : (result.childMessageKey as TranslationKey),
+          )
+        })
         .catch(() => setFeedbackKey(null))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -395,7 +395,7 @@ Tailwind CSS v4 uses the official Vite plugin and the `@theme` block in
 - [Android migration roadmap](docs/ANDROID_MIGRATION_ROADMAP.md)
 - [Web deployment](docs/WEB_DEPLOYMENT.md)
 - [Content review status](CONTENT_REVIEW.md)
-- [Version 1 decisions](DECISIONS.md)
+- [Decisions](DECISIONS.md)
 - [Detailed privacy notes](PRIVACY_NOTES.md)
 - [Historical Version 1 QA report](QA_REPORT.md)
 

@@ -51,6 +51,7 @@ export function RepeatActivity({
       />
       <RecorderPanel
         expectedText={line.transliteration}
+        slokaId={slokaId}
         onAttempted={() => {
           setAttempted(true)
           onRecordingAttempted()

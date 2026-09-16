@@ -1,22 +1,26 @@
 import type {
-  PronunciationEvaluationService,
-  PronunciationFeedback,
-} from '../types'
+  ChantEvaluationRequest,
+  ChantEvaluationService,
+  UnscoredChantEvaluation,
+} from '../types/chant'
+
+export const PARTICIPATION_EVALUATION_VERSION = 'participation-only-v2'
 
 /**
- * Version 1 MOCK implementation — intentionally non-authoritative.
+ * The only evaluator wired into the learner experience.
  *
- * Sloka Steps must never invent pronunciation scores, percentages, or
- * "perfect pronunciation" claims. This mock only ever returns
- * participation-oriented encouragement, regardless of the audio content.
+ * Sloka Steps must never invent pronunciation scores, percentages, or "perfect
+ * pronunciation" claims. This service performs no analysis at all: it returns
+ * rotating encouragement regardless of what the child recorded, and its result
+ * type cannot express a score.
  *
- * FUTURE INTEGRATION POINT: a validated Sanskrit pronunciation service
- * (reviewed by qualified Sanskrit educators) could replace this class. It
- * would receive the audio blob and expected text, run on-device or with
- * explicit parental consent, and return real feedback. Until such a service
- * exists and is validated, keep feedback participation-only.
+ * FUTURE INTEGRATION POINT: a validated Sanskrit analyzer implements this same
+ * ChantEvaluationService interface and returns an AnalyzedChantEvaluation with
+ * per-segment detail. It would run on-device or with explicit, separately
+ * obtained parental consent. Until such a service exists and has been reviewed
+ * by qualified Sanskrit educators, this remains the registered implementation.
  */
-export class MockPronunciationEvaluation implements PronunciationEvaluationService {
+export class ParticipationEvaluationService implements ChantEvaluationService {
   private readonly messageKeys = [
     'feedbackGreatEffort',
     'feedbackNiceChanting',
@@ -26,24 +30,23 @@ export class MockPronunciationEvaluation implements PronunciationEvaluationServi
 
   private nextIndex = 0
 
-  evaluate(
-    _audioBlob: Blob,
-    _expectedText: string,
-    _language: string,
-  ): Promise<PronunciationFeedback> {
+  evaluate(request: ChantEvaluationRequest): Promise<UnscoredChantEvaluation> {
     // Rotate through encouragements so repeat attempts feel varied.
     const messageKey = this.messageKeys[this.nextIndex % this.messageKeys.length]
     this.nextIndex += 1
     return Promise.resolve({
-      kind: 'participation',
-      messageKey,
-      authoritative: false,
+      provenance: 'participation-only',
+      evaluationVersion: PARTICIPATION_EVALUATION_VERSION,
+      referenceId: request.referenceId,
+      childMessageKey: messageKey,
+      parentSummary:
+        'Participation only: no audio analysis was performed and no scores were produced.',
     })
   }
 }
 
-const mockEvaluation = new MockPronunciationEvaluation()
+const participationService = new ParticipationEvaluationService()
 
-export function getPronunciationService(): PronunciationEvaluationService {
-  return mockEvaluation
+export function getEvaluationService(): ChantEvaluationService {
+  return participationService
 }
