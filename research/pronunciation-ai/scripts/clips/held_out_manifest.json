@@ -1,0 +1,178 @@
+[
+  {
+    "clip_id": "heldout_00_dur2.0s",
+    "wav_path": "clips/held_out/heldout_00_dur2.0s.wav",
+    "text": "सञ्जय उवाच",
+    "duration_s": 1.96,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 0,
+    "orig_audio_path_field": "8223f94e1fa7.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_01_dur3.2s",
+    "wav_path": "clips/held_out/heldout_01_dur3.2s.wav",
+    "text": "होतारं रत्नधातमं",
+    "duration_s": 3.16,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 22,
+    "orig_audio_path_field": "0391389cd358.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_02_dur3.4s",
+    "wav_path": "clips/held_out/heldout_02_dur3.4s.wav",
+    "text": "गुरुर्ब्रह्मा गुरुर्विष्णुः",
+    "duration_s": 3.41,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 43,
+    "orig_audio_path_field": "4469d407e058.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_03_dur3.6s",
+    "wav_path": "clips/held_out/heldout_03_dur3.6s.wav",
+    "text": "मायुस्तस्य हिताहितं",
+    "duration_s": 3.58,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 65,
+    "orig_audio_path_field": "f24780849eca.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_04_dur3.8s",
+    "wav_path": "clips/held_out/heldout_04_dur3.8s.wav",
+    "text": "मानं च तच्च यत्रोक्त",
+    "duration_s": 3.84,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 87,
+    "orig_audio_path_field": "16adeeea2af5.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_05_dur3.9s",
+    "wav_path": "clips/held_out/heldout_05_dur3.9s.wav",
+    "text": "हिताहितं सुखं दुःख",
+    "duration_s": 3.93,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 109,
+    "orig_audio_path_field": "b9cf2465930f.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_06_dur4.2s",
+    "wav_path": "clips/held_out/heldout_06_dur4.2s.wav",
+    "text": "मानं च तच्च यत्रोक्त",
+    "duration_s": 4.18,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 130,
+    "orig_audio_path_field": "3dc09711bb75.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_07_dur4.5s",
+    "wav_path": "clips/held_out/heldout_07_dur4.5s.wav",
+    "text": "पठतो नास्ति मूर्खत्वं जपतो नास्ति पातकं",
+    "duration_s": 4.52,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 152,
+    "orig_audio_path_field": "5afd53db97d5.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_08_dur5.2s",
+    "wav_path": "clips/held_out/heldout_08_dur5.2s.wav",
+    "text": "गुरुः साक्षात् परं ब्रह्म",
+    "duration_s": 5.21,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 174,
+    "orig_audio_path_field": "36629e83a7c1.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_09_dur5.8s",
+    "wav_path": "clips/held_out/heldout_09_dur5.8s.wav",
+    "text": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजं",
+    "duration_s": 5.8,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 196,
+    "orig_audio_path_field": "d1263f6ed579.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_10_dur6.2s",
+    "wav_path": "clips/held_out/heldout_10_dur6.2s.wav",
+    "text": "जन्माद्यस्य यतो न्वयादितरतश्चार्थेष्वभिज्ञ स्वराट्",
+    "duration_s": 6.23,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 217,
+    "orig_audio_path_field": "fbd6763fe129.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_11_dur6.8s",
+    "wav_path": "clips/held_out/heldout_11_dur6.8s.wav",
+    "text": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजं होतारं रत्नधातमं",
+    "duration_s": 6.83,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 239,
+    "orig_audio_path_field": "a1096b4cf69e.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_12_dur8.0s",
+    "wav_path": "clips/held_out/heldout_12_dur8.0s.wav",
+    "text": "जन्माद्यस्य यतो न्वयादितरतश्चार्थेष्वभिज्ञ स्वराट्",
+    "duration_s": 8.02,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 261,
+    "orig_audio_path_field": "f1a2c5ab8be9.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_13_dur10.2s",
+    "wav_path": "clips/held_out/heldout_13_dur10.2s.wav",
+    "text": "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "duration_s": 10.24,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 283,
+    "orig_audio_path_field": "8c13fcde9484.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_14_dur13.8s",
+    "wav_path": "clips/held_out/heldout_14_dur13.8s.wav",
+    "text": "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "duration_s": 13.82,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 304,
+    "orig_audio_path_field": "8dbd4d504206.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  },
+  {
+    "clip_id": "heldout_15_dur24.1s",
+    "wav_path": "clips/held_out/heldout_15_dur24.1s.wav",
+    "text": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+    "duration_s": 24.15,
+    "source": "flywheel",
+    "sample_rate": 16000,
+    "orig_parquet_row": 326,
+    "orig_audio_path_field": "df613f757a4d.wav",
+    "provenance": "prathoshap/sushrota-sanskrit-asr-data, split=in_the_wild_test, CC BY 4.0, https://huggingface.co/datasets/prathoshap/sushrota-sanskrit-asr-data"
+  }
+]

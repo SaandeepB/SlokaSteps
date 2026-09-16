@@ -1,0 +1,513 @@
+{
+  "p4a": {
+    "grand_total": {
+      "correct": 220,
+      "incorrect": 6,
+      "unclear": 58
+    },
+    "proxy_false_positive_rate": 0.02112676056338028,
+    "abstain_rate": 0.20422535211267606,
+    "per_clip": [
+      {
+        "clip_id": "heldout_00_dur2.0s",
+        "correct": 5,
+        "incorrect": 0,
+        "unclear": 1,
+        "n_akshara": 6
+      },
+      {
+        "clip_id": "heldout_01_dur3.2s",
+        "correct": 8,
+        "incorrect": 0,
+        "unclear": 0,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_02_dur3.4s",
+        "correct": 6,
+        "incorrect": 0,
+        "unclear": 2,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_03_dur3.6s",
+        "correct": 5,
+        "incorrect": 0,
+        "unclear": 3,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_04_dur3.8s",
+        "correct": 6,
+        "incorrect": 0,
+        "unclear": 2,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_05_dur3.9s",
+        "correct": 7,
+        "incorrect": 0,
+        "unclear": 1,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_06_dur4.2s",
+        "correct": 5,
+        "incorrect": 0,
+        "unclear": 3,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_07_dur4.5s",
+        "correct": 13,
+        "incorrect": 1,
+        "unclear": 2,
+        "n_akshara": 16
+      },
+      {
+        "clip_id": "heldout_08_dur5.2s",
+        "correct": 6,
+        "incorrect": 0,
+        "unclear": 2,
+        "n_akshara": 8
+      },
+      {
+        "clip_id": "heldout_09_dur5.8s",
+        "correct": 12,
+        "incorrect": 1,
+        "unclear": 3,
+        "n_akshara": 16
+      },
+      {
+        "clip_id": "heldout_10_dur6.2s",
+        "correct": 11,
+        "incorrect": 0,
+        "unclear": 8,
+        "n_akshara": 19
+      },
+      {
+        "clip_id": "heldout_11_dur6.8s",
+        "correct": 22,
+        "incorrect": 1,
+        "unclear": 1,
+        "n_akshara": 24
+      },
+      {
+        "clip_id": "heldout_12_dur8.0s",
+        "correct": 9,
+        "incorrect": 0,
+        "unclear": 10,
+        "n_akshara": 19
+      },
+      {
+        "clip_id": "heldout_13_dur10.2s",
+        "correct": 32,
+        "incorrect": 0,
+        "unclear": 0,
+        "n_akshara": 32
+      },
+      {
+        "clip_id": "heldout_14_dur13.8s",
+        "correct": 19,
+        "incorrect": 0,
+        "unclear": 13,
+        "n_akshara": 32
+      },
+      {
+        "clip_id": "heldout_15_dur24.1s",
+        "correct": 54,
+        "incorrect": 3,
+        "unclear": 7,
+        "n_akshara": 64
+      }
+    ],
+    "incorrect_examples": [
+      {
+        "clip_id": "heldout_07_dur4.5s",
+        "index": 6,
+        "akshara": "र्ख",
+        "heard": [
+          "र्क",
+          "र्क",
+          "र्क",
+          "र्क"
+        ]
+      },
+      {
+        "clip_id": "heldout_09_dur5.8s",
+        "index": 14,
+        "akshara": "त्वि",
+        "heard": [
+          "द्वि",
+          "द्वि",
+          "द्वि",
+          "द्व्वि"
+        ]
+      },
+      {
+        "clip_id": "heldout_11_dur6.8s",
+        "index": 14,
+        "akshara": "त्वि",
+        "heard": [
+          "द्वि",
+          "द्वि",
+          "द्वि",
+          "द्व्वि"
+        ]
+      },
+      {
+        "clip_id": "heldout_15_dur24.1s",
+        "index": 25,
+        "akshara": "दा",
+        "heard": [
+          "-",
+          "दाात्",
+          "दाात्",
+          "दाात्"
+        ]
+      },
+      {
+        "clip_id": "heldout_15_dur24.1s",
+        "index": 26,
+        "akshara": "त्मा",
+        "heard": [
+          "दाात्",
+          "मा",
+          "मा",
+          "मा"
+        ]
+      },
+      {
+        "clip_id": "heldout_15_dur24.1s",
+        "index": 59,
+        "akshara": "मि",
+        "heard": [
+          "मिे",
+          "मिे",
+          "मिे",
+          "मिे"
+        ]
+      }
+    ]
+  },
+  "p4b": {
+    "corrupted_positions": {
+      "correct": 0,
+      "incorrect": 65,
+      "unclear": 7
+    },
+    "clean_positions": {
+      "correct": 161,
+      "incorrect": 7,
+      "unclear": 44
+    },
+    "caught_rate": 1.0,
+    "falsely_correct_rate": 0.0,
+    "clean_false_incorrect_rate": 0.0330188679245283,
+    "per_clip": [
+      {
+        "clip_id": "heldout_00_dur2.0s",
+        "n_akshara": 6,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 2,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 3,
+          "incorrect": 0,
+          "unclear": 1
+        }
+      },
+      {
+        "clip_id": "heldout_01_dur3.2s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 2,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 6,
+          "incorrect": 0,
+          "unclear": 0
+        }
+      },
+      {
+        "clip_id": "heldout_02_dur3.4s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 1,
+          "unclear": 1
+        },
+        "clean_positions_result": {
+          "correct": 5,
+          "incorrect": 0,
+          "unclear": 1
+        }
+      },
+      {
+        "clip_id": "heldout_03_dur3.6s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 2,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 4,
+          "incorrect": 0,
+          "unclear": 2
+        }
+      },
+      {
+        "clip_id": "heldout_04_dur3.8s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 2,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 4,
+          "incorrect": 0,
+          "unclear": 2
+        }
+      },
+      {
+        "clip_id": "heldout_05_dur3.9s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 2,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 5,
+          "incorrect": 0,
+          "unclear": 1
+        }
+      },
+      {
+        "clip_id": "heldout_06_dur4.2s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 2,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 3,
+          "incorrect": 0,
+          "unclear": 3
+        }
+      },
+      {
+        "clip_id": "heldout_07_dur4.5s",
+        "n_akshara": 16,
+        "n_corrupted": 4,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 4,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 9,
+          "incorrect": 1,
+          "unclear": 2
+        }
+      },
+      {
+        "clip_id": "heldout_08_dur5.2s",
+        "n_akshara": 8,
+        "n_corrupted": 2,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 1,
+          "unclear": 1
+        },
+        "clean_positions_result": {
+          "correct": 3,
+          "incorrect": 0,
+          "unclear": 3
+        }
+      },
+      {
+        "clip_id": "heldout_09_dur5.8s",
+        "n_akshara": 16,
+        "n_corrupted": 4,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 4,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 8,
+          "incorrect": 1,
+          "unclear": 3
+        }
+      },
+      {
+        "clip_id": "heldout_10_dur6.2s",
+        "n_akshara": 19,
+        "n_corrupted": 5,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 4,
+          "unclear": 1
+        },
+        "clean_positions_result": {
+          "correct": 8,
+          "incorrect": 0,
+          "unclear": 6
+        }
+      },
+      {
+        "clip_id": "heldout_11_dur6.8s",
+        "n_akshara": 24,
+        "n_corrupted": 6,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 6,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 15,
+          "incorrect": 2,
+          "unclear": 1
+        }
+      },
+      {
+        "clip_id": "heldout_12_dur8.0s",
+        "n_akshara": 19,
+        "n_corrupted": 5,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 3,
+          "unclear": 2
+        },
+        "clean_positions_result": {
+          "correct": 8,
+          "incorrect": 0,
+          "unclear": 6
+        }
+      },
+      {
+        "clip_id": "heldout_13_dur10.2s",
+        "n_akshara": 32,
+        "n_corrupted": 8,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 8,
+          "unclear": 0
+        },
+        "clean_positions_result": {
+          "correct": 24,
+          "incorrect": 0,
+          "unclear": 0
+        }
+      },
+      {
+        "clip_id": "heldout_14_dur13.8s",
+        "n_akshara": 32,
+        "n_corrupted": 8,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 7,
+          "unclear": 1
+        },
+        "clean_positions_result": {
+          "correct": 14,
+          "incorrect": 0,
+          "unclear": 10
+        }
+      },
+      {
+        "clip_id": "heldout_15_dur24.1s",
+        "n_akshara": 64,
+        "n_corrupted": 16,
+        "corrupted_positions_result": {
+          "correct": 0,
+          "incorrect": 15,
+          "unclear": 1
+        },
+        "clean_positions_result": {
+          "correct": 42,
+          "incorrect": 3,
+          "unclear": 3
+        }
+      }
+    ]
+  },
+  "p5": {
+    "silence_vs_saraswati": {
+      "decodes": [
+        "मेिःणसायः",
+        "मेिःणसायः",
+        "मेिःणसायः",
+        "मेिःणसायः"
+      ],
+      "tally": {
+        "correct": 0,
+        "incorrect": 4,
+        "unclear": 28
+      },
+      "n_akshara": 32
+    },
+    "noise_vs_saraswati": {
+      "decodes": [
+        "मधाः्मणस्स्याोायीः",
+        "मधाः्मणस्स्याोायीः",
+        "मधाः्मणस्स्याोायीः",
+        "मधाः्मणस्स्याोायीः"
+      ],
+      "tally": {
+        "correct": 2,
+        "incorrect": 4,
+        "unclear": 26
+      },
+      "n_akshara": 32
+    },
+    "wrong_sloka": {
+      "audio_clip": "heldout_13_dur10.2s",
+      "audio_true_text": "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+      "scored_against": "गुरुर्ब्रह्मा गुरुर्विष्णुर्गुरुर्देवो महेश्वरः ।गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः ॥",
+      "decodes": [
+        "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+        "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+        "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+        "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं"
+      ],
+      "tally": {
+        "correct": 0,
+        "incorrect": 32,
+        "unclear": 0
+      },
+      "n_akshara": 32
+    },
+    "truncated": {
+      "source_clip": "heldout_15_dur24.1s",
+      "kept_fraction": 0.15,
+      "decodes": [
+        "यदा यदा हि धर्मस्य ग्लानेत्",
+        "यदा यदा हि धर्मस्य ग्लानेत्",
+        "यदा यदा हि धर्मस्य  ग्लानेत्",
+        "यदा यदा हि धर्मस्य्य  ग्लानेत्"
+      ],
+      "tally": {
+        "correct": 8,
+        "incorrect": 1,
+        "unclear": 55
+      },
+      "n_akshara": 64
+    }
+  }
+}
