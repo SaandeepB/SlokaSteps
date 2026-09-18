@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Loader2, Mic, Play, Square, Trash2 } from 'lucide-react'
+import { Loader2, Mic, Square, Trash2 } from 'lucide-react'
 import { Button } from '../common/Button'
 import { ChantFeedback } from './ChantFeedback'
 import { useRecorder } from '../../hooks/useRecorder'
@@ -27,13 +27,12 @@ export interface RecorderPanelProps {
 }
 
 /**
- * Start/stop recording with elapsed time, immediate in-session playback,
- * delete-and-retry, and feedback. The microphone is requested only when the
- * child presses Record. Audio never leaves the device and is never
- * persisted. Feedback is participation-only unless the parent-enabled
- * on-device Chant Coach is ready, in which case its result renders with
- * full provenance labelling — and evaluation problems of any kind fall back
- * to gentle notices, never blocking the lesson.
+ * Start/stop recording with elapsed time, immediate in-session playback via a
+ * standard audio player, delete-and-retry, and feedback. The microphone is
+ * requested only when the child presses Record. Audio never leaves the device
+ * and is never persisted. Feedback is participation-only unless the
+ * parent-enabled on-device Chant Coach is ready; evaluation problems of any
+ * kind fall back to gentle notices and never block the lesson.
  */
 export function RecorderPanel({
   expectedText,
@@ -44,12 +43,10 @@ export function RecorderPanel({
   const { t } = useTranslation()
   const { state } = useAppState()
   const recorder = useRecorder()
-  const [isPlayingBack, setIsPlayingBack] = useState(false)
   const [evaluating, setEvaluating] = useState(false)
   const [evaluation, setEvaluation] = useState<ChantEvaluationResult | null>(
     null,
   )
-  const playbackRef = useRef<HTMLAudioElement | null>(null)
   const attemptNotified = useRef(false)
   const mountedRef = useRef(true)
   const evaluationToken = useRef(0)
@@ -109,31 +106,7 @@ export function RecorderPanel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recorder.status, recorder.recordingBlob])
 
-  useEffect(() => {
-    return () => {
-      playbackRef.current?.pause()
-      playbackRef.current = null
-    }
-  }, [])
-
-  const playRecording = () => {
-    if (!recorder.recordingUrl || isPlayingBack) return
-    const audio = new Audio(recorder.recordingUrl)
-    playbackRef.current = audio
-    setIsPlayingBack(true)
-    audio.onended = () => setIsPlayingBack(false)
-    audio.onerror = () => setIsPlayingBack(false)
-    audio.play().catch(() => setIsPlayingBack(false))
-  }
-
-  const stopPlayback = () => {
-    playbackRef.current?.pause()
-    playbackRef.current = null
-    setIsPlayingBack(false)
-  }
-
   const deleteAndRetry = () => {
-    stopPlayback()
     evaluationToken.current += 1
     setEvaluating(false)
     setEvaluation(null)
@@ -210,6 +183,25 @@ export function RecorderPanel({
               : ''}
           </p>
 
+          {/* A standard, visible audio player: the child taps play and hears
+              their own recording. Native controls are used deliberately here
+              (over a custom button) so playback is always operable. */}
+          {recorder.recordingUrl && (
+            <div className="flex flex-col gap-1">
+              <span className="text-sm font-semibold text-ink-700">
+                {t('playRecording')}
+              </span>
+              <audio
+                key={recorder.recordingUrl}
+                src={recorder.recordingUrl}
+                controls
+                preload="metadata"
+                className="w-full max-w-md"
+                aria-label={t('playRecording')}
+              />
+            </div>
+          )}
+
           {evaluating && (
             <p
               role="status"
@@ -224,23 +216,10 @@ export function RecorderPanel({
             <ChantFeedback result={evaluation} />
           )}
 
-          <div className="flex flex-wrap gap-3">
-            {isPlayingBack ? (
-              <Button variant="secondary" onClick={stopPlayback}>
-                <Square size={18} aria-hidden="true" />
-                {t('stop')}
-              </Button>
-            ) : (
-              <Button onClick={playRecording}>
-                <Play size={20} aria-hidden="true" />
-                {t('playRecording')}
-              </Button>
-            )}
-            <Button variant="secondary" onClick={deleteAndRetry}>
-              <Trash2 size={18} aria-hidden="true" />
-              {t('deleteRecording')}
-            </Button>
-          </div>
+          <Button variant="secondary" onClick={deleteAndRetry} className="self-start">
+            <Trash2 size={18} aria-hidden="true" />
+            {t('deleteRecording')}
+          </Button>
         </div>
       )}
 

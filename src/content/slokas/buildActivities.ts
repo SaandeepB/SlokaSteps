@@ -13,9 +13,14 @@ export interface StandardActivityOptions {
 
 /**
  * Builds the standard lesson flow used by every fully interactive lesson:
- * introduction → (listen + repeat per line) → meaning → match → fill-blank →
+ * introduction → (listen + repeat per line) → match → fill-blank →
  * arrange-words → full chant → completion. Longer slokas automatically get
  * more listen/repeat steps.
+ *
+ * The meaning is intentionally NOT a gated step: it is already presented on
+ * the lesson overview before the child starts and is woven into the match
+ * activity, so forcing a separate "read the meaning, press Continue" screen
+ * added friction without adding learning.
  */
 export function buildStandardActivities(
   options: StandardActivityOptions,
@@ -38,7 +43,6 @@ export function buildStandardActivities(
     })
   })
 
-  activities.push({ id: `${slokaId}-meaning`, type: 'meaning' })
   activities.push({
     id: `${slokaId}-match`,
     type: 'match',

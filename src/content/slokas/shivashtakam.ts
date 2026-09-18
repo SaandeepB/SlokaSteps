@@ -82,8 +82,9 @@ const lines: SlokaLine[] = [
 
 /**
  * An ashtakam is long, so the lesson flow is custom: introduction, then
- * listen + repeat per verse, then the meaning, one full chant, completion —
- * no match/fill/arrange puzzles, which do not fit nine long verses.
+ * listen + repeat per verse, one full chant, completion — no match/fill/
+ * arrange puzzles, which do not fit nine long verses. As with every lesson,
+ * the meaning is on the overview, not a forced step.
  */
 function buildAshtakamActivities(): LessonActivity[] {
   const activities: LessonActivity[] = [{ id: `${id}-intro`, type: 'introduction' }]
@@ -99,7 +100,6 @@ function buildAshtakamActivities(): LessonActivity[] {
       lineIndex: index,
     })
   })
-  activities.push({ id: `${id}-meaning`, type: 'meaning' })
   activities.push({ id: `${id}-chant`, type: 'fullChant' })
   activities.push({ id: `${id}-done`, type: 'completion' })
   return activities
