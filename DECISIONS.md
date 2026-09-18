@@ -188,3 +188,35 @@ validation plan's stage-1–2 gates. Decisions taken:
     record.** Nothing persists per-akṣara scores against a child profile
     (`FUTURE_ROADMAP` #4 / the DPDP "profiling" question is untouched):
     compute-and-show-once only, and rewards stay independent of the outcome.
+
+## Graded Chant Test — self-referenced, gates completion (2026-09-18)
+
+A separate feature from the ASR Chant Coach above, added at the product owner's
+request for a real graded test rather than unconditional completion.
+
+15. **Grading is audio-to-audio against the learner's OWN reference, not a
+    teacher recording.** Measured first: cross-speaker spectral matching
+    overlaps (a different recitation can outscore a correct one across voices —
+    `research/pronunciation-ai/test_audio_similarity.py`), so grading a child
+    against an adult teacher would penalise the voice, not the pronunciation.
+    Same-speaker retakes separate cleanly (0.81–0.92 vs ≤0.58; a 0.64 bar gives
+    0% false-reject / 0% false-accept on the probe — `test_self_reference.py`).
+    So the learner records their own reference; attempts are graded against it.
+16. **Scorer needs no model.** MFCC+CMVN+DTW over the mel frontend, using
+    committed licence-free mel constants (a standard librosa filterbank + hann
+    window, not the Su-śrotā weights). Ported faithfully from Python and held to
+    it by committed fixtures (`chantSimilarity`, `model/similarityParity`).
+17. **This deliberately reverses "recording never blocks a lesson" — for the
+    Chant Test step only, and never on a technical fault.** The final full-chant
+    step gates completion on passing, and stars come from the grade
+    (`COMPLETE_LESSON.testStars`). But a microphone that is off, unsupported, or
+    failing always unlocks finishing (ungraded), so the accessibility guarantee
+    holds: only a real low-similarity *result* gates, never a tech problem.
+    Retries are unlimited. The first take saves the reference (a baseline,
+    honestly not a grade), so it never shows a fake 100%.
+18. **References are stored on-device (IndexedDB), deletable, never uploaded.**
+    They are the learner's own voice recorded deliberately as a reference — a
+    different category from captured child practice audio — and exist only to
+    grade the learner against themselves. Self-reference measures consistency,
+    not authoritative correctness; it is honestly framed as such and is not a
+    qualified-teacher standard.
