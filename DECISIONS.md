@@ -144,3 +144,47 @@ each lives in `research/pronunciation-ai/`.
    benchmark, and a JS/WASM mel-feature extractor, because the raw-audio
    preprocessor cannot export (`torch.stft` complex-type limitation).
    See `research/pronunciation-ai/11`.
+
+## On-device Chant Coach — shipped to internal testing (2026-09-18)
+
+The two D2 unknowns above are now resolved, and the analyzer ships behind the
+validation plan's stage-1–2 gates. Decisions taken:
+
+9. **D2 resolved to on-device (c), fp16, WebGPU with wasm fallback.** The two
+   open tests passed: the mel preprocessor was ported to TypeScript and holds
+   to the checkpoint's own eval-mode output on real audio
+   (`src/test/chantFrontend.test.ts`), and the fp16 ONNX graph runs in the
+   browser via `onnxruntime-web` in a dedicated worker. Verified end to end in
+   Edge/WebGPU on real held-out audio: JS features → ONNX → JS decode reproduce
+   the Python pipeline's decode strings on every non-degenerate clip
+   (`src/test/model/chantModelParity.test.ts`, 84/84 variants; digital silence
+   excepted — its logits sit at the numeric noise floor where the decode string
+   is ORT-version-dependent, so it is asserted on its safety property instead).
+   int8 stays rejected (accuracy and speed both worse, per `11`). No backend was
+   added; audio never leaves the device; `allowModelTraining` stays `false`.
+10. **Weights are provisioned, never bundled.** The Su-śrotā checkpoint has no
+    explicit licence grant (`research/pronunciation-ai/06`), so the ~235 MB of
+    assets live in git-ignored `models-local/chant/`, are served by a vite
+    middleware in dev/preview, and are deployed separately in production
+    (`docs/WEB_DEPLOYMENT.md`). Absent assets degrade to participation-only.
+11. **D4 (adopt the interface changes) — yes, already done.** The unified
+    `ChantEvaluationService` and the `verified` provenance were the contract the
+    analyzer targets. It registers into a single scored slot at runtime; the
+    default remains `ParticipationEvaluationService`, and clearing the slot
+    restores it everywhere at once.
+12. **D5 (child never sees "incorrect") — upheld in the UI.** `ChantFeedback`
+    renders a deliberately two-state child surface: `matched` vs. a gentle
+    "keep practicing" that folds in BOTH `deviation` and `unclear`. A false
+    positive can therefore only ever under-claim, never accuse. The precise
+    matched/deviation/unclear breakdown stays in the result for the parent
+    summary and the dev Chant Lab.
+13. **D7 (coverage gate before per-akṣara scoring) — built and gating.**
+    `coverage.ts` runs before any segment verdict and refuses wrong-text,
+    silence, and noise (the measured hard negatives) with an enumerated
+    unavailable reason. Its thresholds are provisional, calibrated only against
+    the adult fixture set, and pinned by `src/test/chantCoverage.test.ts`; they
+    must be re-derived against a labelled child corpus before stage 3.
+14. **The chant check is a per-recording convenience, not a longitudinal
+    record.** Nothing persists per-akṣara scores against a child profile
+    (`FUTURE_ROADMAP` #4 / the DPDP "profiling" question is untouched):
+    compute-and-show-once only, and rewards stay independent of the outcome.

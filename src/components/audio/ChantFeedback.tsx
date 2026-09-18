@@ -1,4 +1,4 @@
-import { CheckCircle2, CircleHelp, Ear, ShieldCheck, Sparkles } from 'lucide-react'
+import { CheckCircle2, Ear, ShieldCheck, Sparkles } from 'lucide-react'
 import { useTranslation } from '../../hooks/useTranslation'
 import {
   isScoredEvaluation,
@@ -47,29 +47,22 @@ export function ChantFeedback({ result }: ChantFeedbackProps) {
 
       <p className="text-lg font-semibold text-teal-800">{result.childSummary}</p>
 
-      <ul
-        aria-label={t('chantCoachTitle')}
-        className="flex flex-wrap gap-2"
-      >
+      {/*
+       * Child surface is deliberately two-state (DECISIONS.md, evaluation
+       * contract, D5): a child is never shown a per-akṣara "you got this
+       * wrong". A `deviation` is folded into the same gentle "keep practicing"
+       * chip as an abstention, so a false positive (measured ~2.1% on correct
+       * audio) can only ever under-claim, never accuse. The precise
+       * matched/deviation/unclear breakdown stays in the result for the parent
+       * summary and the dev Chant Lab.
+       */}
+      <ul aria-label={t('chantCoachTitle')} className="flex flex-wrap gap-2">
         {result.segments.map((segment) => {
-          const state =
-            segment.status === 'unclear'
-              ? 'unclear'
-              : segment.outcome === 'matched'
-                ? 'matched'
-                : 'practice'
-          const styles =
-            state === 'matched'
-              ? 'border-leaf-500 bg-leaf-100 text-leaf-700'
-              : state === 'practice'
-                ? 'border-saffron-500 bg-saffron-100 text-saffron-700'
-                : 'border-cream-300 bg-cream-100 text-ink-500'
-          const legendKey: TranslationKey =
-            state === 'matched'
-              ? 'chantCoachMatchedLegend'
-              : state === 'practice'
-                ? 'chantCoachPracticeLegend'
-                : 'chantCoachUnclearLegend'
+          const matched =
+            segment.status === 'assessed' && segment.outcome === 'matched'
+          const styles = matched
+            ? 'border-leaf-500 bg-leaf-100 text-leaf-700'
+            : 'border-cream-300 bg-cream-100 text-ink-500'
           return (
             <li
               key={segment.index}
@@ -79,14 +72,12 @@ export function ChantFeedback({ result }: ChantFeedbackProps) {
                 {segment.label}
               </span>
               <span className="inline-flex items-center gap-1 text-[11px] font-semibold">
-                {state === 'matched' && (
+                {matched ? (
                   <CheckCircle2 size={12} aria-hidden="true" />
+                ) : (
+                  <Ear size={12} aria-hidden="true" />
                 )}
-                {state === 'practice' && <Ear size={12} aria-hidden="true" />}
-                {state === 'unclear' && (
-                  <CircleHelp size={12} aria-hidden="true" />
-                )}
-                {t(legendKey)}
+                {t(matched ? 'chantCoachMatchedLegend' : 'chantCoachPracticeLegend')}
               </span>
             </li>
           )

@@ -1,3 +1,33 @@
+# QA_REPORT.md — Sloka Steps
+
+> **2026-09-18 addendum — on-device Chant Coach + two new sloka paths.**
+> `npm run check` passes end-to-end: `tsc -b` 0 errors, ESLint 0/0, **222
+> tests + 1 skipped** across 29 files, production build clean. New coverage:
+> the chant analyzer's text/frontend/decode/scoring layers are held
+> byte-for-byte to the research checkpoint by committed fixtures; the coverage
+> gate is calibrated and pinned against the measured hard negatives; the
+> evaluation service's fail-closed reasons and structural honesty are tested
+> with injected fakes; the child feedback surface is tested for the two-state
+> (never-"wrong") rule.
+>
+> **This build was driven in a real browser** (Edge, headless, WebGPU) end to
+> end: first-run setup → parent gate → enable the on-device chant check → the
+> ~235 MB model downloads, caches, and builds a WebGPU session (status
+> "ready · webgpu") → Chant Lab analyzes a real held-out Guru Brahma recitation
+> against its own text (a `verified` result with per-akṣara evidence) and
+> against a *different* sloka's text (the coverage gate refuses with
+> `expected-text-not-heard`, no false per-syllable verdicts) → the guided
+> line-by-line Chant Coach page renders. The `chantModelParity` suite confirms
+> the in-browser numerics match the Python pipeline (84/84 decode variants).
+>
+> Not done, and not claimed (reserved for people by
+> `docs/CHANT_COACH_VALIDATION_PLAN.md`): educator-defined acceptance criteria,
+> reviewed reference recordings, a consented child corpus, blind expert ground
+> truth, subgroup validation, and legal review. The analyzer is in the plan's
+> internal-testing stage, off by default, labelled "in family testing".
+
+---
+
 # QA_REPORT.md — Sloka Steps Version 1
 
 Validation performed on 2026-07-15 (Windows 11, Node v22.21.0, npm 10.9.4).

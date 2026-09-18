@@ -83,6 +83,11 @@ export default defineConfig(({ mode }) => {
   return {
     base: normalizeBasePath(environment.VITE_BASE_PATH),
     plugins: [react(), tailwindcss(), chantModelAssetsPlugin()],
+    // onnxruntime-web is imported only inside the chant worker; letting the
+    // dev optimizer discover it mid-flight triggers a full page reload that
+    // kills the worker during model preparation. It ships as native ESM, so
+    // serve it unbundled instead.
+    optimizeDeps: { exclude: ['onnxruntime-web'] },
     server: { headers: ISOLATION_HEADERS },
     preview: { headers: ISOLATION_HEADERS },
     test: {

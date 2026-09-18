@@ -21,8 +21,11 @@ Legend: ⏳ prototype (needs qualified review) · — not present in V1
 | 4 | Tvameva Mata Cha Pita Tvameva | ⏳ | ⏳ | ⏳ | ⏳ | — | — | — |
 | 5 | Karagre Vasate Lakshmi | ⏳ | ⏳ | ⏳ | ⏳ | — | — | — |
 | 6 | Shubham Karoti Kalyanam | ⏳ | ⏳ | ⏳ | ⏳ | — | — | — |
-| 7 | Asato Ma Sadgamaya (coming soon) | ⏳ | ⏳ | ⏳ | — | — | — | — |
-| 8 | Sarve Bhavantu Sukhinah (coming soon) | ⏳ | ⏳ | ⏳ | — | — | — | — |
+| 7 | Lokah Samastah | ⏳ | ⏳ | ⏳ | ⏳ | — | — | — |
+| 8 | Shuklam Baradharam | ⏳ | ⏳ | ⏳ | ⏳ | — | — | — |
+| 9 | Shivashtakam | ⏳ | ⏳ | ⏳ | ⏳ | — | — | — |
+| 10 | Asato Ma Sadgamaya (coming soon) | ⏳ | ⏳ | ⏳ | — | — | — | — |
+| 11 | Sarve Bhavantu Sukhinah (coming soon) | ⏳ | ⏳ | ⏳ | — | — | — | — |
 
 ## Notes, normalizations, and known variations
 
@@ -44,7 +47,35 @@ Legend: ⏳ prototype (needs qualified review) · — not present in V1
     "दीपज्योतिर्नमोऽस्तुते" (joined form — the form supplied was kept).
   - *Asato Ma*: "मृत्योर्मा अमृतं गमय" is often printed with sandhi as
     "मृत्योर्माऽमृतं गमय".
+  - *Shuklam Baradharam* (added 2026-09-18): sourced from two agreeing
+    published renderings (greenmesg.org, templepurohit.com). Often chanted
+    with a leading "ॐ", omitted here to match the other lessons. Read as
+    praising Vishnu in Vaishnava tradition and Ganesha in many households; the
+    meaning text names both without ruling. Full source list and variant notes
+    live in the sloka's `editorial` metadata.
+  - *Shivashtakam* ("Prabhum Prananatham", added 2026-09-18): a nine-verse
+    stotra. Base edition is drikpanchang.com's rendering (mid-word typesetting
+    spaces joined), cross-checked against shrinathdham.com; sanskritdocuments.org
+    was consulted but not copied (its edition carries reuse restrictions). Real
+    inter-edition variants — गणेशादिपालम्/गणेशाधिपालम्, महामोहमारं/महामोहहारं,
+    वटाधो/तटाधो, बलीवर्धमानं/बलीवर्दयानं, and the southern sandhi doublings of the
+    phala verse — are enumerated in the sloka's `editorial.variationNotes`. None
+    were corrected unilaterally; a qualified reviewer should choose the edition.
   These are recorded for reviewers; none were "corrected" unilaterally.
+
+## On-device Chant Coach and content (added 2026-09-18)
+
+The on-device chant check compares a recording against the sloka's **Devanagari
+reference text**, which is the same prototype content flagged above. Two
+consequences for reviewers:
+
+- The check is only as correct as the reference text. A text a reviewer later
+  revises changes what the coach treats as "matched"; the analyzer holds no
+  independent authority over pronunciation.
+- The evaluation text-normaliser drops the danda, avagraha, om, and Vedic
+  accent marks and folds word-final म् to anusvāra before comparison
+  (`services/chantAnalysis/devanagariText.ts`). This is for robustness of the
+  akṣara comparison only and never alters the displayed content.
 - **Line meanings are simplified paraphrases for ages 4–10**, written with
   respectful, non-exclusionary framing ("This sloka expresses…", "Many
   families chant…"). They are not literal word-by-word translations.
