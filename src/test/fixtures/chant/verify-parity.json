@@ -1,0 +1,9837 @@
+{
+ "_doc": "ONNX-fp16 decode variants (blank penalties [0.0, 2.0, 4.0, 6.0]) and the exact score_against_text labels for them. The TS port must reproduce every label and every evidence count. Derived from the Su-srota Sanskrit ASR dataset (prathoshap/sushrota-sanskrit-asr-data, in_the_wild_test split), licensed CC BY 4.0.",
+ "blankPenalties": [
+  0.0,
+  2.0,
+  4.0,
+  6.0
+ ],
+ "entries": [
+  {
+   "clipId": "heldout_00_dur2.0s",
+   "kind": "correct-pair",
+   "expectedText": "सञ्जय उवाच",
+   "decodes": [
+    "सञ्जयवाच",
+    "सञ्जयवाच",
+    "सञ्जय उवाच",
+    "सञ्जय उवाच"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "स",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स",
+       "स",
+       "स",
+       "स"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "ञ्ज",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ञ्ज",
+       "ञ्ज",
+       "ञ्ज",
+       "ञ्ज"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "उ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "-",
+       "-",
+       "उ",
+       "उ"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "वा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "वा",
+       "वा",
+       "वा",
+       "वा"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "च",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "च",
+       "च",
+       "च",
+       "च"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_01_dur3.2s",
+   "kind": "correct-pair",
+   "expectedText": "होतारं रत्नधातमं",
+   "decodes": [
+    "होतारं रत्नधातमं",
+    "होतारं रत्नधातमं",
+    "होतारं रत्नधातमं",
+    "होतारं रत्नधातमं"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "हो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हो",
+       "हो",
+       "हो",
+       "हो"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "ता",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ता",
+       "ता",
+       "ता",
+       "ता"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "रं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रं",
+       "रं",
+       "रं",
+       "रं"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "त्न",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्न",
+       "त्न",
+       "त्न",
+       "त्न"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "धा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "धा",
+       "धा",
+       "धा",
+       "धा"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "मं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मं",
+       "मं",
+       "मं",
+       "मं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_02_dur3.4s",
+   "kind": "correct-pair",
+   "expectedText": "गुरुर्ब्रह्मा गुरुर्विष्णुः",
+   "decodes": [
+    "गुरुर् ब्रह्मा गुरुर्विष्णु",
+    "गुरुर् ब्रह्मा गुरुर्विष्णुः",
+    "गुरुर् ब्रह्मा गुरुर्र्विष्णुः",
+    "गुरुर् ब्रह्मा गुरुर्र्विष्णुः"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "गु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "गु",
+       "गु",
+       "गु",
+       "गु"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "रु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रु",
+       "रु",
+       "रु",
+       "रु"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "र्ब्र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्ब्र",
+       "र्ब्र",
+       "र्ब्र",
+       "र्ब्र"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "ह्मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ह्मा",
+       "ह्मा",
+       "ह्मा",
+       "ह्मा"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "गु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "गु",
+       "गु",
+       "गु",
+       "गु"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "रु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रु",
+       "रु",
+       "रु",
+       "रु"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्वि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "र्वि",
+       "र्वि",
+       "र्र्वि",
+       "र्र्वि"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "ष्णुः",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ष्णु",
+       "ष्णुः",
+       "ष्णुः",
+       "ष्णुः"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_03_dur3.6s",
+   "kind": "correct-pair",
+   "expectedText": "मायुस्तस्य हिताहितं",
+   "decodes": [
+    "मायस्तस्य हिताहितं",
+    "मायुस्तस्य हिताहितं",
+    "मायुस्तस्य हिताहितं",
+    "मायुस्स्तस्य हितााहितं"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मा",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "य",
+       "यु",
+       "यु",
+       "यु"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "स्त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "स्त",
+       "स्त",
+       "स्त",
+       "स्स्त"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "स्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ता",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ता",
+       "ता",
+       "ता",
+       "ताा"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "तं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_04_dur3.8s",
+   "kind": "correct-pair",
+   "expectedText": "मानं च तच्च यत्रोक्त",
+   "decodes": [
+    "मानं च तच्च यत्रोक्त",
+    "मानं च तच्च यत्रोक्ता",
+    "वि मानं च तच्च यत्रोक्ता",
+    "वि मानं च तच्चि यत्रोक्ता"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मा",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "नं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "नं",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "च",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "च",
+       "च",
+       "च",
+       "च"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "च्च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "च्च",
+       "च्च",
+       "च्च",
+       "च्चि"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "त्रो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्रो",
+       "त्रो",
+       "त्रो",
+       "त्रो"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "क्त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "क्त",
+       "क्ता",
+       "क्ता",
+       "क्ता"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_05_dur3.9s",
+   "kind": "correct-pair",
+   "expectedText": "हिताहितं सुखं दुःख",
+   "decodes": [
+    "हिताहितं सुखं दुःख",
+    "हिताहितं सुखं दुःख",
+    "हिताहितं सुखं दुःख",
+    "हिताहितं सुखं दुःखा"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "ता",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ता",
+       "ता",
+       "ता",
+       "ता"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "तं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "सु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "खं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "खं",
+       "खं",
+       "खं",
+       "खं"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "दुः",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दुः",
+       "दुः",
+       "दुः",
+       "दुः"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "ख",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ख",
+       "ख",
+       "ख",
+       "खा"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_06_dur4.2s",
+   "kind": "correct-pair",
+   "expectedText": "मानं च तच्च यत्रोक्त",
+   "decodes": [
+    "मानं च तच्च यत्रोक्त",
+    "मानं च तच्च यत्रोक्तौ",
+    "मानं च तच्चि यत्रोक्तौ",
+    "मानं च तच्चि य्यत्रोक्तौ"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मा",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "नं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "नं",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "च",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "च",
+       "च",
+       "च",
+       "च"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "च्च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "च्च",
+       "च्च",
+       "च्चि",
+       "च्चि"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य्य"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "त्रो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्रो",
+       "त्रो",
+       "त्रो",
+       "त्रो"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "क्त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "क्त",
+       "क्तौ",
+       "क्तौ",
+       "क्तौ"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_07_dur4.5s",
+   "kind": "correct-pair",
+   "expectedText": "पठतो नास्ति मूर्खत्वं जपतो नास्ति पातकं",
+   "decodes": [
+    "पठतो नास्ति मूर्कत्वं जपतो नास्ति पातकम्",
+    "पठुतो नास्ति मूर्कत्वं जपतो नास्ति पातकम्",
+    "पठुतो नास्ति मूर्कत्वं जपुतो नास्ति पातकम्",
+    "पठुतो नास्ति मूर्कत्वं जपुतो नास्ति पातकम्"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "ठ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "ठ",
+       "ठु",
+       "ठु",
+       "ठु"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "तो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तो",
+       "तो",
+       "तो",
+       "तो"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "ना",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ना",
+       "ना",
+       "ना",
+       "ना"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "स्ति",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्ति",
+       "स्ति",
+       "स्ति",
+       "स्ति"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "मू",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मू",
+       "मू",
+       "मू",
+       "मू"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्ख",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्क",
+       "र्क",
+       "र्क",
+       "र्क"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "त्वं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्वं",
+       "त्वं",
+       "त्वं",
+       "त्वं"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ज",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ज",
+       "ज",
+       "ज",
+       "ज"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "प",
+       "प",
+       "पु",
+       "पु"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "तो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तो",
+       "तो",
+       "तो",
+       "तो"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "ना",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ना",
+       "ना",
+       "ना",
+       "ना"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "स्ति",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्ति",
+       "स्ति",
+       "स्ति",
+       "स्ति"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "पा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "पा",
+       "पा",
+       "पा",
+       "पा"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "कं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "कं",
+       "कं",
+       "कं",
+       "कं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_08_dur5.2s",
+   "kind": "correct-pair",
+   "expectedText": "गुरुः साक्षात् परं ब्रह्म",
+   "decodes": [
+    "गुरुः साक्षात् परं ब्रह्म",
+    "गुरुः साक्षात् परं ब्रह्म",
+    "गुरुः साक्षात् परं ब्रह्म",
+    "गुरुः साक्षात् पररं ब्रह््म"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "गु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "गु",
+       "गु",
+       "गु",
+       "गु"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "रुः",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रुः",
+       "रुः",
+       "रुः",
+       "रुः"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "सा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सा",
+       "सा",
+       "सा",
+       "सा"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "क्षा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "क्षा",
+       "क्षा",
+       "क्षा",
+       "क्षा"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "त्प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्प",
+       "त्प",
+       "त्प",
+       "त्प"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "रं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रं",
+       "रं",
+       "रं",
+       "रं"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "ब्र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ब्र",
+       "ब्र",
+       "ब्र",
+       "ब्रह्"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "ह्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ह्म",
+       "ह्म",
+       "ह्म",
+       "म"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_09_dur5.8s",
+   "kind": "correct-pair",
+   "expectedText": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजं",
+   "decodes": [
+    "अग्निमळे पुरोहितं यज्ञस्य देवमृद्विजं",
+    "अग्निमीेळे पुरोहितं यज्ञस्य देवमृद्विजं",
+    "अग्निमीेळे पुरोहितं यज्ञस्य देवमृद्विजं",
+    "अग्निमीेळवे पुरोहितं यज्ञ्यस्य देवमृद्व्विजं"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "अ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "अ",
+       "अ",
+       "अ",
+       "अ"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "ग्नि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ग्नि",
+       "ग्नि",
+       "ग्नि",
+       "ग्नि"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "मी",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "म",
+       "मीे",
+       "मीे",
+       "ळ"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "ळे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ळे",
+       "ळे",
+       "ळे",
+       "वे"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "पु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "पु",
+       "पु",
+       "पु",
+       "पु"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "रो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रो",
+       "रो",
+       "रो",
+       "रो"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "तं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "ज्ञ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ज्ञ",
+       "ज्ञ",
+       "ज्ञ",
+       "ज्ञ्य"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "स्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "मृ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मृ",
+       "मृ",
+       "मृ",
+       "मृ"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "त्वि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "द्वि",
+       "द्वि",
+       "द्वि",
+       "द्व्वि"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "जं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "जं",
+       "जं",
+       "जं",
+       "जं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_10_dur6.2s",
+   "kind": "correct-pair",
+   "expectedText": "जन्माद्यस्य यतो न्वयादितरतश्चार्थेष्वभिज्ञ स्वराट्",
+   "decodes": [
+    "जन्माद्यस्य यतो न्वयादितरतश्चार्थेष्वभिज्ञस्वराट्",
+    "जन्माद्य्यस्य यतो न्वयादितरतश्चार्थेष्वभििज्ञस्वराट्",
+    "जन्माद्य्यस्य यतो न्वयादितरतश्श्चार्थेष्वभििजज्ञःस्वराट्",
+    "जन्माद्य्यस्य यतोू  न््वयादितरतश्श्चार्थेष््वभििज्ज्ञ्यःस्व राट्"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "ज",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ज",
+       "ज",
+       "ज",
+       "ज"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "न्मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न्मा",
+       "न्मा",
+       "न्मा",
+       "न्मा"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "द्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "द्य",
+       "द्य्य",
+       "द्य्य",
+       "द्य्य"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "स्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "तो",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "तो",
+       "तो",
+       "तो",
+       "तोून्"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "न्व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "न्व",
+       "न्व",
+       "न्व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "या",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "या",
+       "या",
+       "या",
+       "या"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "दि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दि",
+       "दि",
+       "दि",
+       "दि"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "श्चा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "श्चा",
+       "श्चा",
+       "श्श्चा",
+       "श्श्चा"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "र्थे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "र्थे",
+       "र्थे",
+       "र्थे",
+       "र्थेष्"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "ष्व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ष्व",
+       "ष्व",
+       "ष्व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "भि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "भि",
+       "भिि",
+       "ज",
+       "भिि"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "ज्ञ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "ज्ञ",
+       "ज्ञ",
+       "ज्ञः",
+       "ज्ज्ञ्यः"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "स्व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्व",
+       "स्व",
+       "स्व",
+       "स्व"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "राट्",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "राट्",
+       "राट्",
+       "राट्",
+       "राट्"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_11_dur6.8s",
+   "kind": "correct-pair",
+   "expectedText": "अग्निमीळे पुरोहितं यज्ञस्य देवमृत्विजं होतारं रत्नधातमं",
+   "decodes": [
+    "अग्निमीळे पुरोहितं यज्ञस्य देवमृद्विजं होतारं रत्नधातमम्",
+    "अग्निमीळे पुरोहितं यज्ञस्य देवमृद्विजं होतारं रत्नधातमम्",
+    "अग्निमीळे पुरोहितं यज्ञस्य देवमृद्विजं होतारं रत्नधातमम्",
+    "अग््निमीळे पुरोहितं यज्ञस्य देवमृद्व्विजं होतारं रत्नधातमम्"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "अ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "अ",
+       "अ",
+       "अ",
+       "अ"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "ग्नि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ग्नि",
+       "ग्नि",
+       "ग्नि",
+       "नि"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "मी",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मी",
+       "मी",
+       "मी",
+       "मी"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "ळे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ळे",
+       "ळे",
+       "ळे",
+       "ळे"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "पु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "पु",
+       "पु",
+       "पु",
+       "पु"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "रो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रो",
+       "रो",
+       "रो",
+       "रो"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "तं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "ज्ञ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ज्ञ",
+       "ज्ञ",
+       "ज्ञ",
+       "ज्ञ"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "स्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "मृ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मृ",
+       "मृ",
+       "मृ",
+       "मृ"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "त्वि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "द्वि",
+       "द्वि",
+       "द्वि",
+       "द्व्वि"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "जं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "जं",
+       "जं",
+       "जं",
+       "जं"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "हो",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हो",
+       "हो",
+       "हो",
+       "हो"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "ता",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ता",
+       "ता",
+       "ता",
+       "ता"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "रं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रं",
+       "रं",
+       "रं",
+       "रं"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "त्न",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्न",
+       "त्न",
+       "त्न",
+       "त्न"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "धा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "धा",
+       "धा",
+       "धा",
+       "धा"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "मं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मं",
+       "मं",
+       "मं",
+       "मं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_12_dur8.0s",
+   "kind": "correct-pair",
+   "expectedText": "जन्माद्यस्य यतो न्वयादितरतश्चार्थेष्वभिज्ञ स्वराट्",
+   "decodes": [
+    "जन्माद्यस्य यतो न्वयादितरतश्चार्थेष्व भिज्ञु स्वराट्",
+    "जन्माद्य्यस्य यतो न्वयादितरतश्चार्थेष्व भिग्ज्ञु स्व्वराट्",
+    "जन्माद्य्यस्य यतो  न्वयादितरतश्चार्थेष्व भिग््ज्ञुः स्व्वराट्",
+    "जन्माद्य्यस्य यतो  न््वयादिितरत्श्चार्थेष्व भिग््ज्ञ्युः स्व्वरााट्"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "ज",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ज",
+       "ज",
+       "ज",
+       "ज"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "न्मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न्मा",
+       "न्मा",
+       "न्मा",
+       "न्मा"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "द्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "द्य",
+       "द्य्य",
+       "द्य्य",
+       "द्य्य"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "स्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "तो",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "तो",
+       "तो",
+       "तो",
+       "तोन्"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "न्व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "न्व",
+       "न्व",
+       "न्व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "या",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "या",
+       "या",
+       "या",
+       "या"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "दि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "दि",
+       "दि",
+       "दि",
+       "दिि"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "श्चा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "श्चा",
+       "श्चा",
+       "श्चा",
+       "त्श्चा"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "र्थे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्थे",
+       "र्थे",
+       "र्थे",
+       "र्थे"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "ष्व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ष्व",
+       "ष्व",
+       "ष्व",
+       "ष्व"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "भि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "भि",
+       "भि",
+       "भिग्",
+       "भिग्"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "ज्ञ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ज्ञु",
+       "ग्ज्ञु",
+       "ज्ञुः",
+       "ज्ञ्युः"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "स्व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 1,
+      "heard": [
+       "स्व",
+       "स्व्व",
+       "स्व्व",
+       "स्व्व"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "राट्",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "राट्",
+       "राट्",
+       "राट्",
+       "रााट्"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_13_dur10.2s",
+   "kind": "correct-pair",
+   "expectedText": "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+   "decodes": [
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "सु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "सु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "तं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "वं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "वं",
+       "वं",
+       "वं",
+       "वं"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "कं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "कं",
+       "कं",
+       "कं",
+       "कं"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "स",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स",
+       "स",
+       "स",
+       "स"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "चा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "चा",
+       "चा",
+       "चा",
+       "चा"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "णू",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "णू",
+       "णू",
+       "णू",
+       "णू"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "म",
+       "म",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र्द",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्द",
+       "र्द",
+       "र्द",
+       "र्द"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "नं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "नं",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "की",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "की",
+       "की",
+       "की",
+       "की"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मा",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "न",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न",
+       "न",
+       "न",
+       "न"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "न्दं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न्दं",
+       "न्दं",
+       "न्दं",
+       "न्दं"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "कृ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "कृ",
+       "कृ",
+       "कृ",
+       "कृ"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "ष्णं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ष्णं",
+       "ष्णं",
+       "ष्णं",
+       "ष्णं"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "न्दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न्दे",
+       "न्दे",
+       "न्दे",
+       "न्दे"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "ज",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ज",
+       "ज",
+       "ज",
+       "ज"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "ग",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ग",
+       "ग",
+       "ग",
+       "ग"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "द्गु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "द्गु",
+       "द्गु",
+       "द्गु",
+       "द्गु"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "रुं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रुं",
+       "रुं",
+       "रुं",
+       "रुं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_14_dur13.8s",
+   "kind": "correct-pair",
+   "expectedText": "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+   "decodes": [
+    "वसुदेवसुतं देवंं देवकीपरमानन्दं कष्ण जगद्गु",
+    "वसुदेवसुतं देवं कंसचाणरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णुं वन्दे जगद्गुरुं"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "सु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "सु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "तं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "वं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "वं",
+       "वं",
+       "वं",
+       "वं"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "कं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "कं",
+       "कं",
+       "कं"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "स",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "स",
+       "स",
+       "स"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "चा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "चा",
+       "चा",
+       "चा"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "णू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "-",
+       "ण",
+       "णू",
+       "णू"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "म",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र्द",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "र्द",
+       "र्द",
+       "र्द"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "दे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "की",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "की",
+       "की",
+       "की",
+       "की"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "मा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "मा",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "न",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न",
+       "न",
+       "न",
+       "न"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "न्दं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न्दं",
+       "न्दं",
+       "न्दं",
+       "न्दं"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "कृ",
+       "कृ",
+       "कृ"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "ष्णं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "-",
+       "ष्णं",
+       "ष्णं",
+       "ष्णुं"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "क",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "न्दे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ष्ण",
+       "न्दे",
+       "न्दे",
+       "न्दे"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "ज",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ज",
+       "ज",
+       "ज",
+       "ज"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "ग",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ग",
+       "ग",
+       "ग",
+       "ग"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "द्गु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "द्गु",
+       "द्गु",
+       "द्गु",
+       "द्गु"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "रुं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "-",
+       "रुं",
+       "रुं",
+       "रुं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_15_dur24.1s",
+   "kind": "correct-pair",
+   "expectedText": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+   "decodes": [
+    "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदाात््मं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामिे युगे युगे",
+    "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदाात््मानं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामिे युगे युगे",
+    "यदा यदा हि धर्मस्य ग्लानिीर्भवति भारतम् अभ्युत्थानमधर्मस्य तदाात््मानं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामिे युगे युगे",
+    "यदा यदा हि धर्मस्य्य  ग्लानिीेर्भवति भारतम् अभ्युत्थानमधर्मस्य तदाात््मानं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृृतां धर्मसंस््थापनार्थाय सम्भवामिे युगे युगे"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "दा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दा",
+       "दा",
+       "दा",
+       "दा"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "दा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दा",
+       "दा",
+       "दा",
+       "दा"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ध",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ध",
+       "ध",
+       "ध",
+       "ध"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्म",
+       "र्म",
+       "र्म",
+       "र्म"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य्य"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ग्ला",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ग्ला",
+       "ग्ला",
+       "ग्ला",
+       "ग्ला"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "नि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "नि",
+       "नि",
+       "निी",
+       "निीे"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र्भ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्भ",
+       "र्भ",
+       "र्भ",
+       "र्भ"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "व",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "ति",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ति",
+       "ति",
+       "ति",
+       "ति"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "भा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "भा",
+       "भा",
+       "भा",
+       "भा"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "त",
+       "त",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "अ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "अ",
+       "अ",
+       "अ",
+       "अ"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "भ्यु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "भ्यु",
+       "भ्यु",
+       "भ्यु",
+       "भ्यु"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "त्था",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्था",
+       "त्था",
+       "त्था",
+       "त्था"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "न",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "न",
+       "न",
+       "न",
+       "न"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "म",
+       "म",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "ध",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ध",
+       "ध",
+       "ध",
+       "ध"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "र्म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्म",
+       "र्म",
+       "र्म",
+       "र्म"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "स्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "त",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त",
+       "त",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "दा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "दाात्",
+       "दाात्",
+       "दाात्"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "त्मा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "दाात्",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "मं",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "सृ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सृ",
+       "सृ",
+       "सृ",
+       "सृ"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "जा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "जा",
+       "जा",
+       "जा",
+       "जा"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "म्य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "म्य",
+       "म्य",
+       "म्य",
+       "म्य"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "हं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हं",
+       "हं",
+       "हं",
+       "हं"
+      ]
+     }
+    },
+    {
+     "index": 32,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 33,
+     "akshara": "रि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "रि",
+       "रि",
+       "रि",
+       "रि"
+      ]
+     }
+    },
+    {
+     "index": 34,
+     "akshara": "त्रा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "त्रा",
+       "त्रा",
+       "त्रा",
+       "त्रा"
+      ]
+     }
+    },
+    {
+     "index": 35,
+     "akshara": "णा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "णा",
+       "णा",
+       "णा",
+       "णा"
+      ]
+     }
+    },
+    {
+     "index": 36,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 37,
+     "akshara": "सा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सा",
+       "सा",
+       "सा",
+       "सा"
+      ]
+     }
+    },
+    {
+     "index": 38,
+     "akshara": "धू",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "धू",
+       "धू",
+       "धू",
+       "धू"
+      ]
+     }
+    },
+    {
+     "index": 39,
+     "akshara": "नां",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "नां",
+       "नां",
+       "नां",
+       "नां"
+      ]
+     }
+    },
+    {
+     "index": 40,
+     "akshara": "वि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "वि",
+       "वि",
+       "वि",
+       "वि"
+      ]
+     }
+    },
+    {
+     "index": 41,
+     "akshara": "ना",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ना",
+       "ना",
+       "ना",
+       "ना"
+      ]
+     }
+    },
+    {
+     "index": 42,
+     "akshara": "शा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "शा",
+       "शा",
+       "शा",
+       "शा"
+      ]
+     }
+    },
+    {
+     "index": 43,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 44,
+     "akshara": "च",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "च",
+       "च",
+       "च",
+       "च"
+      ]
+     }
+    },
+    {
+     "index": 45,
+     "akshara": "दु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दु",
+       "दु",
+       "दु",
+       "दु"
+      ]
+     }
+    },
+    {
+     "index": 46,
+     "akshara": "ष्कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "ष्कृ",
+       "ष्कृ",
+       "ष्कृ",
+       "ष्कृृ"
+      ]
+     }
+    },
+    {
+     "index": 47,
+     "akshara": "तां",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "तां",
+       "तां",
+       "तां",
+       "तां"
+      ]
+     }
+    },
+    {
+     "index": 48,
+     "akshara": "ध",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ध",
+       "ध",
+       "ध",
+       "ध"
+      ]
+     }
+    },
+    {
+     "index": 49,
+     "akshara": "र्म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्म",
+       "र्म",
+       "र्म",
+       "र्म"
+      ]
+     }
+    },
+    {
+     "index": 50,
+     "akshara": "सं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "सं",
+       "सं",
+       "सं",
+       "संस्"
+      ]
+     }
+    },
+    {
+     "index": 51,
+     "akshara": "स्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "स्था",
+       "स्था",
+       "स्था",
+       "था"
+      ]
+     }
+    },
+    {
+     "index": 52,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 53,
+     "akshara": "ना",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ना",
+       "ना",
+       "ना",
+       "ना"
+      ]
+     }
+    },
+    {
+     "index": 54,
+     "akshara": "र्था",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्था",
+       "र्था",
+       "र्था",
+       "र्था"
+      ]
+     }
+    },
+    {
+     "index": 55,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 56,
+     "akshara": "स",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "स",
+       "स",
+       "स",
+       "स"
+      ]
+     }
+    },
+    {
+     "index": 57,
+     "akshara": "म्भ",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "म्भ",
+       "म्भ",
+       "म्भ",
+       "म्भ"
+      ]
+     }
+    },
+    {
+     "index": 58,
+     "akshara": "वा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "वा",
+       "वा",
+       "वा",
+       "वा"
+      ]
+     }
+    },
+    {
+     "index": 59,
+     "akshara": "मि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "मिे",
+       "मिे",
+       "मिे",
+       "मिे"
+      ]
+     }
+    },
+    {
+     "index": 60,
+     "akshara": "यु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "यु",
+       "यु",
+       "यु",
+       "यु"
+      ]
+     }
+    },
+    {
+     "index": 61,
+     "akshara": "गे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "गे",
+       "गे",
+       "गे",
+       "गे"
+      ]
+     }
+    },
+    {
+     "index": 62,
+     "akshara": "यु",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "यु",
+       "यु",
+       "यु",
+       "यु"
+      ]
+     }
+    },
+    {
+     "index": 63,
+     "akshara": "गे",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "गे",
+       "गे",
+       "गे",
+       "गे"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "_hardneg_silence.wav",
+   "kind": "silence",
+   "expectedText": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+   "decodes": [
+    "मेिःणसायः",
+    "मेिःणसायः",
+    "मेिःणसायः",
+    "मेिःणसायः"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ग्ला",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "नि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "ति",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "भा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "अ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "भ्यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "त्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "न",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "त्मा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "सृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "जा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "म्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "हं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 32,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 33,
+     "akshara": "रि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 34,
+     "akshara": "त्रा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 35,
+     "akshara": "णा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "मेिः",
+       "मेिः",
+       "मेिः",
+       "मेिः"
+      ]
+     }
+    },
+    {
+     "index": 36,
+     "akshara": "य",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ण",
+       "ण",
+       "ण",
+       "ण"
+      ]
+     }
+    },
+    {
+     "index": 37,
+     "akshara": "सा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "सा",
+       "सा",
+       "सा",
+       "सा"
+      ]
+     }
+    },
+    {
+     "index": 38,
+     "akshara": "धू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 39,
+     "akshara": "नां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 40,
+     "akshara": "वि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 41,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 42,
+     "akshara": "शा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 43,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 44,
+     "akshara": "च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 45,
+     "akshara": "दु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 46,
+     "akshara": "ष्कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 47,
+     "akshara": "तां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 48,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 49,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 50,
+     "akshara": "सं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 51,
+     "akshara": "स्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 52,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 53,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 54,
+     "akshara": "र्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 55,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 56,
+     "akshara": "स",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 57,
+     "akshara": "म्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 58,
+     "akshara": "वा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 59,
+     "akshara": "मि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 60,
+     "akshara": "यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 61,
+     "akshara": "गे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 62,
+     "akshara": "यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 63,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "यः",
+       "यः",
+       "यः",
+       "यः"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "_hardneg_noise.wav",
+   "kind": "noise",
+   "expectedText": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+   "decodes": [
+    "मधाः्मणस्स्याोायीः",
+    "मधाः्मणस्स्याोायीः",
+    "मधाः्मणस्स्याोायीः",
+    "मधाः्मणस्स्याोायीः"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ग्ला",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "नि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "ति",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "भा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "अ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "भ्यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "त्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "न",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "म",
+       "म",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "त्मा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "सृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "जा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "म्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "हं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 32,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 33,
+     "akshara": "रि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 34,
+     "akshara": "त्रा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 35,
+     "akshara": "णा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 36,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 37,
+     "akshara": "सा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 38,
+     "akshara": "धू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 39,
+     "akshara": "नां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 40,
+     "akshara": "वि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 41,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 42,
+     "akshara": "शा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 43,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 44,
+     "akshara": "च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 45,
+     "akshara": "दु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 46,
+     "akshara": "ष्कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 47,
+     "akshara": "तां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 48,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 49,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 50,
+     "akshara": "सं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 51,
+     "akshara": "स्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 52,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 53,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 54,
+     "akshara": "र्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 55,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 56,
+     "akshara": "स",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 57,
+     "akshara": "म्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 58,
+     "akshara": "वा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 59,
+     "akshara": "मि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "धाः",
+       "धाः",
+       "धाः",
+       "धाः"
+      ]
+     }
+    },
+    {
+     "index": 60,
+     "akshara": "यु",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "म",
+       "म",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 61,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ण",
+       "ण",
+       "ण",
+       "ण"
+      ]
+     }
+    },
+    {
+     "index": 62,
+     "akshara": "यु",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "स्स्याोा",
+       "स्स्याोा",
+       "स्स्याोा",
+       "स्स्याोा"
+      ]
+     }
+    },
+    {
+     "index": 63,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "यीः",
+       "यीः",
+       "यीः",
+       "यीः"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "_hardneg_truncated.wav",
+   "kind": "truncated",
+   "expectedText": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+   "decodes": [
+    "यदा यदा हि धर्मस्य ग्लानेत्",
+    "यदा यदा हि धर्मस्य ग्लानेत्",
+    "यदा यदा हि धर्मस्य  ग्लानेत्",
+    "यदा यदा हि धर्मस्य्य  ग्लानेत्"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "दा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दा",
+       "दा",
+       "दा",
+       "दा"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "दा",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "दा",
+       "दा",
+       "दा",
+       "दा"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "हि",
+       "हि",
+       "हि",
+       "हि"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ध",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ध",
+       "ध",
+       "ध",
+       "ध"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र्म",
+       "र्म",
+       "र्म",
+       "र्म"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "स्य",
+       "स्य",
+       "स्य",
+       "स्य्य"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ग्ला",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "ग्ला",
+       "ग्ला",
+       "ग्ला",
+       "ग्ला"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "नि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "ति",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "भा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "अ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "भ्यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "त्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "न",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "त्मा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "सृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "जा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "म्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "हं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 32,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 33,
+     "akshara": "रि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 34,
+     "akshara": "त्रा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 35,
+     "akshara": "णा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 36,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 37,
+     "akshara": "सा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 38,
+     "akshara": "धू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 39,
+     "akshara": "नां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 40,
+     "akshara": "वि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 41,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 42,
+     "akshara": "शा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 43,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 44,
+     "akshara": "च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 45,
+     "akshara": "दु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 46,
+     "akshara": "ष्कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 47,
+     "akshara": "तां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 48,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 49,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 50,
+     "akshara": "सं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 51,
+     "akshara": "स्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 52,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 53,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 54,
+     "akshara": "र्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 55,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 56,
+     "akshara": "स",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 57,
+     "akshara": "म्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 58,
+     "akshara": "वा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 59,
+     "akshara": "मि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 60,
+     "akshara": "यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 61,
+     "akshara": "गे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 62,
+     "akshara": "यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 63,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "नेत्",
+       "नेत्",
+       "नेत्",
+       "नेत्"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_13_dur10.2s",
+   "kind": "wrong-text",
+   "expectedText": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+   "decodes": [
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+    "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "दा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ध",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्म",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "सु",
+       "सु",
+       "सु",
+       "सु"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "स्य",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "तं",
+       "तं",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ग्ला",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "नि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "वं",
+       "वं",
+       "वं",
+       "वं"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र्भ",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "कं",
+       "कं",
+       "कं",
+       "कं"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "व",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "स",
+       "स",
+       "स",
+       "स"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "ति",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "चा",
+       "चा",
+       "चा",
+       "चा"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "भा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "णू",
+       "णू",
+       "णू",
+       "णू"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "अ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "भ्यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "त्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "न",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "म",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "म",
+       "म",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "त्मा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्द",
+       "र्द",
+       "र्द",
+       "र्द"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "नं",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "नं",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "सृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "जा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "दे",
+       "दे",
+       "दे",
+       "दे"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "म्य",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "हं",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "की",
+       "की",
+       "की",
+       "की"
+      ]
+     }
+    },
+    {
+     "index": 32,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 33,
+     "akshara": "रि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 34,
+     "akshara": "त्रा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 35,
+     "akshara": "णा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 36,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 37,
+     "akshara": "सा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 38,
+     "akshara": "धू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 39,
+     "akshara": "नां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 40,
+     "akshara": "वि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 41,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 42,
+     "akshara": "शा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 43,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 44,
+     "akshara": "च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 45,
+     "akshara": "दु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 46,
+     "akshara": "ष्कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 47,
+     "akshara": "तां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 48,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 49,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 50,
+     "akshara": "सं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 51,
+     "akshara": "स्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 52,
+     "akshara": "प",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र",
+       "र",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 53,
+     "akshara": "ना",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "मा",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 54,
+     "akshara": "र्था",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "न",
+       "न",
+       "न",
+       "न"
+      ]
+     }
+    },
+    {
+     "index": 55,
+     "akshara": "य",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "न्दं",
+       "न्दं",
+       "न्दं",
+       "न्दं"
+      ]
+     }
+    },
+    {
+     "index": 56,
+     "akshara": "स",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "कृ",
+       "कृ",
+       "कृ",
+       "कृ"
+      ]
+     }
+    },
+    {
+     "index": 57,
+     "akshara": "म्भ",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ष्णं",
+       "ष्णं",
+       "ष्णं",
+       "ष्णं"
+      ]
+     }
+    },
+    {
+     "index": 58,
+     "akshara": "वा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "व",
+       "व",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 59,
+     "akshara": "मि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "न्दे",
+       "न्दे",
+       "न्दे",
+       "न्दे"
+      ]
+     }
+    },
+    {
+     "index": 60,
+     "akshara": "यु",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ज",
+       "ज",
+       "ज",
+       "ज"
+      ]
+     }
+    },
+    {
+     "index": 61,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ग",
+       "ग",
+       "ग",
+       "ग"
+      ]
+     }
+    },
+    {
+     "index": 62,
+     "akshara": "यु",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "द्गु",
+       "द्गु",
+       "द्गु",
+       "द्गु"
+      ]
+     }
+    },
+    {
+     "index": 63,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "रुं",
+       "रुं",
+       "रुं",
+       "रुं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_15_dur24.1s",
+   "kind": "wrong-text",
+   "expectedText": "वसुदेवसुतं देवं कंसचाणूरमर्दनं देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुं",
+   "decodes": [
+    "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदाात््मं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामिे युगे युगे",
+    "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदाात््मानं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामिे युगे युगे",
+    "यदा यदा हि धर्मस्य ग्लानिीर्भवति भारतम् अभ्युत्थानमधर्मस्य तदाात््मानं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामिे युगे युगे",
+    "यदा यदा हि धर्मस्य्य  ग्लानिीेर्भवति भारतम् अभ्युत्थानमधर्मस्य तदाात््मानं सृजाम्यहम् परित्राणाय साधूनां विनाशाय च दुष्कृृतां धर्मसंस््थापनार्थाय सम्भवामिे युगे युगे"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "य",
+       "य",
+       "ग्ला",
+       "ग्ला"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "सु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "दा",
+       "दा",
+       "निी",
+       "निीे"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "दे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "हि",
+       "हि",
+       "र्भ",
+       "र्भ"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "ध",
+       "ध",
+       "व",
+       "व"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "सु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्म",
+       "र्म",
+       "र",
+       "र"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "तं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "स्य",
+       "स्य",
+       "तं",
+       "तं"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "दे",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ग्ला",
+       "ग्ला",
+       "त्था",
+       "त्था"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "वं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "नि",
+       "नि",
+       "न",
+       "न"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "कं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्भ",
+       "र्भ",
+       "म",
+       "म"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "स",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "व",
+       "व",
+       "ध",
+       "ध"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "चा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ति",
+       "ति",
+       "र्म",
+       "र्म"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "णू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "भा",
+       "भा",
+       "स्य",
+       "स्य"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "र",
+       "र",
+       "त",
+       "त"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 2,
+      "heard": [
+       "म",
+       "म",
+       "दाात्",
+       "दाात्"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र्द",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "मं",
+       "मा",
+       "मा",
+       "मा"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 3,
+      "heard": [
+       "सृ",
+       "नं",
+       "नं",
+       "नं"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "दे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "जा",
+       "जा",
+       "जा",
+       "जा"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "व",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "म्य",
+       "म्य",
+       "म्य",
+       "म्य"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "की",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "हं",
+       "हं",
+       "हं",
+       "हं"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "प",
+     "label": "correct",
+     "evidence": {
+      "decodes": 4,
+      "matched": 4,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "र",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "प",
+       "प",
+       "प",
+       "प"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "मा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ना",
+       "ना",
+       "ना",
+       "ना"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "न",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्था",
+       "र्था",
+       "र्था",
+       "र्था"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "न्दं",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "य",
+       "य",
+       "य",
+       "य"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "कृ",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "स",
+       "स",
+       "स",
+       "स"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "ष्णं",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "म्भ",
+       "म्भ",
+       "म्भ",
+       "म्भ"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "व",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "वा",
+       "वा",
+       "वा",
+       "वा"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "न्दे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "मिे",
+       "मिे",
+       "मिे",
+       "मिे"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "ज",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "यु",
+       "यु",
+       "यु",
+       "यु"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "ग",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "गे",
+       "गे",
+       "गे",
+       "गे"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "द्गु",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "यु",
+       "यु",
+       "यु",
+       "यु"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "रुं",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "गे",
+       "गे",
+       "गे",
+       "गे"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "clipId": "heldout_02_dur3.4s",
+   "kind": "wrong-text",
+   "expectedText": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहं परित्राणाय साधूनां विनाशाय च दुष्कृतां धर्मसंस्थापनार्थाय सम्भवामि युगे युगे",
+   "decodes": [
+    "गुरुर् ब्रह्मा गुरुर्विष्णु",
+    "गुरुर् ब्रह्मा गुरुर्विष्णुः",
+    "गुरुर् ब्रह्मा गुरुर्र्विष्णुः",
+    "गुरुर् ब्रह्मा गुरुर्र्विष्णुः"
+   ],
+   "results": [
+    {
+     "index": 0,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 1,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 2,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 3,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 4,
+     "akshara": "हि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 5,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 6,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 7,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 8,
+     "akshara": "ग्ला",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 9,
+     "akshara": "नि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 10,
+     "akshara": "र्भ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 11,
+     "akshara": "व",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 12,
+     "akshara": "ति",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 13,
+     "akshara": "भा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 14,
+     "akshara": "र",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 15,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 16,
+     "akshara": "अ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 17,
+     "akshara": "भ्यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 18,
+     "akshara": "त्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 19,
+     "akshara": "न",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 20,
+     "akshara": "म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 21,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 22,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 23,
+     "akshara": "स्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 24,
+     "akshara": "त",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 25,
+     "akshara": "दा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 26,
+     "akshara": "त्मा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 27,
+     "akshara": "नं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 28,
+     "akshara": "सृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 29,
+     "akshara": "जा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 30,
+     "akshara": "म्य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 31,
+     "akshara": "हं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 32,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 33,
+     "akshara": "रि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 34,
+     "akshara": "त्रा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 35,
+     "akshara": "णा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 36,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 37,
+     "akshara": "सा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 38,
+     "akshara": "धू",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 39,
+     "akshara": "नां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 40,
+     "akshara": "वि",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 41,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 42,
+     "akshara": "शा",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 43,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 44,
+     "akshara": "च",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 45,
+     "akshara": "दु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 46,
+     "akshara": "ष्कृ",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 47,
+     "akshara": "तां",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 48,
+     "akshara": "ध",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 49,
+     "akshara": "र्म",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 50,
+     "akshara": "सं",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 51,
+     "akshara": "स्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 52,
+     "akshara": "प",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 53,
+     "akshara": "ना",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 54,
+     "akshara": "र्था",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 55,
+     "akshara": "य",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "-",
+       "-",
+       "-",
+       "-"
+      ]
+     }
+    },
+    {
+     "index": 56,
+     "akshara": "स",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "गु",
+       "गु",
+       "गु",
+       "गु"
+      ]
+     }
+    },
+    {
+     "index": 57,
+     "akshara": "म्भ",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "रु",
+       "रु",
+       "रु",
+       "रु"
+      ]
+     }
+    },
+    {
+     "index": 58,
+     "akshara": "वा",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्ब्र",
+       "र्ब्र",
+       "र्ब्र",
+       "र्ब्र"
+      ]
+     }
+    },
+    {
+     "index": 59,
+     "akshara": "मि",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ह्मा",
+       "ह्मा",
+       "ह्मा",
+       "ह्मा"
+      ]
+     }
+    },
+    {
+     "index": 60,
+     "akshara": "यु",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "गु",
+       "गु",
+       "गु",
+       "गु"
+      ]
+     }
+    },
+    {
+     "index": 61,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "रु",
+       "रु",
+       "रु",
+       "रु"
+      ]
+     }
+    },
+    {
+     "index": 62,
+     "akshara": "यु",
+     "label": "unclear",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "र्वि",
+       "र्वि",
+       "र्र्वि",
+       "र्र्वि"
+      ]
+     }
+    },
+    {
+     "index": 63,
+     "akshara": "गे",
+     "label": "incorrect",
+     "evidence": {
+      "decodes": 4,
+      "matched": 0,
+      "heard": [
+       "ष्णु",
+       "ष्णुः",
+       "ष्णुः",
+       "ष्णुः"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

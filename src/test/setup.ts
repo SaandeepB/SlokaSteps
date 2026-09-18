@@ -3,6 +3,10 @@ import { cleanup } from '@testing-library/react'
 import { afterEach } from 'vitest'
 
 afterEach(() => {
-  cleanup()
-  window.localStorage.clear()
+  // The chant-analysis suites run under `@vitest-environment node`, where no
+  // DOM exists to clean up.
+  if (typeof window !== 'undefined') {
+    cleanup()
+    window.localStorage.clear()
+  }
 })

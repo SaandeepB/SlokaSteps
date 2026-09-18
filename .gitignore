@@ -7,3 +7,6 @@ dist
 *.local
 *.log
 .DS_Store
+
+# local-only model assets (weights have no explicit licence grant - see research/pronunciation-ai/06)
+models-local
