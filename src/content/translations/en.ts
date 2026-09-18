@@ -150,6 +150,44 @@ export const en = {
       'Checks recordings against the sloka text on this device only — audio never leaves the device. New and under family testing; feedback is gentle and can be unsure. Turning this on downloads a large (~220 MB) model file once.',
     chantCoachStatusLabel: 'Chant check',
 
+    // Chant Test (self-referenced graded test that gates the lesson)
+    chantTestTitle: 'Chant Test',
+    chantTestListenFirst: 'Listen to the whole sloka first.',
+    chantTestSetReferenceTitle: 'Record your reference chant',
+    chantTestSetReferenceHelp:
+      'Record your best version of the whole sloka. This becomes your reference — later you are graded on how closely you match it. It stays on this device only.',
+    chantTestReferenceSaved:
+      'Reference saved! From now on, chanting this sloka is graded against your own reference.',
+    chantTestReferenceSaveFailed:
+      "That recording couldn't be saved as a reference. Chant a little louder and try again.",
+    chantTestTakeTitle: 'Chant the whole sloka to take the test',
+    chantTestTakeHelp:
+      'You are graded on how closely you match your own reference chant. You can retry as many times as you like.',
+    chantTestGrading: 'Scoring your chant…',
+    chantTestMatch: 'Match with your reference: {percent}%',
+    chantTestPassed: 'You passed the Chant Test!',
+    chantTestFailedTitle: 'Not quite yet',
+    chantTestFailedBody:
+      'Listen to your reference again, then chant once more. You need a closer match to pass.',
+    chantTestTooQuiet:
+      "I couldn't hear you clearly. Move a little closer and chant out loud.",
+    chantTestTooShort: 'That was very short. Chant the whole sloka.',
+    chantTestUndecodable:
+      "That recording couldn't be read. Let's try recording again.",
+    chantTestRecord: 'Record my chant',
+    chantTestRecordReference: 'Record my reference',
+    chantTestRetry: 'Try Again',
+    chantTestReRecordReference: 'Re-record my reference',
+    chantTestPlayReference: 'Play my reference',
+    chantTestGradeExcellent: 'Excellent!',
+    chantTestGradeGreat: 'Great!',
+    chantTestGradeGood: 'Good!',
+    chantTestGradeKeepPractising: 'Keep practising',
+    chantTestFinishGated: 'Pass the Chant Test to finish',
+    chantTestReferenceExists: 'Your reference chant is saved.',
+    chantTestMicOffNote:
+      'Microphone practice is off, so this lesson is not graded. You can still finish.',
+
     // Audio and microphone messages
     speechUnavailable:
       'The practice voice is not available in this browser. You can still read the line and continue.',

@@ -141,5 +141,41 @@ export const hi: {
     chantCoachParentToggleHelp:
       'रिकॉर्डिंग का मिलान श्लोक के पाठ से इसी डिवाइस पर होता है — आवाज़ कभी डिवाइस से बाहर नहीं जाती। यह सुविधा नई है और परीक्षण में है; प्रतिक्रिया कोमल रहती है और "पक्का नहीं" भी हो सकती है। चालू करने पर एक बार लगभग 220 MB का मॉडल डाउनलोड होगा।',
     chantCoachStatusLabel: 'श्लोक-जाँच',
+
+    // Chant Test
+    chantTestTitle: 'श्लोक परीक्षा',
+    chantTestListenFirst: 'पहले पूरा श्लोक सुनो।',
+    chantTestSetReferenceTitle: 'अपना आदर्श श्लोक रिकॉर्ड करो',
+    chantTestSetReferenceHelp:
+      'पूरे श्लोक का अपना सबसे अच्छा रूप रिकॉर्ड करो। यही तुम्हारा आदर्श बनेगा — आगे तुम्हें इससे मिलान पर अंक मिलेंगे। यह केवल इसी डिवाइस पर रहता है।',
+    chantTestReferenceSaved:
+      'आदर्श सहेजा गया! अब से इस श्लोक का गायन तुम्हारे अपने आदर्श से मिलान करके आँका जाएगा।',
+    chantTestReferenceSaveFailed:
+      'वह रिकॉर्डिंग आदर्श के रूप में सहेजी नहीं जा सकी। थोड़ा ज़ोर से गाकर फिर कोशिश करो।',
+    chantTestTakeTitle: 'परीक्षा देने के लिए पूरा श्लोक गाओ',
+    chantTestTakeHelp:
+      'तुम्हें इस बात पर अंक मिलते हैं कि तुम अपने आदर्श श्लोक से कितना मिलते हो। तुम जितनी बार चाहो कोशिश कर सकते हो।',
+    chantTestGrading: 'तुम्हारे गायन को आँका जा रहा है…',
+    chantTestMatch: 'तुम्हारे आदर्श से मिलान: {percent}%',
+    chantTestPassed: 'तुमने श्लोक परीक्षा पास कर ली!',
+    chantTestFailedTitle: 'अभी थोड़ा बाकी है',
+    chantTestFailedBody:
+      'अपना आदर्श फिर से सुनो, फिर एक बार और गाओ। पास होने के लिए और नज़दीकी मिलान चाहिए।',
+    chantTestTooQuiet: 'मुझे तुम्हारी आवाज़ साफ़ नहीं सुनाई दी। थोड़ा पास आकर ज़ोर से गाओ।',
+    chantTestTooShort: 'यह बहुत छोटा था। पूरा श्लोक गाओ।',
+    chantTestUndecodable: 'वह रिकॉर्डिंग पढ़ी नहीं जा सकी। चलो फिर से रिकॉर्ड करें।',
+    chantTestRecord: 'अपना गायन रिकॉर्ड करो',
+    chantTestRecordReference: 'अपना आदर्श रिकॉर्ड करो',
+    chantTestRetry: 'फिर कोशिश करो',
+    chantTestReRecordReference: 'अपना आदर्श फिर से रिकॉर्ड करो',
+    chantTestPlayReference: 'अपना आदर्श सुनो',
+    chantTestGradeExcellent: 'शानदार!',
+    chantTestGradeGreat: 'बहुत बढ़िया!',
+    chantTestGradeGood: 'अच्छा!',
+    chantTestGradeKeepPractising: 'अभ्यास जारी रखो',
+    chantTestFinishGated: 'पाठ पूरा करने के लिए श्लोक परीक्षा पास करो',
+    chantTestReferenceExists: 'तुम्हारा आदर्श श्लोक सहेजा गया है।',
+    chantTestMicOffNote:
+      'माइक्रोफ़ोन अभ्यास बंद है, इसलिए इस पाठ का मूल्यांकन नहीं होगा। तुम फिर भी पूरा कर सकते हो।',
   },
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { ChevronLeft, X } from 'lucide-react'
 import { getActivityById, getSlokaById, SLOKAS } from '../content/slokas'
+import type { StarCount } from '../types'
 import { useAppState } from '../hooks/useAppState'
 import { useTranslation } from '../hooks/useTranslation'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
@@ -99,7 +100,7 @@ export function ActivityPage() {
   // The trailing completion marker is celebrated on the Complete page.
   const totalSteps = sloka.activities.length - 1
 
-  const advance = () => {
+  const advance = (testStars?: StarCount) => {
     const nextIndex = index + 1
     dispatch({
       type: 'ADVANCE_ACTIVITY',
@@ -116,6 +117,8 @@ export function ActivityPage() {
         slokaId: sloka.id,
         today: todayIsoDate(),
         nowIso: new Date().toISOString(),
+        // Present only when the Chant Test was passed; it drives the stars.
+        ...(testStars !== undefined ? { testStars } : {}),
       })
       navigate(routes.complete(sloka.id), { replace: true })
     } else {
@@ -246,7 +249,7 @@ export function ActivityPage() {
           <FullChantActivity
             lines={sloka.lines}
             slokaId={sloka.id}
-            onFinish={advance}
+            onFinish={(testStars) => advance(testStars)}
             onRecordingAttempted={recordRecording}
           />
         )}
