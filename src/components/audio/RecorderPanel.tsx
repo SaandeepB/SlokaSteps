@@ -1,16 +1,22 @@
 import { useEffect, useRef, useState } from 'react'
-import { Mic, Play, Square, Trash2 } from 'lucide-react'
+import { Loader2, Mic, Play, Square, Trash2 } from 'lucide-react'
 import { Button } from '../common/Button'
+import { ChantFeedback } from './ChantFeedback'
 import { useRecorder } from '../../hooks/useRecorder'
 import { useTranslation } from '../../hooks/useTranslation'
 import { getEvaluationService } from '../../services/pronunciation'
-import { isScoredEvaluation } from '../../types/chant'
+import { isScoredEvaluation, type ChantEvaluationResult } from '../../types/chant'
 import type { TranslationKey } from '../../content/translations'
 import { useAppState } from '../../hooks/useAppState'
 
 export interface RecorderPanelProps {
-  /** The line/sloka the child is chanting (for future evaluation only). */
+  /** The line/sloka the child is chanting, as displayed (transliteration). */
   expectedText: string
+  /**
+   * Devanagari reference text for the on-device chant check. Without it the
+   * recording only ever receives participation encouragement.
+   */
+  expectedDevanagari?: string
   /** Catalogue id of the sloka being practised, when the caller knows it. */
   slokaId?: string
   /**
@@ -22,12 +28,16 @@ export interface RecorderPanelProps {
 
 /**
  * Start/stop recording with elapsed time, immediate in-session playback,
- * delete-and-retry, and participation-only encouragement. The microphone is
- * requested only when the child presses Record. Audio never leaves the
- * device and is never persisted.
+ * delete-and-retry, and feedback. The microphone is requested only when the
+ * child presses Record. Audio never leaves the device and is never
+ * persisted. Feedback is participation-only unless the parent-enabled
+ * on-device Chant Coach is ready, in which case its result renders with
+ * full provenance labelling — and evaluation problems of any kind fall back
+ * to gentle notices, never blocking the lesson.
  */
 export function RecorderPanel({
   expectedText,
+  expectedDevanagari,
   slokaId,
   onAttempted,
 }: RecorderPanelProps) {
@@ -35,9 +45,21 @@ export function RecorderPanel({
   const { state } = useAppState()
   const recorder = useRecorder()
   const [isPlayingBack, setIsPlayingBack] = useState(false)
-  const [feedbackKey, setFeedbackKey] = useState<TranslationKey | null>(null)
+  const [evaluating, setEvaluating] = useState(false)
+  const [evaluation, setEvaluation] = useState<ChantEvaluationResult | null>(
+    null,
+  )
   const playbackRef = useRef<HTMLAudioElement | null>(null)
   const attemptNotified = useRef(false)
+  const mountedRef = useRef(true)
+  const evaluationToken = useRef(0)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  }, [])
 
   const notifyAttempted = () => {
     if (!attemptNotified.current) {
@@ -54,30 +76,36 @@ export function RecorderPanel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recorder.status])
 
-  // Participation-only encouragement — never a pronunciation score.
+  // Evaluate the recording. The registered service decides what that means:
+  // participation-only encouragement by default; the on-device analyzer when
+  // the parent has enabled it and it is ready.
   useEffect(() => {
-    if (recorder.status === 'recorded' && recorder.recordingBlob) {
-      getEvaluationService()
-        .evaluate({
-          recording: recorder.recordingBlob,
-          slokaId: slokaId ?? null,
-          referenceId: null,
-          expectedText,
-          language: 'sa-IN',
-          ageBand: state.profile?.ageBand ?? '7-8',
-          evaluationModes: [],
-        })
-        .then((result) => {
-          // A scored result must never be rendered as a participation message.
-          // Until a validated analyzer ships, this branch is unreachable.
-          setFeedbackKey(
-            isScoredEvaluation(result)
-              ? null
-              : (result.childMessageKey as TranslationKey),
-          )
-        })
-        .catch(() => setFeedbackKey(null))
-    }
+    if (recorder.status !== 'recorded' || !recorder.recordingBlob) return
+    const token = ++evaluationToken.current
+    setEvaluating(true)
+    setEvaluation(null)
+    getEvaluationService()
+      .evaluate({
+        recording: recorder.recordingBlob,
+        slokaId: slokaId ?? null,
+        referenceId: null,
+        expectedText: expectedDevanagari ?? expectedText,
+        language: 'sa-IN',
+        ageBand: state.profile?.ageBand ?? '7-8',
+        evaluationModes: expectedDevanagari
+          ? ['completeness', 'pronunciation']
+          : [],
+      })
+      .then((result) => {
+        if (!mountedRef.current || token !== evaluationToken.current) return
+        setEvaluating(false)
+        setEvaluation(result)
+      })
+      .catch(() => {
+        if (!mountedRef.current || token !== evaluationToken.current) return
+        setEvaluating(false)
+        setEvaluation(null)
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recorder.status, recorder.recordingBlob])
 
@@ -106,7 +134,9 @@ export function RecorderPanel({
 
   const deleteAndRetry = () => {
     stopPlayback()
-    setFeedbackKey(null)
+    evaluationToken.current += 1
+    setEvaluating(false)
+    setEvaluation(null)
     recorder.reset()
   }
 
@@ -173,8 +203,27 @@ export function RecorderPanel({
       {recorder.status === 'recorded' && (
         <div className="flex flex-col gap-3">
           <p role="status" className="font-semibold text-leaf-700">
-            {t('recordedOk')} {feedbackKey ? t(feedbackKey) : ''}
+            {t('recordedOk')}{' '}
+            {evaluation && !isScoredEvaluation(evaluation) &&
+            evaluation.provenance === 'participation-only'
+              ? t(evaluation.childMessageKey as TranslationKey)
+              : ''}
           </p>
+
+          {evaluating && (
+            <p
+              role="status"
+              className="inline-flex items-center gap-2 rounded-xl bg-teal-100 px-3 py-2 font-semibold text-teal-700"
+            >
+              <Loader2 size={18} aria-hidden="true" className="animate-spin" />
+              {t('chantCoachChecking')}
+            </p>
+          )}
+
+          {evaluation && evaluation.provenance !== 'participation-only' && (
+            <ChantFeedback result={evaluation} />
+          )}
+
           <div className="flex flex-wrap gap-3">
             {isPlayingBack ? (
               <Button variant="secondary" onClick={stopPlayback}>

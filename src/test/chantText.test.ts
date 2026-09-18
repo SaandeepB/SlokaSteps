@@ -26,7 +26,7 @@ interface AlignCase {
 }
 
 const textCases = (textParity as { cases: TextCase[] }).cases
-const alignCases = (alignParity as { cases: AlignCase[] }).cases
+const alignCases = (alignParity as unknown as { cases: AlignCase[] }).cases
 
 describe('devanagariText parity with common_text.py', () => {
   it('loads a non-trivial fixture set', () => {

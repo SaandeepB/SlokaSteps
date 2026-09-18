@@ -41,6 +41,11 @@ const StoryChapterPage = lazy(() =>
 const PracticePage = lazy(() =>
   import('../pages/PracticePage').then((module) => ({ default: module.PracticePage })),
 )
+const ChantCoachPage = lazy(() =>
+  import('../pages/ChantCoachPage').then((module) => ({
+    default: module.ChantCoachPage,
+  })),
+)
 const RewardsPage = lazy(() =>
   import('../pages/RewardsPage').then((module) => ({ default: module.RewardsPage })),
 )
@@ -87,6 +92,7 @@ export function App() {
             <Route path={routePatterns.path} element={<PathPage />} />
             <Route path={routePatterns.lesson} element={<LessonOverviewPage />} />
             <Route path={routePatterns.activity} element={<ActivityPage />} />
+            <Route path={routePatterns.chantCoach} element={<ChantCoachPage />} />
             <Route path={routePatterns.stories} element={<StoriesPage />} />
             <Route path={routePatterns.epic} element={<EpicPage />} />
             <Route path={routePatterns.storyChapter} element={<StoryChapterPage />} />

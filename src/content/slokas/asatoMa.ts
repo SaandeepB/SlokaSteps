@@ -32,7 +32,7 @@ const lines: SlokaLine[] = [
  */
 export const asatoMa: Sloka = {
   id,
-  order: 8,
+  order: 10,
   level: 1,
   title: 'Asato Ma Sadgamaya',
   theme: 'Truth and Inner Light',

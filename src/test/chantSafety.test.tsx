@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { FEATURE_FLAGS } from '../config/featureFlags'
 import { ChantLabPage } from '../pages/ChantLabPage'
+import { renderWithProviders } from './testUtils'
+import { createDefaultPreferences } from '../services/persistence'
+import {
+  getEvaluationService,
+  getParticipationService,
+  registerScoredEvaluationService,
+} from '../services/pronunciation'
 import {
   ChantEvaluationUnavailableError,
   LOCAL_PITCH_EVALUATION_VERSION,
@@ -90,12 +97,37 @@ function childText(result: ChantEvaluationResult): string {
 }
 
 describe('safety-sensitive feature flags', () => {
-  it('keeps Chant Coach and community features disabled by default', () => {
+  it('compiles Chant Coach in but keeps community features off, frozen', () => {
+    // Deliberate 2026-09-18 change: the on-device analyzer shipped, so the
+    // build-time flag is on. Child exposure remains double-gated below.
     expect(FEATURE_FLAGS).toEqual({
-      chantCoachEnabled: false,
+      chantCoachEnabled: true,
       communityEnabled: false,
     })
     expect(Object.isFrozen(FEATURE_FLAGS)).toBe(true)
+  })
+
+  it('requires an explicit parent opt-in before any analysis can run', () => {
+    // Gate 1: the parent preference defaults OFF, so a fresh install never
+    // routes a child's recording into the analyzer.
+    expect(createDefaultPreferences().voicePrivacy.onDeviceChantCheck).toBe(
+      false,
+    )
+    // Gate 2: with nothing registered, evaluation is participation-only.
+    expect(getEvaluationService()).toBe(getParticipationService())
+  })
+
+  it('falls back to participation-only the moment the analyzer unregisters', async () => {
+    const scored = new MockChantEvaluationService()
+    registerScoredEvaluationService(scored)
+    try {
+      expect(getEvaluationService()).toBe(scored)
+    } finally {
+      registerScoredEvaluationService(null)
+    }
+    expect(getEvaluationService()).toBe(getParticipationService())
+    const result = await getEvaluationService().evaluate(makeRequest())
+    expect(result.provenance).toBe('participation-only')
   })
 })
 
@@ -386,22 +418,21 @@ describe('Chant Coach placeholder services', () => {
 })
 
 describe('Chant Lab', () => {
-  it('is visibly a disabled development prototype with no genuine analysis', () => {
-    render(<ChantLabPage />)
+  it('is a dev harness that shows no analysis output until the real analyzer produced one', () => {
+    renderWithProviders(<ChantLabPage />)
 
     expect(screen.getByRole('heading', { name: 'Chant Lab' })).toBeInTheDocument()
-    expect(screen.getByText('Feature flag: off')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Record test audio' })).toBeDisabled()
-    expect(screen.getByLabelText(/Upload local test audio/)).toHaveAttribute(
+    expect(screen.getByText('Feature flag: on')).toBeInTheDocument()
+    expect(screen.getByText(/Internal-testing harness/)).toBeInTheDocument()
+    // Without provisioned assets and an explicit prepare, the analyzer is
+    // not ready and no evaluation payload exists to display.
+    expect(screen.getByText(/Analyzer status: off/)).toBeInTheDocument()
+    expect(screen.queryByTestId('chant-evaluation-json')).not.toBeInTheDocument()
+    expect(screen.getByLabelText(/upload local test audio/i)).toHaveAttribute(
       'accept',
       'audio/*',
     )
-    expect(screen.getByLabelText('Waveform placeholder')).toBeInTheDocument()
-    expect(screen.getByLabelText('Pitch contour placeholder')).toBeInTheDocument()
-
-    const preview = screen.getByTestId('chant-evaluation-json')
-    expect(preview).toHaveTextContent('"simulated": true')
-    expect(preview).toHaveTextContent('"scores": null')
-    expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
+    // It renders honestly about locality: audio is processed on-device only.
+    expect(screen.getByText(/never uploaded/)).toBeInTheDocument()
   })
 })

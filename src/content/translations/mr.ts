@@ -91,5 +91,34 @@ export const mr: {
     notFoundTitle: 'अरेरे! पान सापडले नाही',
     notFoundBody: 'मित्राला ते पान सापडले नाही. चला पुन्हा शिकायला जाऊया!',
     defaultLearnerName: 'विद्यार्थी',
+
+    // Chant Coach (child-facing subset; the rest falls back to English)
+    chantCoachTitle: 'चांट कोच',
+    chantCoachIntro:
+      'तुमच्या कोचसोबत एक-एक ओळ म्हणा. आधी ऐका, मग तशीच म्हणा — गुरुजींजवळ शिकल्यासारखे.',
+    chantCoachChecking: 'लक्षपूर्वक ऐकत आहे…',
+    chantCoachNoSpeechNotice:
+      'या वेळी तुझा आवाज ऐकू आला नाही. जरा जवळ येऊन मोठ्याने म्हण!',
+    chantCoachTooShortNotice: 'खूपच लवकर झाले! एक श्वास घे आणि पूर्ण ओळ म्हण.',
+    chantCoachAudioUnclearNotice:
+      'स्पष्ट ऐकू आले नाही. शांत जागी जाऊन पुन्हा एकदा प्रयत्न करूया.',
+    chantCoachDifferentTextNotice:
+      'ते वेगळ्या श्लोकासारखे वाटले. ही ओळ पुन्हा ऐक, मग प्रयत्न कर.',
+    chantCoachSummaryLovely: 'खूप सुंदर! जे ऐकले ते सगळे जुळले.',
+    chantCoachSummaryPractice:
+      'अगदी जवळ आलास! पुन्हा एकदा ऐकून या अक्षरांचा सराव कर: {sounds}',
+    chantCoachSummaryTryClearer:
+      'छान प्रयत्न! प्रत्येक अक्षर ऐकू येईल असे जरा मोठ्याने आणि सावकाश म्हण.',
+    chantCoachMatchedLegend: 'जुळले',
+    chantCoachPracticeLegend: 'सराव करा',
+    chantCoachUnclearLegend: 'नक्की नाही',
+    chantCoachYourTurn: 'तुझी पाळी! ही ओळ म्हण.',
+    chantCoachListenFirst: 'आधी ओळ ऐक.',
+    chantCoachTryLineAgain: 'या ओळीचा पुन्हा सराव करा',
+    chantCoachNextLine: 'पुढील ओळ',
+    chantCoachPreviousLine: 'मागील ओळ',
+    chantCoachOpenAction: 'चांट कोचसोबत सराव करा',
+    chantCoachLineOf: 'ओळ {current} / {total}',
+    chantCoachAllDone: 'कोचसोबत प्रत्येक ओळीचा सराव झाला. फारच छान!',
   },
 }

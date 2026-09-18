@@ -213,6 +213,7 @@ export function ParentDashboard() {
           <DashboardRow label={t('microphoneLabel')} value={state.preferences.voicePrivacy.allowMicrophone ? 'On' : 'Off'} />
           <DashboardRow label={t('cloudEvaluationLabel')} value={state.preferences.voicePrivacy.allowCloudEvaluation ? 'On' : 'Off'} />
           <DashboardRow label={t('retainRecordingsLabel')} value={state.preferences.voicePrivacy.retainPracticeRecordings ? 'Requested (not active)' : 'Off'} />
+          <DashboardRow label={t('chantCoachParentToggleLabel')} value={state.preferences.voicePrivacy.onDeviceChantCheck ? 'On (on-device only, testing preview)' : 'Off'} />
           <DashboardRow label={t('communityPreferenceLabel')} value={state.preferences.allowFutureCommunityFeatures ? 'Parent interest saved; feature off' : 'Off'} />
           <DashboardRow label={t('bookmarks')} value={String(state.progress.bookmarks.length)} />
         </dl>

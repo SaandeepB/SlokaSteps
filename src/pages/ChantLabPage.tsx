@@ -1,48 +1,42 @@
 import { useMemo, useState } from 'react'
+import { Mic, Play, Square, Trash2, Upload } from 'lucide-react'
 import { Card } from '../components/common/Card'
 import { Button } from '../components/common/Button'
-import { SLOKAS } from '../content/slokas'
+import { ChantFeedback } from '../components/audio/ChantFeedback'
+import { SLOKAS, getSlokaById } from '../content/slokas'
 import { FEATURE_FLAGS } from '../config/featureFlags'
-
-const REFERENCE_OPTIONS = [
-  {
-    id: 'none',
-    name: 'No approved Chant Coach reference is bundled',
-  },
-]
+import { useChantCoach } from '../hooks/useChantCoach'
+import { useRecorder } from '../hooks/useRecorder'
+import {
+  getChantCoachService,
+  prepareChantCoach,
+  probeChantCoach,
+} from '../services/chantAnalysis/chantCoachRuntime'
+import type { ChantEvaluationResult } from '../types/chant'
 
 /**
- * Development-only scaffolding for inspecting the future Chant Coach flow.
- * Routing must keep this page out of production navigation.
+ * Development-only harness for the on-device Chant Coach. Runs the real
+ * analyzer (when local model assets are provisioned) against a microphone
+ * recording or an uploaded local file, and shows the full evaluation result
+ * — segments, coverage, provenance — exactly as the contract carries it.
+ * Nothing here is uploaded anywhere; routing keeps this page out of
+ * production navigation and builds.
  */
 export function ChantLabPage() {
+  const coach = useChantCoach()
   const [slokaId, setSlokaId] = useState(SLOKAS[0]?.id ?? '')
-  const [referenceId, setReferenceId] = useState(REFERENCE_OPTIONS[0].id)
+  const [expectedText, setExpectedText] = useState(
+    SLOKAS[0]?.lines.map((line) => line.devanagari).join(' ') ?? '',
+  )
   const [testFile, setTestFile] = useState<File | null>(null)
+  const [result, setResult] = useState<ChantEvaluationResult | null>(null)
+  const [busy, setBusy] = useState(false)
+  const [labError, setLabError] = useState<string | null>(null)
+  const recorder = useRecorder()
 
-  const evaluationPreview = useMemo(
-    () =>
-      JSON.stringify(
-        {
-          status: 'unable-to-evaluate',
-          simulated: true,
-          message: 'Development placeholder — no audio analysis was performed.',
-          slokaId,
-          referenceId,
-          recording: testFile
-            ? {
-                name: testFile.name,
-                type: testFile.type || 'unknown',
-                sizeBytes: testFile.size,
-                retained: false,
-              }
-            : null,
-          scores: null,
-        },
-        null,
-        2,
-      ),
-    [referenceId, slokaId, testFile],
+  const resultJson = useMemo(
+    () => (result ? JSON.stringify(result, null, 2) : null),
+    [result],
   )
 
   if (!import.meta.env.DEV) {
@@ -54,6 +48,43 @@ export function ChantLabPage() {
         </p>
       </div>
     )
+  }
+
+  const analyze = async (blob: Blob) => {
+    const service = getChantCoachService()
+    if (!service) {
+      setLabError(
+        'Analyzer not ready. Prepare the coach first (status above); without local model assets it stays unavailable.',
+      )
+      return
+    }
+    setBusy(true)
+    setLabError(null)
+    setResult(null)
+    try {
+      const evaluation = await service.evaluate({
+        recording: blob,
+        slokaId: slokaId || null,
+        referenceId: null,
+        expectedText,
+        language: 'sa-IN',
+        ageBand: '7-8',
+        evaluationModes: ['completeness', 'pronunciation'],
+      })
+      setResult(evaluation)
+    } catch (error) {
+      setLabError(error instanceof Error ? error.message : 'analysis failed')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const onPickSloka = (id: string) => {
+    setSlokaId(id)
+    const sloka = getSlokaById(id)
+    if (sloka) {
+      setExpectedText(sloka.lines.map((line) => line.devanagari).join(' '))
+    }
   }
 
   return (
@@ -71,12 +102,31 @@ export function ChantLabPage() {
       </div>
 
       <Card className="border-lotus-300 bg-lotus-100">
-        <h2 className="text-lg font-bold text-lotus-700">Prototype only</h2>
+        <h2 className="text-lg font-bold text-lotus-700">Internal-testing harness</h2>
         <p className="mt-2 text-ink-700">
-          Chant Coach is disabled. This page does not analyze pronunciation,
-          rhythm, melody, completeness, or audio quality. It never uploads a
-          recording and never presents simulated feedback as genuine analysis.
+          This page runs the REAL on-device analyzer when local model assets
+          are provisioned (models-local/chant). Audio is processed in a worker
+          on this machine and never uploaded. Results carry their provenance;
+          nothing simulated is ever labelled as analysis.
         </p>
+        <p className="mt-2 font-semibold text-ink-700">
+          Analyzer status: {coach.status}
+          {coach.status === 'preparing' && ` (${Math.round(coach.progress * 100)}%)`}
+          {coach.executionProvider ? ` · ${coach.executionProvider}` : ''}
+          {coach.analyzerVersion ? ` · ${coach.analyzerVersion}` : ''}
+          {coach.errorMessage ? ` · ${coach.errorMessage}` : ''}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-3">
+          <Button variant="secondary" onClick={() => void probeChantCoach()}>
+            Probe assets
+          </Button>
+          <Button
+            onClick={() => void prepareChantCoach()}
+            disabled={coach.status === 'preparing' || coach.status === 'ready'}
+          >
+            Prepare analyzer
+          </Button>
+        </div>
       </Card>
 
       <Card className="flex flex-col gap-4">
@@ -86,7 +136,7 @@ export function ChantLabPage() {
           Sloka
           <select
             value={slokaId}
-            onChange={(event) => setSlokaId(event.target.value)}
+            onChange={(event) => onPickSloka(event.target.value)}
             className="min-h-11 rounded-xl border-2 border-cream-300 bg-white px-3 py-2"
           >
             {SLOKAS.map((sloka) => (
@@ -98,76 +148,94 @@ export function ChantLabPage() {
         </label>
 
         <label className="flex flex-col gap-2 font-semibold text-ink-700">
-          Reference recording
-          <select
-            value={referenceId}
-            onChange={(event) => setReferenceId(event.target.value)}
-            className="min-h-11 rounded-xl border-2 border-cream-300 bg-white px-3 py-2"
-          >
-            {REFERENCE_OPTIONS.map((reference) => (
-              <option key={reference.id} value={reference.id}>
-                {reference.name}
-              </option>
-            ))}
-          </select>
+          Expected Devanagari text (editable — try a WRONG sloka to see the
+          coverage gate refuse)
+          <textarea
+            value={expectedText}
+            onChange={(event) => setExpectedText(event.target.value)}
+            rows={3}
+            lang="sa-Deva"
+            className="rounded-xl border-2 border-cream-300 bg-white px-3 py-2 text-lg font-normal"
+          />
         </label>
 
-        <div className="flex flex-wrap gap-3">
-          <Button disabled aria-describedby="chant-record-disabled">
-            Record test audio
-          </Button>
-          <p id="chant-record-disabled" className="self-center text-sm text-ink-500">
-            Recording is disabled until the feature passes privacy and validation review.
-          </p>
+        <div className="flex flex-col gap-2">
+          <p className="font-semibold text-ink-700">Microphone test</p>
+          <div className="flex flex-wrap gap-3">
+            {recorder.status !== 'recording' ? (
+              <Button onClick={recorder.start} disabled={!recorder.supported}>
+                <Mic size={18} aria-hidden="true" /> Record
+              </Button>
+            ) : (
+              <Button onClick={recorder.stop}>
+                <Square size={18} aria-hidden="true" /> Stop ({recorder.elapsedSeconds}s)
+              </Button>
+            )}
+            {recorder.status === 'recorded' && recorder.recordingBlob && (
+              <>
+                <Button
+                  onClick={() => void analyze(recorder.recordingBlob!)}
+                  disabled={busy}
+                >
+                  <Play size={18} aria-hidden="true" /> Analyze recording
+                </Button>
+                <Button variant="secondary" onClick={recorder.reset}>
+                  <Trash2 size={18} aria-hidden="true" /> Discard
+                </Button>
+              </>
+            )}
+          </div>
+          {recorder.status === 'error' && (
+            <p className="text-sm text-lotus-700">
+              Microphone unavailable ({recorder.errorKind}); use file upload below.
+            </p>
+          )}
         </div>
 
         <label className="flex flex-col gap-2 font-semibold text-ink-700">
-          Upload local test audio
+          Or upload local test audio (stays in memory)
           <input
             type="file"
             accept="audio/*"
             onChange={(event) => setTestFile(event.target.files?.[0] ?? null)}
             className="min-h-11 rounded-xl border-2 border-cream-300 bg-white p-2 font-normal"
           />
-          <span className="text-sm font-normal text-ink-500">
-            The selected file remains in memory for this page and is not uploaded.
-          </span>
         </label>
+        {testFile && (
+          <Button onClick={() => void analyze(testFile)} disabled={busy} className="self-start">
+            <Upload size={18} aria-hidden="true" /> Analyze {testFile.name}
+          </Button>
+        )}
+
+        {busy && (
+          <p role="status" className="font-semibold text-teal-700">
+            Analyzing on this device…
+          </p>
+        )}
+        {labError && (
+          <p role="alert" className="rounded-xl bg-lotus-100 p-3 text-lotus-700">
+            {labError}
+          </p>
+        )}
       </Card>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <h2 className="font-bold text-ink-900">Waveform</h2>
-          <div
-            className="mt-3 flex min-h-28 items-center justify-center rounded-2xl border-2 border-dashed border-sky-300 bg-sky-100 text-center text-sm text-sky-700"
-            aria-label="Waveform placeholder"
-          >
-            Waveform placeholder — no signal processing installed
-          </div>
-        </Card>
-        <Card>
-          <h2 className="font-bold text-ink-900">Pitch contour</h2>
-          <div
-            className="mt-3 flex min-h-28 items-center justify-center rounded-2xl border-2 border-dashed border-lavender-300 bg-lavender-100 text-center text-sm text-lavender-700"
-            aria-label="Pitch contour placeholder"
-          >
-            Pitch contour placeholder — recitation styles remain separate
-          </div>
-        </Card>
-      </div>
-
-      <Card>
-        <h2 className="text-xl font-bold text-ink-900">Evaluation JSON</h2>
-        <p className="mt-1 text-sm text-ink-500">
-          Safe placeholder output; scores are intentionally absent.
-        </p>
-        <pre
-          className="mt-3 overflow-x-auto rounded-2xl bg-ink-900 p-4 text-sm text-cream-50"
-          data-testid="chant-evaluation-json"
-        >
-          {evaluationPreview}
-        </pre>
-      </Card>
+      {result && (
+        <>
+          <ChantFeedback result={result} />
+          <Card>
+            <h2 className="text-xl font-bold text-ink-900">Evaluation JSON</h2>
+            <p className="mt-1 text-sm text-ink-500">
+              Exact contract payload, including provenance and evidence.
+            </p>
+            <pre
+              className="mt-3 overflow-x-auto rounded-2xl bg-ink-900 p-4 text-sm text-cream-50"
+              data-testid="chant-evaluation-json"
+            >
+              {resultJson}
+            </pre>
+          </Card>
+        </>
+      )}
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Bookmark, Clock, ListChecks } from 'lucide-react'
+import { Bookmark, Clock, GraduationCap, ListChecks } from 'lucide-react'
 import { getSlokaById, SLOKAS } from '../content/slokas'
 import { useAppState } from '../hooks/useAppState'
+import { useChantCoach } from '../hooks/useChantCoach'
 import { useTranslation } from '../hooks/useTranslation'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { getLessonAvailability } from '../utils/progression'
@@ -19,6 +20,7 @@ export function LessonOverviewPage() {
   const { slokaId } = useParams()
   const { state, dispatch } = useAppState()
   const { t, language } = useTranslation()
+  const coach = useChantCoach()
   const navigate = useNavigate()
 
   const sloka = getSlokaById(slokaId)
@@ -214,6 +216,18 @@ export function LessonOverviewPage() {
               {t('practiceAgain')}
             </Button>
           )}
+          {coach.enabled &&
+            availability !== 'coming-soon' &&
+            availability !== 'locked' && (
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={() => navigate(routes.chantCoach(sloka.id))}
+              >
+                <GraduationCap size={20} aria-hidden="true" />
+                {t('chantCoachOpenAction')}
+              </Button>
+            )}
           <Link
             to={routes.path}
             className="inline-flex min-h-11 items-center rounded-2xl px-4 font-semibold text-teal-700 hover:bg-teal-100"

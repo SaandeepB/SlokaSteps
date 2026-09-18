@@ -8,6 +8,7 @@ export const routes = {
   lesson: (slokaId: string) => `/slokas/${slokaId}`,
   activity: (slokaId: string, activityId: string) =>
     `/slokas/${slokaId}/activity/${activityId}`,
+  chantCoach: (slokaId: string) => `/slokas/${slokaId}/coach`,
   stories: '/stories',
   epic: (epicId: string) => `/stories/${epicId}`,
   storyChapter: (epicId: string, chapterId: string) =>
@@ -31,6 +32,7 @@ export const routePatterns = {
   path: '/slokas',
   lesson: '/slokas/:slokaId',
   activity: '/slokas/:slokaId/activity/:activityId',
+  chantCoach: '/slokas/:slokaId/coach',
   stories: '/stories',
   epic: '/stories/:epicId',
   storyChapter: '/stories/:epicId/:chapterId',

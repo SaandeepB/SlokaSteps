@@ -234,7 +234,9 @@ let manifestRequestToken: object | null = null
 function fetchAudioManifest(): Promise<AudioManifest> {
   const controller =
     typeof AbortController === 'function' ? new AbortController() : null
-  let timeoutId = 0
+  // ReturnType keeps this portable between DOM and Node typings; the chant
+  // test helpers pulled @types/node into the program.
+  let timeoutId: ReturnType<typeof globalThis.setTimeout> | undefined
   const timeout = new Promise<never>((_resolve, reject) => {
     timeoutId = globalThis.setTimeout(() => {
       controller?.abort()

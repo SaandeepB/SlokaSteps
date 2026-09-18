@@ -65,7 +65,12 @@ export function SlokaTextBlock({
             </button>
           )}
           {wantsDevanagari && (
-            <p lang="sa-Deva" className={`${devanagariSize} font-semibold text-teal-800`}>
+            <p
+              lang="sa-Deva"
+              // whitespace-pre-line: multi-pada verses (e.g. an ashtakam
+              // verse per line entry) break where the content breaks.
+              className={`${devanagariSize} whitespace-pre-line font-semibold text-teal-800`}
+            >
               {line.devanagari}
             </p>
           )}

@@ -91,5 +91,35 @@ export const kn: {
     notFoundTitle: 'ಅಯ್ಯೋ! ಪುಟ ಸಿಗಲಿಲ್ಲ',
     notFoundBody: 'ಮಿತ್ರನಿಗೆ ಆ ಪುಟ ಸಿಗಲಿಲ್ಲ. ಮತ್ತೆ ಕಲಿಕೆಗೆ ಹೋಗೋಣ!',
     defaultLearnerName: 'ವಿದ್ಯಾರ್ಥಿ',
+
+    // Chant Coach (child-facing subset; the rest falls back to English)
+    chantCoachTitle: 'ಚಾಂಟ್ ಕೋಚ್',
+    chantCoachIntro:
+      'ನಿಮ್ಮ ಕೋಚ್ ಜೊತೆ ಒಂದೊಂದು ಸಾಲನ್ನೂ ಹಾಡಿ. ಮೊದಲು ಕೇಳಿ, ನಂತರ ಹಾಗೆಯೇ ಹಾಡಿ — ಗುರುಗಳ ಬಳಿ ಕಲಿತಂತೆ.',
+    chantCoachChecking: 'ಗಮನವಿಟ್ಟು ಕೇಳುತ್ತಿದ್ದೇನೆ…',
+    chantCoachNoSpeechNotice:
+      'ಈ ಬಾರಿ ನಿಮ್ಮ ಧ್ವನಿ ಕೇಳಿಸಲಿಲ್ಲ. ಸ್ವಲ್ಪ ಹತ್ತಿರ ಬಂದು ಜೋರಾಗಿ ಹಾಡಿ!',
+    chantCoachTooShortNotice:
+      'ತುಂಬಾ ಬೇಗ ಆಯಿತು! ಒಂದು ಉಸಿರು ತೆಗೆದುಕೊಂಡು ಪೂರ್ತಿ ಸಾಲನ್ನು ಹಾಡಿ.',
+    chantCoachAudioUnclearNotice:
+      'ಸ್ಪಷ್ಟವಾಗಿ ಕೇಳಿಸಲಿಲ್ಲ. ನಿಶ್ಯಬ್ದ ಜಾಗಕ್ಕೆ ಹೋಗಿ ಇನ್ನೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸೋಣ.',
+    chantCoachDifferentTextNotice:
+      'ಅದು ಬೇರೆ ಶ್ಲೋಕದಂತೆ ಕೇಳಿಸಿತು. ಈ ಸಾಲನ್ನು ಇನ್ನೊಮ್ಮೆ ಕೇಳಿ, ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
+    chantCoachSummaryLovely: 'ಬಹಳ ಸುಂದರವಾಗಿ ಹಾಡಿದಿರಿ! ಕೇಳಿದ್ದೆಲ್ಲವೂ ಹೊಂದಿಕೆಯಾಯಿತು.',
+    chantCoachSummaryPractice:
+      'ಬಹಳ ಹತ್ತಿರ ಬಂದಿರಿ! ಇನ್ನೊಮ್ಮೆ ಕೇಳಿ ಈ ಅಕ್ಷರಗಳನ್ನು ಅಭ್ಯಾಸ ಮಾಡಿ: {sounds}',
+    chantCoachSummaryTryClearer:
+      'ಒಳ್ಳೆಯ ಪ್ರಯತ್ನ! ಪ್ರತಿ ಅಕ್ಷರವೂ ಕೇಳಿಸುವಂತೆ ಸ್ವಲ್ಪ ಜೋರಾಗಿ, ನಿಧಾನವಾಗಿ ಹಾಡಿ.',
+    chantCoachMatchedLegend: 'ಹೊಂದಿತು',
+    chantCoachPracticeLegend: 'ಅಭ್ಯಾಸ ಮಾಡಿ',
+    chantCoachUnclearLegend: 'ಖಚಿತವಿಲ್ಲ',
+    chantCoachYourTurn: 'ನಿಮ್ಮ ಸರದಿ! ಈ ಸಾಲನ್ನು ಹಾಡಿ.',
+    chantCoachListenFirst: 'ಮೊದಲು ಸಾಲನ್ನು ಕೇಳಿ.',
+    chantCoachTryLineAgain: 'ಈ ಸಾಲನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಿ',
+    chantCoachNextLine: 'ಮುಂದಿನ ಸಾಲು',
+    chantCoachPreviousLine: 'ಹಿಂದಿನ ಸಾಲು',
+    chantCoachOpenAction: 'ಚಾಂಟ್ ಕೋಚ್ ಜೊತೆ ಅಭ್ಯಾಸ ಮಾಡಿ',
+    chantCoachLineOf: 'ಸಾಲು {current} / {total}',
+    chantCoachAllDone: 'ಕೋಚ್ ಜೊತೆ ಪ್ರತಿ ಸಾಲನ್ನೂ ಅಭ್ಯಾಸ ಮಾಡಿದಿರಿ. ಅದ್ಭುತ!',
   },
 }

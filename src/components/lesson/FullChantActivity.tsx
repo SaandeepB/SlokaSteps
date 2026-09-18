@@ -27,6 +27,7 @@ export function FullChantActivity({
   const { t } = useTranslation()
   const [attempted, setAttempted] = useState(false)
   const fullText = lines.map((line) => line.transliteration).join('. ')
+  const fullDevanagari = lines.map((line) => line.devanagari).join(' ')
 
   return (
     <div className="flex flex-col gap-6">
@@ -49,6 +50,7 @@ export function FullChantActivity({
       />
       <RecorderPanel
         expectedText={fullText}
+        expectedDevanagari={fullDevanagari}
         slokaId={slokaId}
         onAttempted={() => {
           setAttempted(true)

@@ -47,6 +47,26 @@ export class ParticipationEvaluationService implements ChantEvaluationService {
 
 const participationService = new ParticipationEvaluationService()
 
+/**
+ * The single scored-analyzer slot. Only the Chant Coach runtime registers
+ * here, and only after the on-device analyzer is actually loaded; clearing
+ * it (parent toggle off, worker disposed) restores participation-only
+ * behaviour everywhere at once. Call sites keep using
+ * `getEvaluationService()` and never know which is active — the result's
+ * `provenance` is the only truth about what happened.
+ */
+let scoredService: ChantEvaluationService | null = null
+
+export function registerScoredEvaluationService(
+  service: ChantEvaluationService | null,
+): void {
+  scoredService = service
+}
+
 export function getEvaluationService(): ChantEvaluationService {
+  return scoredService ?? participationService
+}
+
+export function getParticipationService(): ChantEvaluationService {
   return participationService
 }

@@ -29,6 +29,12 @@ export interface VoicePrivacyPreferences {
   allowCloudEvaluation: boolean
   retainPracticeRecordings: boolean
   allowModelTraining: false
+  /**
+   * Parent opt-in for the on-device Chant Coach check (internal-testing
+   * stage). Audio never leaves the device either way; off means recordings
+   * receive participation-only encouragement.
+   */
+  onDeviceChantCheck: boolean
 }
 
 export interface UserPreferences {

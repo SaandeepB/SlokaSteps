@@ -42,7 +42,8 @@ describe('V2 learning navigation', () => {
       { route: '/slokas', state: makeStateWithProfile() },
     )
 
-    expect(screen.getAllByText('Editorial review')).toHaveLength(7)
+    // 7 original interactive lessons + Shuklam Baradharam + Shivashtakam.
+    expect(screen.getAllByText('Editorial review')).toHaveLength(9)
     expect(screen.getAllByText('Draft')).toHaveLength(2)
     expect(
       screen.getByRole('link', {

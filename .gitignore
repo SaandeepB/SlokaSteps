@@ -10,3 +10,6 @@ dist
 
 # local-only model assets (weights have no explicit licence grant - see research/pronunciation-ai/06)
 models-local
+
+# generated onnxruntime-web runtime files (copied by scripts/chant/copy-ort-assets.mjs)
+public/ort

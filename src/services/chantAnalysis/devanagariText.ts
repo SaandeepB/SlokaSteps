@@ -19,9 +19,12 @@
 const VIRAMA = '्'
 const ANUSVARA = 'ं'
 
-// DANDA, DOUBLE DANDA, AVAGRAHA, OM, ASCII pipe, Vedic accents
-// (U+0951–U+0954, U+1CD0–U+1CFA), Devanagari and ASCII digits.
+// DANDA (U+0964), DOUBLE DANDA (U+0965), AVAGRAHA (U+093D), OM (U+0950),
+// ASCII pipe, Vedic accents (U+0951–U+0954, U+1CD0–U+1CFA), Devanagari
+// digits (U+0966–U+096F) and ASCII digits. The accent ranges are lone
+// combining marks; byte-level correctness is pinned by the parity fixtures.
 const DROP_CHARS =
+  // eslint-disable-next-line no-misleading-character-class -- stripping lone combining Vedic accents is exactly the intent (parity with common_text.py)
   /[।॥ऽॐ|॑-॔᳐-ᳺ०-९0-9]/g
 
 const WHITESPACE = /\s+/g
@@ -73,6 +76,38 @@ export function segmentAksharas(text: string): string[] {
   const stripped = stripSpaces(text)
   const matches = stripped.match(AKSHARA_RE)
   return matches ? matches.filter((m) => m.length > 0) : []
+}
+
+export interface AksharaSpan {
+  akshara: string
+  /** Char offsets into the input string (which must already be space-free). */
+  start: number
+  end: number
+}
+
+/**
+ * Like `segmentAksharas`, but over an already-canonicalised (space-free)
+ * string and with char spans, for mapping aksharas back to decode timing.
+ * The concatenated aksharas may skip stray non-akshara characters; spans are
+ * therefore not necessarily contiguous.
+ */
+export function segmentAksharasWithSpans(canonical: string): AksharaSpan[] {
+  const spans: AksharaSpan[] = []
+  for (const match of canonical.matchAll(AKSHARA_RE)) {
+    if (match[0].length === 0) continue
+    spans.push({
+      akshara: match[0],
+      start: match.index,
+      end: match.index + match[0].length,
+    })
+  }
+  return spans
+}
+
+/** Single-char membership test for the drop set (danda, om, digits, ...). */
+export function isDroppedChar(ch: string): boolean {
+  DROP_CHARS.lastIndex = 0
+  return DROP_CHARS.test(ch)
 }
 
 // --- canonicalisation used before alignment --------------------------------

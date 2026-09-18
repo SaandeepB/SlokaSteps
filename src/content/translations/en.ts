@@ -95,6 +95,61 @@ export const en = {
       'This is a simulated preview. Chant Coach did not listen to or check this recording.',
     chantCoachUnavailableNotice: 'Chant Coach could not check this recording yet.',
 
+    // Chant Coach (on-device analyzer, internal-testing stage)
+    chantCoachTitle: 'Chant Coach',
+    chantCoachIntro:
+      'Chant one line at a time with your coach. Listen first, then chant it back — just like learning beside a teacher.',
+    chantCoachChecking: 'Listening carefully…',
+    chantCoachNoSpeechNotice:
+      "I couldn't hear you that time. Let's move a little closer and chant out loud!",
+    chantCoachTooShortNotice:
+      'That was very quick! Take a breath and chant the whole line.',
+    chantCoachAudioUnclearNotice:
+      "I couldn't hear that clearly. Let's find a quiet spot and try once more.",
+    chantCoachDifferentTextNotice:
+      'That sounded like a different chant. Listen to this line once more, then try again.',
+    chantCoachSummaryLovely: 'Lovely chanting! Every sound I heard matched.',
+    chantCoachSummaryPractice:
+      "So close! Let's listen once more and practice these sounds: {sounds}",
+    chantCoachSummaryTryClearer:
+      'Good try! Chant a little louder and slower so I can hear every sound.',
+    chantCoachDimCompleteness: 'Heard {covered} of {expected} syllables of the line.',
+    chantCoachDimPronunciation:
+      '{matched} of the {assessed} clearly-heard syllables matched the text.',
+    chantCoachMatchedLegend: 'Matched',
+    chantCoachPracticeLegend: 'Practice',
+    chantCoachUnclearLegend: 'Not sure',
+    chantCoachProvenanceNote:
+      'Checked against the sloka text on this device. Nothing was uploaded.',
+    chantCoachTestingBadge: 'Coach preview — in family testing',
+    chantCoachTestingExplainer:
+      'The chant check is new and still being tested by families. It compares sounds with the sloka text — it is not a teacher, and being unsure is normal.',
+    chantCoachPreparing: 'Getting your coach ready… {percent}%',
+    chantCoachPreparingHint:
+      'This one-time download is large (about 220 MB). Please stay connected.',
+    chantCoachReady: 'Your coach is ready!',
+    chantCoachNotDownloaded: 'The coach voice model is not downloaded yet.',
+    chantCoachDownloadAction: 'Prepare Chant Coach',
+    chantCoachFailed:
+      'The coach could not start on this device. You can keep practicing — recordings are never blocked.',
+    chantCoachAssetsMissing:
+      'Chant Coach is not set up on this installation. Practice works normally without it.',
+    chantCoachDisabledNote:
+      'Chant Coach is off. A parent can turn it on in Settings.',
+    chantCoachYourTurn: 'Your turn! Chant this line.',
+    chantCoachListenFirst: 'Listen to the line first.',
+    chantCoachTryLineAgain: 'Practice This Line Again',
+    chantCoachNextLine: 'Next Line',
+    chantCoachPreviousLine: 'Previous Line',
+    chantCoachOpenAction: 'Practice with Chant Coach',
+    chantCoachLineOf: 'Line {current} of {total}',
+    chantCoachAllDone:
+      'You practiced every line with your coach. Beautiful work!',
+    chantCoachParentToggleLabel: 'On-device chant check (testing preview)',
+    chantCoachParentToggleHelp:
+      'Checks recordings against the sloka text on this device only — audio never leaves the device. New and under family testing; feedback is gentle and can be unsure. Turning this on downloads a large (~220 MB) model file once.',
+    chantCoachStatusLabel: 'Chant check',
+
     // Audio and microphone messages
     speechUnavailable:
       'The practice voice is not available in this browser. You can still read the line and continue.',
