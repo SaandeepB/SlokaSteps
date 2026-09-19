@@ -5,6 +5,7 @@ import type {
   DailyGoalMinutes,
   PracticeHistoryEntry,
   SlokaProgress,
+  StarCount,
   StoryChapterProgress,
   SupportedLanguage,
   UserPreferences,
@@ -53,7 +54,18 @@ export type AppAction =
     }
   | { type: 'RECORD_INCORRECT_ATTEMPT'; slokaId: string }
   | { type: 'RECORD_RECORDING_ATTEMPTED'; slokaId: string }
-  | { type: 'COMPLETE_LESSON'; slokaId: string; today: string; nowIso: string }
+  | {
+      type: 'COMPLETE_LESSON'
+      slokaId: string
+      today: string
+      nowIso: string
+      /**
+       * Stars from a graded chant test. When present it replaces the
+       * puzzle-mistake stars, so completion reflects the recitation grade —
+       * a lesson gated on passing the test carries its grade here.
+       */
+      testStars?: StarCount
+    }
   | { type: 'START_STORY_CHAPTER'; chapterId: string }
   | {
       type: 'ADVANCE_STORY_ACTIVITY'
@@ -291,7 +303,8 @@ function reduceAppState(
       if (!sloka || !isLessonEnterable(state, action.slokaId)) return state
       const progress =
         state.progress.slokas[action.slokaId] ?? createSlokaProgress(action.slokaId)
-      const stars = starsForIncorrectAttempts(progress.incorrectAttempts)
+      const stars =
+        action.testStars ?? starsForIncorrectAttempts(progress.incorrectAttempts)
       const isFirstCompletion = !progress.xpAwarded
       const historyEntry: PracticeHistoryEntry = {
         id: `${action.nowIso}:${action.slokaId}`,

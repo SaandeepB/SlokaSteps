@@ -37,7 +37,7 @@ const lines: SlokaLine[] = [
  */
 export const sarveBhavantu: Sloka = {
   id,
-  order: 9,
+  order: 11,
   level: 1,
   title: 'Sarve Bhavantu Sukhinah',
   theme: 'Kindness and Well-Being for All',

@@ -91,5 +91,35 @@ export const te: {
     notFoundTitle: 'అయ్యో! పేజీ కనబడలేదు',
     notFoundBody: 'మిత్రకు ఆ పేజీ కనబడలేదు. మళ్ళీ నేర్చుకోవడానికి వెళ్దాం!',
     defaultLearnerName: 'విద్యార్థి',
+
+    // Chant Coach (child-facing subset; the rest falls back to English)
+    chantCoachTitle: 'చాంట్ కోచ్',
+    chantCoachIntro:
+      'మీ కోచ్‌తో కలిసి ఒక్కో పంక్తి పాడండి. ముందు వినండి, తరువాత అలాగే పాడండి — గురువుగారి దగ్గర నేర్చుకున్నట్టే.',
+    chantCoachChecking: 'జాగ్రత్తగా వింటున్నాను…',
+    chantCoachNoSpeechNotice:
+      'ఈసారి మీ గొంతు వినబడలేదు. కొంచెం దగ్గరగా వచ్చి గట్టిగా పాడండి!',
+    chantCoachTooShortNotice:
+      'చాలా త్వరగా అయిపోయింది! ఒక ఊపిరి తీసుకుని పూర్తి పంక్తి పాడండి.',
+    chantCoachAudioUnclearNotice:
+      'స్పష్టంగా వినబడలేదు. నిశ్శబ్దమైన చోటికి వెళ్ళి మరోసారి ప్రయత్నిద్దాం.',
+    chantCoachDifferentTextNotice:
+      'అది వేరే శ్లోకంలా వినిపించింది. ఈ పంక్తిని మరోసారి విని, మళ్ళీ ప్రయత్నించండి.',
+    chantCoachSummaryLovely: 'చాలా అందంగా పాడారు! విన్నవన్నీ సరిపోయాయి.',
+    chantCoachSummaryPractice:
+      'దగ్గరగా వచ్చేశారు! మరోసారి విని ఈ అక్షరాలను సాధన చేయండి: {sounds}',
+    chantCoachSummaryTryClearer:
+      'మంచి ప్రయత్నం! ప్రతి అక్షరం వినబడేలా కొంచెం గట్టిగా, నెమ్మదిగా పాడండి.',
+    chantCoachMatchedLegend: 'సరిపోయింది',
+    chantCoachPracticeLegend: 'సాధన చేయండి',
+    chantCoachUnclearLegend: 'ఖచ్చితం కాదు',
+    chantCoachYourTurn: 'మీ వంతు! ఈ పంక్తి పాడండి.',
+    chantCoachListenFirst: 'ముందు పంక్తిని వినండి.',
+    chantCoachTryLineAgain: 'ఈ పంక్తిని మళ్ళీ సాధన చేయండి',
+    chantCoachNextLine: 'తరువాతి పంక్తి',
+    chantCoachPreviousLine: 'మునుపటి పంక్తి',
+    chantCoachOpenAction: 'చాంట్ కోచ్‌తో సాధన చేయండి',
+    chantCoachLineOf: 'పంక్తి {current} / {total}',
+    chantCoachAllDone: 'కోచ్‌తో ప్రతి పంక్తినీ సాధన చేశారు. అద్భుతం!',
   },
 }

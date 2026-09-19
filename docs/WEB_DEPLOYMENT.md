@@ -65,6 +65,46 @@ For root hosting, replace `/SlokaSteps/` with `/`. For GitHub Pages, deploy the
 contents of `dist/` and keep `dist/404.html`; no server rewrite configuration
 is available there.
 
+## Chant Coach model assets (on-device analyzer)
+
+The on-device Chant Coach loads a large model that is deliberately NOT part of
+the built site: the Su-śrotā ASR weights carry no explicit licence grant
+(`research/pronunciation-ai/06`), so they are provisioned per deployment, never
+committed and never bundled. In dev and `vite preview` a plugin serves them
+from the git-ignored `models-local/chant/` directory; production hosting must
+place the same four files where the app fetches them.
+
+1. **Provision the assets.** Regenerate them from the checkpoint with
+   `research/pronunciation-ai/scripts/export_web_assets.py` (writes
+   `models-local/chant/`), then copy that directory to `<base>/models/chant/`
+   on the host — i.e. served at `/<base>/models/chant/model-manifest.json`,
+   `frontend.json`, `sa_tokenizer.json`, and `susrota_ctc_fp16.onnx`
+   (~235 MB). Set `VITE_CHANT_MODEL_BASE_URL` at build time only to override
+   that default location. If the assets are absent the app degrades cleanly to
+   participation-only encouragement; it never fails into pretend analysis.
+
+2. **Serve the onnxruntime-web runtime.** `prebuild`/`predev` copy the wasm
+   runtime into `public/ort/`, so a normal build already emits it under
+   `<base>/ort/`. Confirm the `.wasm` files ship with the site.
+
+3. **Cross-origin isolation (recommended, not required).** Serve the two
+   headers `Cross-Origin-Opener-Policy: same-origin` and
+   `Cross-Origin-Embedder-Policy: require-corp` so onnxruntime-web can use
+   multithreaded wasm. Without them the analyzer still runs, single-threaded
+   or on WebGPU. Because these headers make the browser require CORP on every
+   subresource, keep all assets same-origin (this app already does).
+
+```text
+# Netlify-style headers for the whole site
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+```
+
+The chant check needs a secure context (HTTPS or localhost) for the microphone
+and, on most browsers, for cross-origin isolation. The parent preference is off
+by default; the model downloads (and caches) only after a parent opts in.
+
 ## Release checks
 
 After building:

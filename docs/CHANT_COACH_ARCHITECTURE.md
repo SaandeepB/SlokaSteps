@@ -1,9 +1,42 @@
 # Chant Coach architecture
 
-Chant Coach is a disabled future feature. It must never imply that prototype,
-mock, or unvalidated processing can judge a child's Sanskrit pronunciation.
-The current feature flag is `false`; the development Chant Lab provides only
-structured placeholders and does not analyze or upload audio.
+Chant Coach is an on-device analyzer in the **internal-testing** stage of
+`CHANT_COACH_VALIDATION_PLAN.md` (§8 stage 1–2). It runs entirely in the
+browser, never uploads audio, and is gated three ways: the build-time
+`chantCoachEnabled` flag, a parent-only preference (`onDeviceChantCheck`,
+default **off**), and the presence of locally provisioned model assets. With
+any gate closed, recordings receive participation-only encouragement exactly as
+before. It must never imply that its output is a qualified teacher's judgement:
+every child-facing surface carries the "coach preview — in family testing"
+label and the "checked against the sloka text on this device" provenance note.
+
+## What it does, and does not, claim
+
+The analyzer compares the recording against the sloka's reference **text** (not
+against an approved recording), abstaining per-akṣara wherever the decode
+consensus is absent, and refusing the whole recording through a coverage gate
+before any per-segment verdict exists. It therefore produces a `verified`
+result, never an `analyzed` one — see `src/types/chant.ts`. Its thresholds are
+provisional and not yet educator-validated; the staged-release gates in
+`CHANT_COACH_VALIDATION_PLAN.md` still govern any move beyond internal testing.
+The measured basis for the coverage gate (wrong-text input producing 32/32
+false deviations without it) is in `research/pronunciation-ai/10`.
+
+## Pipeline (all on-device)
+
+```text
+session-only Blob -> Web Audio decode to 16 kHz mono -> energy VAD (voicedMs)
+  -> log-mel frontend (melFrontend.ts) -> ONNX encoder+CTC (worker, WebGPU/wasm)
+  -> Sanskrit-slice greedy decode x4 blank penalties (ctcDecode.ts)
+  -> coverage gate (coverage.ts) --insufficient--> unscored `unavailable`
+                                 --sufficient----> per-akṣara verify + abstain
+  -> VerifiedChantEvaluation (segments: matched | deviation | unclear)
+```
+
+Every layer is a verified TypeScript port of the research harness, held to
+byte-identical output against the real checkpoint by the fixtures under
+`src/test/fixtures/chant/` (`chantText`, `chantFrontend`, `chantScore`,
+`chantCoverage`, and the end-to-end `model/chantModelParity` suite).
 
 ## User experience boundary
 
@@ -49,12 +82,18 @@ audio, waveform, pitch-contour, and alignment assets.
 and reference IDs, age band, and explicitly requested dimensions. It returns a
 versioned result whose dimensions remain separate.
 
-- `MockChantEvaluationService` is for UI development. It does not inspect audio,
-  labels every result simulated, returns `unable-to-evaluate`, and omits scores.
-- `LocalPitchEvaluationService` is a placeholder for optional on-device signal
-  processing. It currently returns unavailable with no score.
-- `ServerChantEvaluationService` is a fail-closed placeholder. It performs no
-  network request and throws an `unable-to-evaluate` error.
+- `ParticipationEvaluationService` (`services/pronunciation.ts`) is the default
+  registered evaluator: it inspects nothing and returns participation-only
+  encouragement whose type cannot carry a score.
+- `OnDeviceChantEvaluationService` (`services/chantAnalysis/`) is the shipped
+  analyzer. The Chant Coach runtime registers it into the single scored slot
+  only after the worker loads; clearing the slot (parent toggle off, worker
+  disposed) restores participation-only behaviour everywhere at once. Call
+  sites keep calling `getEvaluationService()` and never learn which is active —
+  the result's `provenance` is the only truth about what happened.
+- `MockChantEvaluationService`, `LocalPitchEvaluationService`, and
+  `ServerChantEvaluationService` remain fail-closed placeholders for UI
+  development and future cloud/pitch work; none inspect or upload audio.
 
 Provider clients must live behind this domain interface. UI components must not
 know vendor request formats or API keys.
@@ -86,9 +125,14 @@ training by default, and `allowModelTraining` remains `false`.
 
 ## Release requirements
 
-Keep `chantCoachEnabled` false until approved reference recordings exist, the
-validation plan passes for every enabled dimension and supported population,
-privacy/security/legal reviews are recorded, human escalation and correction
-paths exist, and production monitoring can detect harm without retaining child
-audio or identifiers unnecessarily.
+The analyzer is in the internal-testing stage. Moving it beyond that — to a
+consented parent-supervised study and then any broader release — still requires
+everything the validation plan lists: educator-defined acceptance criteria,
+reviewed references where audio-reference dimensions are enabled, per-dimension
+validation on a consented corpus across every supported subgroup, recorded
+privacy/security/legal reviews, human escalation and correction paths, and
+production monitoring that detects harm without retaining child audio or
+identifiers. Two invariants hold at every stage: `allowModelTraining` stays
+`false`, and lesson rewards (XP, stars, badges) stay independent of evaluation
+availability and outcome.
 

@@ -1,0 +1,42 @@
+{
+ "_doc": "MFCC+CMVN+DTW similarity for real clip pairs, computed by test_audio_similarity.py. The TS grader must reproduce these within tolerance. Clips are git-ignored (CC BY 4.0 prathoshap/sushrota-sanskrit-asr-data); the node test skips when absent.",
+ "dtwScale": 0.5,
+ "nMfcc": 13,
+ "pairs": [
+  {
+   "a": "heldout_04_dur3.8s",
+   "b": "heldout_04_dur3.8s",
+   "similarity": 0.9999999936710929
+  },
+  {
+   "a": "heldout_04_dur3.8s",
+   "b": "heldout_06_dur4.2s",
+   "similarity": 0.6031665003424849
+  },
+  {
+   "a": "heldout_10_dur6.2s",
+   "b": "heldout_12_dur8.0s",
+   "similarity": 0.6879446417761164
+  },
+  {
+   "a": "heldout_13_dur10.2s",
+   "b": "heldout_14_dur13.8s",
+   "similarity": 0.43906780073377955
+  },
+  {
+   "a": "heldout_00_dur2.0s",
+   "b": "heldout_15_dur24.1s",
+   "similarity": 0.2638616068191356
+  },
+  {
+   "a": "heldout_02_dur3.4s",
+   "b": "heldout_09_dur5.8s",
+   "similarity": 0.4110210074832893
+  },
+  {
+   "a": "heldout_01_dur3.2s",
+   "b": "heldout_08_dur5.2s",
+   "similarity": 0.4263276946339641
+  }
+ ]
+}

@@ -91,5 +91,91 @@ export const hi: {
     notFoundTitle: 'अरे! पृष्ठ नहीं मिला',
     notFoundBody: 'मित्र को वह पृष्ठ नहीं मिला। चलो सीखने की ओर वापस चलें!',
     defaultLearnerName: 'विद्यार्थी',
+
+    // Chant Coach
+    chantCoachTitle: 'चैंट कोच',
+    chantCoachIntro:
+      'अपने कोच के साथ एक-एक पंक्ति गाओ। पहले सुनो, फिर वैसे ही गाओ — जैसे गुरुजी के पास बैठकर सीखते हैं।',
+    chantCoachChecking: 'ध्यान से सुन रही/रहा हूँ…',
+    chantCoachNoSpeechNotice:
+      'इस बार मुझे तुम्हारी आवाज़ नहीं सुनाई दी। थोड़ा पास आकर ज़ोर से गाओ!',
+    chantCoachTooShortNotice: 'बहुत जल्दी हो गया! एक साँस लो और पूरी पंक्ति गाओ।',
+    chantCoachAudioUnclearNotice:
+      'आवाज़ साफ़ नहीं आई। चलो किसी शांत जगह जाकर एक बार और कोशिश करें।',
+    chantCoachDifferentTextNotice:
+      'यह कोई और श्लोक जैसा लगा। इस पंक्ति को एक बार फिर सुनो, फिर कोशिश करो।',
+    chantCoachSummaryLovely: 'बहुत सुंदर! जो भी सुना, सब मिल गया।',
+    chantCoachSummaryPractice:
+      'बस थोड़ा-सा और! एक बार फिर सुनकर इन अक्षरों का अभ्यास करो: {sounds}',
+    chantCoachSummaryTryClearer:
+      'अच्छी कोशिश! थोड़ा ज़ोर से और धीरे-धीरे गाओ ताकि हर अक्षर सुनाई दे।',
+    chantCoachMatchedLegend: 'मिल गया',
+    chantCoachPracticeLegend: 'अभ्यास करें',
+    chantCoachUnclearLegend: 'पक्का नहीं',
+    chantCoachProvenanceNote:
+      'श्लोक के पाठ से इसी डिवाइस पर मिलान हुआ। कुछ भी अपलोड नहीं हुआ।',
+    chantCoachTestingBadge: 'कोच पूर्वावलोकन — पारिवारिक परीक्षण में',
+    chantCoachTestingExplainer:
+      'यह जाँच नई है और अभी परिवारों के साथ परखी जा रही है। यह आवाज़ का श्लोक के पाठ से मिलान करती है — यह कोई गुरुजी नहीं है, और "पक्का नहीं" आना सामान्य है।',
+    chantCoachPreparing: 'तुम्हारा कोच तैयार हो रहा है… {percent}%',
+    chantCoachPreparingHint:
+      'यह एक बार का बड़ा डाउनलोड है (लगभग 220 MB)। कृपया इंटरनेट से जुड़े रहें।',
+    chantCoachReady: 'तुम्हारा कोच तैयार है!',
+    chantCoachNotDownloaded: 'कोच का मॉडल अभी डाउनलोड नहीं हुआ है।',
+    chantCoachDownloadAction: 'चैंट कोच तैयार करें',
+    chantCoachFailed:
+      'इस डिवाइस पर कोच शुरू नहीं हो सका। अभ्यास फिर भी चलता रहेगा — रिकॉर्डिंग कभी नहीं रुकती।',
+    chantCoachAssetsMissing:
+      'इस इंस्टॉलेशन में चैंट कोच सेट नहीं है। अभ्यास सामान्य रूप से चलता रहेगा।',
+    chantCoachDisabledNote:
+      'चैंट कोच बंद है। अभिभावक इसे सेटिंग्स में चालू कर सकते हैं।',
+    chantCoachYourTurn: 'तुम्हारी बारी! यह पंक्ति गाओ।',
+    chantCoachListenFirst: 'पहले पंक्ति सुनो।',
+    chantCoachTryLineAgain: 'यह पंक्ति फिर से अभ्यास करें',
+    chantCoachNextLine: 'अगली पंक्ति',
+    chantCoachPreviousLine: 'पिछली पंक्ति',
+    chantCoachOpenAction: 'चैंट कोच के साथ अभ्यास करें',
+    chantCoachLineOf: 'पंक्ति {current} / {total}',
+    chantCoachAllDone: 'तुमने कोच के साथ हर पंक्ति का अभ्यास किया। बहुत बढ़िया!',
+    chantCoachParentToggleLabel: 'डिवाइस पर श्लोक-जाँच (परीक्षण पूर्वावलोकन)',
+    chantCoachParentToggleHelp:
+      'रिकॉर्डिंग का मिलान श्लोक के पाठ से इसी डिवाइस पर होता है — आवाज़ कभी डिवाइस से बाहर नहीं जाती। यह सुविधा नई है और परीक्षण में है; प्रतिक्रिया कोमल रहती है और "पक्का नहीं" भी हो सकती है। चालू करने पर एक बार लगभग 220 MB का मॉडल डाउनलोड होगा।',
+    chantCoachStatusLabel: 'श्लोक-जाँच',
+
+    // Chant Test
+    chantTestTitle: 'श्लोक परीक्षा',
+    chantTestListenFirst: 'पहले पूरा श्लोक सुनो।',
+    chantTestSetReferenceTitle: 'अपना आदर्श श्लोक रिकॉर्ड करो',
+    chantTestSetReferenceHelp:
+      'पूरे श्लोक का अपना सबसे अच्छा रूप रिकॉर्ड करो। यही तुम्हारा आदर्श बनेगा — आगे तुम्हें इससे मिलान पर अंक मिलेंगे। यह केवल इसी डिवाइस पर रहता है।',
+    chantTestReferenceSaved:
+      'आदर्श सहेजा गया! अब से इस श्लोक का गायन तुम्हारे अपने आदर्श से मिलान करके आँका जाएगा।',
+    chantTestReferenceSaveFailed:
+      'वह रिकॉर्डिंग आदर्श के रूप में सहेजी नहीं जा सकी। थोड़ा ज़ोर से गाकर फिर कोशिश करो।',
+    chantTestTakeTitle: 'परीक्षा देने के लिए पूरा श्लोक गाओ',
+    chantTestTakeHelp:
+      'तुम्हें इस बात पर अंक मिलते हैं कि तुम अपने आदर्श श्लोक से कितना मिलते हो। तुम जितनी बार चाहो कोशिश कर सकते हो।',
+    chantTestGrading: 'तुम्हारे गायन को आँका जा रहा है…',
+    chantTestMatch: 'तुम्हारे आदर्श से मिलान: {percent}%',
+    chantTestPassed: 'तुमने श्लोक परीक्षा पास कर ली!',
+    chantTestFailedTitle: 'अभी थोड़ा बाकी है',
+    chantTestFailedBody:
+      'अपना आदर्श फिर से सुनो, फिर एक बार और गाओ। पास होने के लिए और नज़दीकी मिलान चाहिए।',
+    chantTestTooQuiet: 'मुझे तुम्हारी आवाज़ साफ़ नहीं सुनाई दी। थोड़ा पास आकर ज़ोर से गाओ।',
+    chantTestTooShort: 'यह बहुत छोटा था। पूरा श्लोक गाओ।',
+    chantTestUndecodable: 'वह रिकॉर्डिंग पढ़ी नहीं जा सकी। चलो फिर से रिकॉर्ड करें।',
+    chantTestRecord: 'अपना गायन रिकॉर्ड करो',
+    chantTestRecordReference: 'अपना आदर्श रिकॉर्ड करो',
+    chantTestRetry: 'फिर कोशिश करो',
+    chantTestReRecordReference: 'अपना आदर्श फिर से रिकॉर्ड करो',
+    chantTestPlayReference: 'अपना आदर्श सुनो',
+    chantTestGradeExcellent: 'शानदार!',
+    chantTestGradeGreat: 'बहुत बढ़िया!',
+    chantTestGradeGood: 'अच्छा!',
+    chantTestGradeKeepPractising: 'अभ्यास जारी रखो',
+    chantTestFinishGated: 'पाठ पूरा करने के लिए श्लोक परीक्षा पास करो',
+    chantTestReferenceExists: 'तुम्हारा आदर्श श्लोक सहेजा गया है।',
+    chantTestMicOffNote:
+      'माइक्रोफ़ोन अभ्यास बंद है, इसलिए इस पाठ का मूल्यांकन नहीं होगा। तुम फिर भी पूरा कर सकते हो।',
   },
 }

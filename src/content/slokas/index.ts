@@ -6,10 +6,16 @@ import { tvamevaMata } from './tvamevaMata'
 import { karagreVasate } from './karagreVasate'
 import { shubhamKaroti } from './shubhamKaroti'
 import { lokahSamastah } from './lokahSamastah'
+import { shuklambaradharam } from './shuklambaradharam'
+import { shivashtakam } from './shivashtakam'
 import { asatoMa } from './asatoMa'
 import { sarveBhavantu } from './sarveBhavantu'
 
-/** Beginner Path — Level 1, ordered. */
+/**
+ * Beginner Path — Level 1, ordered. The coming-soon lessons sit at the end:
+ * sequential unlocking walks `order`, and a coming-soon lesson can never be
+ * completed, so anything ordered after one would be permanently locked.
+ */
 export const SLOKAS: Sloka[] = [
   saraswatiNamastubhyam,
   vakratundaMahakaya,
@@ -18,6 +24,8 @@ export const SLOKAS: Sloka[] = [
   karagreVasate,
   shubhamKaroti,
   lokahSamastah,
+  shuklambaradharam,
+  shivashtakam,
   asatoMa,
   sarveBhavantu,
 ]

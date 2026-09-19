@@ -50,6 +50,7 @@ export function createDefaultPreferences(): UserPreferences {
       allowCloudEvaluation: false,
       retainPracticeRecordings: false,
       allowModelTraining: false,
+      onDeviceChantCheck: false,
     },
     allowFutureCommunityFeatures: false,
   }
@@ -147,6 +148,7 @@ function sanitizePreferences(value: unknown): UserPreferences {
       allowCloudEvaluation: voice.allowCloudEvaluation === true,
       retainPracticeRecordings: voice.retainPracticeRecordings === true,
       allowModelTraining: false,
+      onDeviceChantCheck: voice.onDeviceChantCheck === true,
     },
     allowFutureCommunityFeatures: value.allowFutureCommunityFeatures === true,
   }

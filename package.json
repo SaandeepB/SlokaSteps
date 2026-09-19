@@ -5,7 +5,9 @@
   "type": "module",
   "description": "Sloka Steps - a child-friendly multilingual app for learning Sanskrit slokas and epic stories.",
   "scripts": {
+    "predev": "node scripts/chant/copy-ort-assets.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/chant/copy-ort-assets.mjs",
     "build": "tsc -b && vite build && node scripts/build-spa-fallback.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
@@ -20,6 +22,7 @@
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
+    "onnxruntime-web": "^1.20.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.5.3"
@@ -38,6 +41,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "jsdom": "^26.1.0",
+    "onnxruntime-node": "^1.20.1",
     "tailwindcss": "^4.1.7",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.0",

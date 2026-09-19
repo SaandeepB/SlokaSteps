@@ -5,6 +5,21 @@ disabled prototype. It deliberately sets no invented accuracy threshold;
 qualified pronunciation educators, child-safety reviewers, and statistical
 specialists must define acceptance criteria before evaluation begins.
 
+> **Current stage (2026-09-18): §8 stage 1–2, internal / adult testing.** The
+> on-device analyzer is implemented and running behind a parent-off-by-default
+> toggle, with a "coach preview — in family testing" label on every child-facing
+> surface. What software could verify has been verified: byte-for-byte parity
+> with the research checkpoint across all layers, the coverage gate refusing the
+> measured hard negatives (wrong-text, silence, noise), fail-closed behaviour on
+> every error path, and an end-to-end browser run on real held-out audio
+> (WebGPU). What this plan reserves for people has **not** been done and is not
+> claimed: no educator-defined acceptance criteria, no reviewed reference
+> recordings, no consented child corpus, no blind expert ground truth, no
+> subgroup validation, and no legal review. Stages 3–5 remain gated on those.
+> Thresholds in `services/chantAnalysis/coverage.ts` are provisional, calibrated
+> only against the small adult fixture set, and must be re-derived against a
+> labelled corpus before any move past internal testing.
+
 ## 1. Define intended use
 
 - State the supported slokas, age bands, languages, devices, environments,

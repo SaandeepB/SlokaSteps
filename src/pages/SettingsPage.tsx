@@ -4,6 +4,7 @@ import { LanguageSelector } from '../components/common/LanguageSelector'
 import { ParentGate } from '../components/parent/ParentGate'
 import type { GateQuestion } from '../components/parent/ParentGate'
 import { useAppState } from '../hooks/useAppState'
+import { useChantCoach } from '../hooks/useChantCoach'
 import { useTranslation } from '../hooks/useTranslation'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { DAILY_GOAL_OPTIONS } from '../types'
@@ -36,7 +37,9 @@ export function SettingsPage({ fixedGateQuestion }: SettingsPageProps = {}) {
   const microphoneId = useId()
   const cloudId = useId()
   const retainId = useId()
+  const chantCheckId = useId()
   const communityId = useId()
+  const chantCoach = useChantCoach()
   const [saveNotice, setSaveNotice] = useState<
     'saving' | 'saved' | 'failed' | null
   >(null)
@@ -244,9 +247,39 @@ export function SettingsPage({ fixedGateQuestion }: SettingsPageProps = {}) {
               help="Version 2 does not persist recordings; this preference reserves the parent choice for a future implementation."
               onChange={(checked) => updateVoicePrivacy({ retainPracticeRecordings: checked })}
             />
+            {FEATURE_FLAGS.chantCoachEnabled && (
+              <>
+                <ToggleRow
+                  id={chantCheckId}
+                  checked={state.preferences.voicePrivacy.onDeviceChantCheck}
+                  label={t('chantCoachParentToggleLabel')}
+                  help={t('chantCoachParentToggleHelp')}
+                  onChange={(checked) =>
+                    updateVoicePrivacy({ onDeviceChantCheck: checked })
+                  }
+                />
+                {state.preferences.voicePrivacy.onDeviceChantCheck && (
+                  <p role="status" className="rounded-xl bg-teal-100 p-3 text-sm text-ink-700">
+                    {t('chantCoachStatusLabel')}:{' '}
+                    {chantCoach.status === 'ready'
+                      ? `${t('chantCoachReady')} (${chantCoach.executionProvider ?? 'wasm'})`
+                      : chantCoach.status === 'preparing'
+                        ? t('chantCoachPreparing', {
+                            percent: Math.round(chantCoach.progress * 100),
+                          })
+                        : chantCoach.status === 'assets-missing'
+                          ? t('chantCoachAssetsMissing')
+                          : chantCoach.status === 'failed'
+                            ? t('chantCoachFailed')
+                            : t('chantCoachNotDownloaded')}
+                  </p>
+                )}
+              </>
+            )}
             <p className="rounded-xl bg-sky-100 p-3 text-sm text-ink-700">
-              Model training is always disabled. Chant Coach is{' '}
-              {FEATURE_FLAGS.chantCoachEnabled ? 'enabled' : 'disabled'}.
+              Model training is always disabled. The chant check never uploads
+              audio: it runs entirely on this device, and it is a testing
+              preview — not a teacher&apos;s judgement.
             </p>
           </Card>
 

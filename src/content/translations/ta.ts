@@ -91,5 +91,36 @@ export const ta: {
     notFoundTitle: 'அடடா! பக்கம் கிடைக்கவில்லை',
     notFoundBody: 'மித்ராவால் அந்தப் பக்கத்தைக் கண்டுபிடிக்க முடியவில்லை. மீண்டும் கற்கச் செல்வோம்!',
     defaultLearnerName: 'மாணவர்',
+
+    // Chant Coach (child-facing subset; the rest falls back to English)
+    chantCoachTitle: 'சாண்ட் கோச்',
+    chantCoachIntro:
+      'உங்கள் பயிற்சியாளருடன் ஒவ்வொரு வரியாகப் பாடுங்கள். முதலில் கேளுங்கள், பிறகு அப்படியே பாடுங்கள் — ஆசிரியர் அருகில் கற்பது போல.',
+    chantCoachChecking: 'கவனமாகக் கேட்கிறேன்…',
+    chantCoachNoSpeechNotice:
+      'இந்த முறை உங்கள் குரல் கேட்கவில்லை. கொஞ்சம் அருகில் வந்து சத்தமாகப் பாடுங்கள்!',
+    chantCoachTooShortNotice:
+      'மிக விரைவாக முடிந்தது! ஒரு மூச்சு எடுத்து முழு வரியையும் பாடுங்கள்.',
+    chantCoachAudioUnclearNotice:
+      'தெளிவாகக் கேட்கவில்லை. அமைதியான இடத்திற்குச் சென்று மீண்டும் முயற்சிப்போம்.',
+    chantCoachDifferentTextNotice:
+      'அது வேறு ஸ்லோகம் போலக் கேட்டது. இந்த வரியை மீண்டும் கேட்டு, பிறகு முயற்சிக்கவும்.',
+    chantCoachSummaryLovely: 'அழகாகப் பாடினீர்கள்! கேட்ட அனைத்தும் பொருந்தியது.',
+    chantCoachSummaryPractice:
+      'மிக அருகில் வந்துவிட்டீர்கள்! மீண்டும் கேட்டு இந்த எழுத்துக்களைப் பயிற்சி செய்யுங்கள்: {sounds}',
+    chantCoachSummaryTryClearer:
+      'நல்ல முயற்சி! ஒவ்வொரு எழுத்தும் கேட்கும்படி சற்று சத்தமாக, மெதுவாகப் பாடுங்கள்.',
+    chantCoachMatchedLegend: 'பொருந்தியது',
+    chantCoachPracticeLegend: 'பயிற்சி செய்யுங்கள்',
+    chantCoachUnclearLegend: 'உறுதியில்லை',
+    chantCoachYourTurn: 'உங்கள் முறை! இந்த வரியைப் பாடுங்கள்.',
+    chantCoachListenFirst: 'முதலில் வரியைக் கேளுங்கள்.',
+    chantCoachTryLineAgain: 'இந்த வரியை மீண்டும் பயிற்சி செய்யுங்கள்',
+    chantCoachNextLine: 'அடுத்த வரி',
+    chantCoachPreviousLine: 'முந்தைய வரி',
+    chantCoachOpenAction: 'சாண்ட் கோச்சுடன் பயிற்சி செய்யுங்கள்',
+    chantCoachLineOf: 'வரி {current} / {total}',
+    chantCoachAllDone:
+      'பயிற்சியாளருடன் ஒவ்வொரு வரியையும் பயிற்சி செய்தீர்கள். அருமை!',
   },
 }

@@ -75,6 +75,58 @@ describe('unified V2 progress', () => {
     expect(state.progress.practiceHistory[0].kind).toBe('practice')
   })
 
+  it('uses the Chant Test grade for stars when provided, over puzzle mistakes', () => {
+    const slokaId = 'saraswati-namastubhyam'
+    // Two puzzle mistakes would normally cap stars at 2; a passed test at 3
+    // stars must win, because completion should reflect the recitation grade.
+    let state = run(
+      createDefaultAppState(),
+      { type: 'START_LESSON', slokaId },
+      { type: 'RECORD_INCORRECT_ATTEMPT', slokaId },
+      { type: 'RECORD_INCORRECT_ATTEMPT', slokaId },
+      {
+        type: 'COMPLETE_LESSON',
+        slokaId,
+        today: '2026-09-18',
+        nowIso: '2026-09-18T10:00:00.000Z',
+        testStars: 3,
+      },
+    )
+    expect(state.progress.slokas[slokaId].bestStars).toBe(3)
+    expect(state.lastCompletion?.stars).toBe(3)
+
+    // A replay that scores lower does not lower the best, but records the grade.
+    state = run(
+      state,
+      { type: 'START_LESSON', slokaId },
+      {
+        type: 'COMPLETE_LESSON',
+        slokaId,
+        today: '2026-09-19',
+        nowIso: '2026-09-19T10:00:00.000Z',
+        testStars: 1,
+      },
+    )
+    expect(state.progress.slokas[slokaId].bestStars).toBe(3)
+    expect(state.progress.practiceHistory[0].stars).toBe(1)
+  })
+
+  it('falls back to participation stars when no test grade is given', () => {
+    const slokaId = 'saraswati-namastubhyam'
+    const state = run(
+      createDefaultAppState(),
+      { type: 'START_LESSON', slokaId },
+      {
+        type: 'COMPLETE_LESSON',
+        slokaId,
+        today: '2026-09-18',
+        nowIso: '2026-09-18T10:00:00.000Z',
+      },
+    )
+    // No mistakes, no test grade -> baseline completion still earns stars.
+    expect(state.progress.slokas[slokaId].bestStars).toBe(3)
+  })
+
   it('persists the last selected learning mode', () => {
     const stories = appReducer(createDefaultAppState(), {
       type: 'SET_LEARNING_MODE',

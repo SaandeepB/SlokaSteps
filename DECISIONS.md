@@ -144,3 +144,79 @@ each lives in `research/pronunciation-ai/`.
    benchmark, and a JS/WASM mel-feature extractor, because the raw-audio
    preprocessor cannot export (`torch.stft` complex-type limitation).
    See `research/pronunciation-ai/11`.
+
+## On-device Chant Coach — shipped to internal testing (2026-09-18)
+
+The two D2 unknowns above are now resolved, and the analyzer ships behind the
+validation plan's stage-1–2 gates. Decisions taken:
+
+9. **D2 resolved to on-device (c), fp16, WebGPU with wasm fallback.** The two
+   open tests passed: the mel preprocessor was ported to TypeScript and holds
+   to the checkpoint's own eval-mode output on real audio
+   (`src/test/chantFrontend.test.ts`), and the fp16 ONNX graph runs in the
+   browser via `onnxruntime-web` in a dedicated worker. Verified end to end in
+   Edge/WebGPU on real held-out audio: JS features → ONNX → JS decode reproduce
+   the Python pipeline's decode strings on every non-degenerate clip
+   (`src/test/model/chantModelParity.test.ts`, 84/84 variants; digital silence
+   excepted — its logits sit at the numeric noise floor where the decode string
+   is ORT-version-dependent, so it is asserted on its safety property instead).
+   int8 stays rejected (accuracy and speed both worse, per `11`). No backend was
+   added; audio never leaves the device; `allowModelTraining` stays `false`.
+10. **Weights are provisioned, never bundled.** The Su-śrotā checkpoint has no
+    explicit licence grant (`research/pronunciation-ai/06`), so the ~235 MB of
+    assets live in git-ignored `models-local/chant/`, are served by a vite
+    middleware in dev/preview, and are deployed separately in production
+    (`docs/WEB_DEPLOYMENT.md`). Absent assets degrade to participation-only.
+11. **D4 (adopt the interface changes) — yes, already done.** The unified
+    `ChantEvaluationService` and the `verified` provenance were the contract the
+    analyzer targets. It registers into a single scored slot at runtime; the
+    default remains `ParticipationEvaluationService`, and clearing the slot
+    restores it everywhere at once.
+12. **D5 (child never sees "incorrect") — upheld in the UI.** `ChantFeedback`
+    renders a deliberately two-state child surface: `matched` vs. a gentle
+    "keep practicing" that folds in BOTH `deviation` and `unclear`. A false
+    positive can therefore only ever under-claim, never accuse. The precise
+    matched/deviation/unclear breakdown stays in the result for the parent
+    summary and the dev Chant Lab.
+13. **D7 (coverage gate before per-akṣara scoring) — built and gating.**
+    `coverage.ts` runs before any segment verdict and refuses wrong-text,
+    silence, and noise (the measured hard negatives) with an enumerated
+    unavailable reason. Its thresholds are provisional, calibrated only against
+    the adult fixture set, and pinned by `src/test/chantCoverage.test.ts`; they
+    must be re-derived against a labelled child corpus before stage 3.
+14. **The chant check is a per-recording convenience, not a longitudinal
+    record.** Nothing persists per-akṣara scores against a child profile
+    (`FUTURE_ROADMAP` #4 / the DPDP "profiling" question is untouched):
+    compute-and-show-once only, and rewards stay independent of the outcome.
+
+## Graded Chant Test — self-referenced, gates completion (2026-09-18)
+
+A separate feature from the ASR Chant Coach above, added at the product owner's
+request for a real graded test rather than unconditional completion.
+
+15. **Grading is audio-to-audio against the learner's OWN reference, not a
+    teacher recording.** Measured first: cross-speaker spectral matching
+    overlaps (a different recitation can outscore a correct one across voices —
+    `research/pronunciation-ai/test_audio_similarity.py`), so grading a child
+    against an adult teacher would penalise the voice, not the pronunciation.
+    Same-speaker retakes separate cleanly (0.81–0.92 vs ≤0.58; a 0.64 bar gives
+    0% false-reject / 0% false-accept on the probe — `test_self_reference.py`).
+    So the learner records their own reference; attempts are graded against it.
+16. **Scorer needs no model.** MFCC+CMVN+DTW over the mel frontend, using
+    committed licence-free mel constants (a standard librosa filterbank + hann
+    window, not the Su-śrotā weights). Ported faithfully from Python and held to
+    it by committed fixtures (`chantSimilarity`, `model/similarityParity`).
+17. **This deliberately reverses "recording never blocks a lesson" — for the
+    Chant Test step only, and never on a technical fault.** The final full-chant
+    step gates completion on passing, and stars come from the grade
+    (`COMPLETE_LESSON.testStars`). But a microphone that is off, unsupported, or
+    failing always unlocks finishing (ungraded), so the accessibility guarantee
+    holds: only a real low-similarity *result* gates, never a tech problem.
+    Retries are unlimited. The first take saves the reference (a baseline,
+    honestly not a grade), so it never shows a fake 100%.
+18. **References are stored on-device (IndexedDB), deletable, never uploaded.**
+    They are the learner's own voice recorded deliberately as a reference — a
+    different category from captured child practice audio — and exist only to
+    grade the learner against themselves. Self-reference measures consistency,
+    not authoritative correctness; it is honestly framed as such and is not a
+    qualified-teacher standard.
